@@ -1,19 +1,28 @@
 package by.it.academy.repository.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
-/*@SuperBuilder*/
-@Data
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
-@Table
-@DiscriminatorValue("Student")
-public class Student extends Person{
+@Table(name = "student")
+public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private Integer id;
+
+    @Column(name = "student_name", length = 50)
+    private String studentName;
+
+    @OneToMany(mappedBy = "studentInAssessment", fetch = FetchType.LAZY)
+    private List<Assessment> assessments;
 }

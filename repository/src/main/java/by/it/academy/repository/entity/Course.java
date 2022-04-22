@@ -1,32 +1,41 @@
 package by.it.academy.repository.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-@Data
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 @Entity
-@Table
-/*@Inheritance(strategy = InheritanceType.JOINED)*/
-public class Course implements Serializable {
+@Table(name = "course")
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "COURSE_ID")
+    @Column
     private Integer id;
-    @Column
-    private String name;
-   /* @OneToMany(mappedBy = "Course")*/
-    @Column
-    private Mentor mentor;
-    @Column
-    private Integer grade;
+
+    @Column(name = "course_program", length = 1000)
+    private String courseProgram;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mentor_id")
+    private Mentor mentorField;
+
+    @OneToMany(mappedBy = "courseField", fetch = FetchType.EAGER)
+    private List<Task> tasks;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "student_course", joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "course_id")})
+    private List<Student> students;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "admin_id")
+    private Admin adminField;
 }

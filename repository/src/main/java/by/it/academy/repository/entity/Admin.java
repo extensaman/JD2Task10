@@ -6,27 +6,26 @@ import javax.persistence.*;
 import java.util.List;
 
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name = "mentor")
-public class Mentor {
+@Table(name = "admin")
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer id;
 
-    @Column(name = "mentor_name", length = 50)
-    private String mentorName;
+    @Column(name = "admin_name", length = 50)
+    private String adminName;
 
-    @OneToMany(mappedBy = "mentorField", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "adminField", fetch = FetchType.LAZY)
     private List<Course> courses;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "admin_mentor_id")
-    private Admin adminMentorField;
+    @OneToMany(mappedBy = "adminMentorField", fetch = FetchType.LAZY)
+    private List<Mentor> mentors;
 }
