@@ -4,6 +4,7 @@ import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.dao.impl.EntityDaoImpl;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
+import by.it.academy.repository.util.HibernateUtil;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -31,8 +32,7 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Start!");
 
-        EntityManagerFactory factory = Persistence
-                .createEntityManagerFactory("production");
+        EntityManagerFactory factory = HibernateUtil.ENTITY_MANAGER_FACTORY;
 
         EntityDao<Mentor> mentorDao = new EntityDaoImpl<>(factory, Mentor.class);
         EntityDao<Course> courseDao = new EntityDaoImpl<>(factory, Course.class);
