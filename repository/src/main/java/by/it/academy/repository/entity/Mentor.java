@@ -23,7 +23,7 @@ public class Mentor {
     @Column(name = "mentor_name", length = 50)
     private String mentorName;
 
-    @OneToMany(mappedBy = "mentorField", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "mentorField", fetch = FetchType.LAZY)
     private List<Course> courses;
 
     @ManyToOne(cascade = CascadeType.ALL)
