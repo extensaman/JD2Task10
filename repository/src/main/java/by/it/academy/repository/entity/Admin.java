@@ -22,10 +22,12 @@ public class Admin {
 
     @Column(name = "admin_name", length = 50)
     private String adminName;
-
+    @EqualsAndHashCode.Exclude
+@ToString.Exclude
     @OneToMany(mappedBy = "adminField", fetch = FetchType.LAZY)
     private List<Course> courses;
-
+@EqualsAndHashCode.Exclude
+@ToString.Exclude
     @OneToMany(mappedBy = "adminMentorField", fetch = FetchType.LAZY)
     private List<Mentor> mentors;
 }
