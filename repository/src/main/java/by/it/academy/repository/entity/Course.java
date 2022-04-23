@@ -27,7 +27,7 @@ public class Course {
     @JoinColumn(name = "mentor_id")
     private Mentor mentorField;
 
-    @OneToMany(mappedBy = "courseField", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "courseField", fetch = FetchType.LAZY)
     private List<Task> tasks;
 
     @ManyToMany(cascade = CascadeType.ALL)

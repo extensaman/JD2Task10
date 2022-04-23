@@ -36,4 +36,6 @@ public interface EntityDao<T> {
      * @param id
      */
     void delete(Integer id);
+
+    void closeDao();
 }

@@ -2,3 +2,5 @@
 /repository/target/
 /service/target/
 /target/
+*.iml
+.idea

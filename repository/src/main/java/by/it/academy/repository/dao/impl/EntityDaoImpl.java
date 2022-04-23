@@ -20,27 +20,20 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
     /**
      *
      */
-    private final EntityManagerFactory factory;
+    private final EntityManager entityManager;
     /**
      *
      */
     private final Class<T> aClass;
 
     /**
-     * @param f
+     * @param em
      * @param a
      */
-    public EntityDaoImpl(final EntityManagerFactory f,
+    public EntityDaoImpl(final EntityManager em,
                          final Class<T> a) {
-        this.factory = f;
+        this.entityManager = em;
         this.aClass = a;
-    }
-
-    /**
-     * @return -
-     */
-    protected EntityManagerFactory getFactory() {
-        return factory;
     }
 
     /**
@@ -49,14 +42,11 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
      */
     @Override
     public T findById(final Integer id) {
-        EntityManager entityManager = factory.createEntityManager();
         T entity = null;
         try {
             entity = entityManager.find(aClass, id);
         } catch (IllegalArgumentException e) {
             throw new EntityDaoException(e);
-        } finally {
-            entityManager.close();
         }
         return entity;
     }
@@ -66,7 +56,6 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
      */
     @Override
     public List<T> findAll() {
-        EntityManager entityManager = factory.createEntityManager();
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(aClass);
         Root<T> rootEntry = criteriaQuery.from(aClass);
@@ -80,7 +69,6 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
      */
     @Override
     public void save(final T t) {
-        EntityManager entityManager = factory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(t);
@@ -88,8 +76,6 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
             throw new EntityDaoException(e);
-        } finally {
-            entityManager.close();
         }
     }
 
@@ -98,7 +84,6 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
      */
     @Override
     public void save(final List<T> list) {
-        EntityManager entityManager = factory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
             list.forEach(entityManager::persist);
@@ -106,8 +91,6 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
             throw new EntityDaoException(e);
-        } finally {
-            entityManager.close();
         }
     }
 
@@ -116,7 +99,6 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
      */
     @Override
     public void update(final T t) {
-        EntityManager entityManager = factory.createEntityManager();
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(t);
@@ -124,8 +106,6 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
             throw new EntityDaoException(e);
-        } finally {
-            entityManager.close();
         }
     }
 
@@ -134,7 +114,6 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
      */
     @Override
     public void delete(final Integer id) {
-        EntityManager entityManager = factory.createEntityManager();
         try {
             T entity = entityManager.find(aClass, id);
             entityManager.getTransaction().begin();
@@ -143,8 +122,11 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
             throw new EntityDaoException(e);
-        } finally {
-            entityManager.close();
         }
+    }
+
+    @Override
+    public void closeDao() {
+        entityManager.close();
     }
 }

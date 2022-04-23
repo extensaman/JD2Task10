@@ -1,4 +1,4 @@
-package by.it.academy.repository;
+package by.it.academy;
 
 import by.it.academy.repository.dao.DaoProductionFactory;
 import by.it.academy.repository.dao.EntityDao;
@@ -30,25 +30,15 @@ import java.util.stream.Collectors;
  */
 public class App {
     public static void main(String[] args) {
-
-        // RELOCATED to SERVICE module
-        // IT'S NECESSARY to DELETE this CLASS
-
-
-
-        /*System.out.println("Start!");
+        System.out.println("Start!");
 
         EntityDao<Mentor> mentorDao = DaoProductionFactory.getInstance().getMentorDao();
-        EntityDao<Course> courseDao = DaoProductionFactory.getInstance().getCourseDao();
-
         Mentor mentor01 = mentorDao.findById(1);
 
+        // Поставим студенту Student01 оценку 10
+        // за задание с описанием "TaskDescription01"
 
-        List<Course> courses = mentor01.getCourses();
-        for (Course course : courses) {
-            System.out.println(course.getCourseProgram());
-        }
-
+        // Для этого сначала получим List оценок этого студента за это задание
         List<Assessment> collect = mentor01.getCourses().stream()
                 .flatMap(course -> course.getStudents().stream())
                 .filter(student -> student.getStudentName().equals("Student01"))
@@ -59,17 +49,29 @@ public class App {
                         .equals("TaskDescription01"))
                 .collect(Collectors.toList());
         mentorDao.closeDao();
+
+        // Затем простаим оценку
         collect.forEach(assessment -> {
             assessment.setMark(10);
             assessment.setFeedback("Brilliant");
         });
-        EntityDao<Assessment> assessmentEntityDao = DaoProductionFactory.getInstance().getAssessmentDao();
+
+        // Затем заливаем ее в БД
+        EntityDao<Assessment> assessmentEntityDao =
+                DaoProductionFactory.getInstance().getAssessmentDao();
         collect.forEach(assessmentEntityDao::update);
         assessmentEntityDao.closeDao();
 
+        // Проверяем, что у нас получилось, но уже через Курсы "заходим"
+        EntityDao<Course> courseDao =
+                DaoProductionFactory.getInstance().getCourseDao();
         Course course01 = courseDao.findById(1);
-        System.out.println(course01.getStudents().get(0).getAssessments().get(0).getMark());
-
-        courseDao.closeDao();*/
+        System.out.println(course01.getStudents()
+                .get(0) // This is "Student01"
+                .getAssessments()
+                .get(0)  // This assessment with "TaskDescription01"
+                .getMark());
+        courseDao.closeDao();
     }
 }
+
