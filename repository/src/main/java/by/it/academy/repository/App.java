@@ -1,14 +1,5 @@
 package by.it.academy.repository;
 
-import by.it.academy.repository.dao.DaoProductionFactory;
-import by.it.academy.repository.dao.EntityDao;
-import by.it.academy.repository.entity.Assessment;
-import by.it.academy.repository.entity.Course;
-import by.it.academy.repository.entity.Mentor;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * Create a project.
  * It has two maven submodules, the first is "repository",
