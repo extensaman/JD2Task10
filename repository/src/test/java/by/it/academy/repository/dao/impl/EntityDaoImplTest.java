@@ -1,6 +1,6 @@
 package by.it.academy.repository.dao.impl;
 
-import by.it.academy.repository.dao.DaoTestFactory;
+import by.it.academy.repository.dao.DaoFactory;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Admin;
 import org.junit.After;
@@ -21,7 +21,7 @@ public class EntityDaoImplTest {
 
     @Before
     public void setUp() {
-        adminEntityDao = DaoTestFactory.getInstance().getAdminDao();
+        adminEntityDao = DaoFactory.getInstance().getAdminDao();
         admin = Admin.builder().adminName("kdjfsk").build();
         adminList.add(admin);
     }

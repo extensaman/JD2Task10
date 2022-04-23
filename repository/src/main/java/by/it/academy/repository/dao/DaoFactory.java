@@ -11,16 +11,16 @@ import by.it.academy.repository.entity.Task;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DaoProductionFactory {
-    public static final String PERSISTENCE_UNIT_NAME = "production-unit";
+public class DaoFactory {
+    public static final String PERSISTENCE_UNIT_NAME = "unit";
     private final EntityManagerFactory factory;
 
     private static class SingletonHolder {
-        private final static DaoProductionFactory INSTANCE =
-                new DaoProductionFactory();
+        private final static DaoFactory INSTANCE =
+                new DaoFactory();
     }
 
-    private DaoProductionFactory() {
+    private DaoFactory() {
         factory = Persistence
                 .createEntityManagerFactory(
                         PERSISTENCE_UNIT_NAME);
@@ -29,7 +29,7 @@ public class DaoProductionFactory {
     /**
      * @return -
      */
-    public static DaoProductionFactory getInstance() {
+    public static DaoFactory getInstance() {
         return SingletonHolder.INSTANCE;
     }
 

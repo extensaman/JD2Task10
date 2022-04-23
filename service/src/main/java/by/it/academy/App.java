@@ -1,6 +1,6 @@
 package by.it.academy;
 
-import by.it.academy.repository.dao.DaoProductionFactory;
+import by.it.academy.repository.dao.DaoFactory;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Assessment;
 import by.it.academy.repository.entity.Course;
@@ -32,7 +32,7 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Start!");
 
-        EntityDao<Mentor> mentorDao = DaoProductionFactory.getInstance().getMentorDao();
+        EntityDao<Mentor> mentorDao = DaoFactory.getInstance().getMentorDao();
         Mentor mentor01 = mentorDao.findById(1);
 
         // Поставим студенту Student01 оценку 10
@@ -58,13 +58,13 @@ public class App {
 
         // Затем заливаем ее в БД
         EntityDao<Assessment> assessmentEntityDao =
-                DaoProductionFactory.getInstance().getAssessmentDao();
+                DaoFactory.getInstance().getAssessmentDao();
         collect.forEach(assessmentEntityDao::update);
         assessmentEntityDao.closeDao();
 
         // Проверяем, что у нас получилось, но уже через Курсы "заходим"
         EntityDao<Course> courseDao =
-                DaoProductionFactory.getInstance().getCourseDao();
+                DaoFactory.getInstance().getCourseDao();
         Course course01 = courseDao.findById(1);
         System.out.println(course01.getStudents()
                 .get(0) // This is "Student01"
