@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "tasks")
 @EqualsAndHashCode
 @Entity
 @Table(name = "course")
