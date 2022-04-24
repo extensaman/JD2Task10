@@ -10,10 +10,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.OrderBy;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -41,6 +38,8 @@ public class MentorServiceTests {
         courseDao.save(course);
 
         ms = new MentorService();
+
+        courseDao.closeDao();
     }
 
     @Test
@@ -52,19 +51,26 @@ public class MentorServiceTests {
         assertEquals(task.getTaskId(), taskFromDatabase.getTaskId());
 
         taskDao.closeDao();
+        assessmentDao.closeDao();
     }
 
     @Test
     public void t2_testCreateAssessment() {
+        assessmentDao = DaoFactory.getInstance().getAssessmentDao();
+
         ms.createAssessment(1,assessment);
 
         Assessment assessmentFromDatabase = assessmentDao.findById(1);
         assertNotNull(assessmentFromDatabase);
         assertEquals(assessment.getId(), assessmentFromDatabase.getId());
+
+        assessmentDao.closeDao();
     }
 
     @Test
     public void t3_testUpdateAssessment() {
+        assessmentDao = DaoFactory.getInstance().getAssessmentDao();
+
         assessment.setFeedback("not so good");
         assessment.setMark(7);
         ms.updateAssessment(assessment);
@@ -89,5 +95,8 @@ public class MentorServiceTests {
         assertNull(taskFromDatabase);
         Assessment assessmentFromDatabase = assessmentDao.findById(assessment.getId());
         assertNull(assessmentFromDatabase);
+
+        taskDao.closeDao();
+        assessmentDao.closeDao();
     }
 }
