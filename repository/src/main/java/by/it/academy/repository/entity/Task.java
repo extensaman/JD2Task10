@@ -1,16 +1,16 @@
 package by.it.academy.repository.entity;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
 @Entity
 @Table(name = "task")
 public class Task {
@@ -30,4 +30,25 @@ public class Task {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private Assessment assessment;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Task task = (Task) o;
+        return taskId != null && Objects.equals(taskId, task.taskId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "taskId = " + taskId + ", " +
+                "description = " + description + ", " +
+                "courseField = " + courseField + ")";
+    }
 }
