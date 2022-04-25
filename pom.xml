@@ -101,6 +101,7 @@
                             <excludes>
                                 <exclude>by/it/academy/**/App.class</exclude>
                                 <exclude>by/it/academy/**/EntityDaoException.class</exclude>
+                                <exclude>by/it/academy/**/HibernateUtil.class</exclude>
                                 <exclude>**by/it/academy/repository/entity/*</exclude>
                             </excludes>
                         </configuration>
