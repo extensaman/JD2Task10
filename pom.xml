@@ -12,6 +12,7 @@
     <modules>
         <module>repository</module>
         <module>service</module>
+        <module>reportAggregator</module>
     </modules>
 
     <properties>
@@ -25,57 +26,48 @@
         <h2.version>2.1.212</h2.version>
     </properties>
 
-<dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
         </dependency>
-    </dependencies>
-</dependencyManagement>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>4.9.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.8</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -85,20 +77,46 @@
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.8</version>
                 <executions>
                     <execution>
-                        <id>report</id>
-                        <phase>test</phase>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>report-aggregate</goal>
                         </goals>
+                        <configuration>
+                            <dataFileIncludes>
+                                <dataFileInclude>**/jacoco.exec</dataFileInclude>
+                            </dataFileIncludes>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco-aggregate</outputDirectory>
+                            <excludes>
+                                <exclude>by/it/academy/**/App.class</exclude>
+                                <exclude>by/it/academy/**/EntityDaoException.class</exclude>
+                                <exclude>**by/it/academy/repository/entity/*</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>**/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -123,10 +141,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <!--<configLocation>checkstyle\checkstyle.xml</configLocation>-->
                     <sourceDirectories>${project.basedir}/src/main/java</sourceDirectories>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <!--<suppressionsLocation>checkstyle\checkstyle-suppressions.xml</suppressionsLocation>-->
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
                     <consoleOutput>true</consoleOutput>
@@ -134,5 +150,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
