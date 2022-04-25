@@ -20,7 +20,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
     /**
      *
      */
-    private final EntityManager entityManager;
+    protected final EntityManager entityManager;
     /**
      *
      */

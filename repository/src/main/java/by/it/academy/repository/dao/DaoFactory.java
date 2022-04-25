@@ -1,6 +1,7 @@
 package by.it.academy.repository.dao;
 
 import by.it.academy.repository.dao.impl.EntityDaoImpl;
+import by.it.academy.repository.dao.impl.StudentDaoImpl;
 import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Assessment;
 import by.it.academy.repository.entity.Course;
@@ -68,9 +69,8 @@ public class DaoFactory {
     /**
      * @return -
      */
-    public EntityDao<Student> getStudentDao() {
-        return new EntityDaoImpl<>(factory.createEntityManager(),
-                Student.class);
+    public StudentDao getStudentDao() {
+        return new StudentDaoImpl(factory.createEntityManager());
     }
 
     /**

@@ -2,6 +2,7 @@ package by.it.academy;
 
 import by.it.academy.repository.dao.DaoFactory;
 import by.it.academy.repository.dao.EntityDao;
+import by.it.academy.repository.dao.StudentDao;
 import by.it.academy.repository.entity.Assessment;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
@@ -72,6 +73,12 @@ public class App {
                 .get(0)  // This assessment with "TaskDescription01"
                 .getMark());
         courseDao.closeDao();
+
+        StudentDao studentDao = DaoFactory.getInstance().getStudentDao();
+        studentDao.getStudentAcademicPerformanceList(4,7)
+                .forEach(System.out::println);
     }
+
+
 }
 
