@@ -39,6 +39,7 @@ public class AdminServiceImpl implements AdminService {
                 .courseProgram(nameCourse)
                 .build();
         courseEntityDao.save(course);
+        courseEntityDao.closeDao();
     }
 
     /**
