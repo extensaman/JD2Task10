@@ -8,40 +8,35 @@
         <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>repository</artifactId>
-
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
-            <version>4.9.1</version>
-            <executions>
-                <execution>
-                    <id>report</id>
-                    <phase>validate</phase>
-                    <goals>
-                        <goal>update</goal>
-                    </goals>
-                    <configuration>
-                        <propertyFile>src\main\resources\databaseProd.properties</propertyFile>
-                        <driver>com.mysql.cj.jdbc.Driver</driver>
-                    </configuration>
-                </execution>
-            </executions>
-            <configuration>
-                <propertyFile>src\main\resources\databaseProd.properties</propertyFile>
-                <driver>com.mysql.cj.jdbc.Driver</driver>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-
-
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.9.1</version>
+                <executions>
+                    <execution>
+                        <id>report</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                        <configuration>
+                            <propertyFile>src\main\resources\databaseProd.properties</propertyFile>
+                            <driver>com.mysql.cj.jdbc.Driver</driver>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <propertyFile>src\main\resources\databaseProd.properties</propertyFile>
+                    <driver>com.mysql.cj.jdbc.Driver</driver>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

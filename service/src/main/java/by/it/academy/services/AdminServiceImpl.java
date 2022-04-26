@@ -5,7 +5,10 @@ import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
+import by.it.academy.repository.util.HibernateUtil;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Scanner;
 
@@ -134,6 +137,12 @@ public class AdminServiceImpl implements AdminService {
                 "Choose id of a mentor which do you prefer dismiss:");
         int idMentor = scanner.nextInt();
         if (mentorEntityDao.findById(idMentor) != null) {
+            List<Course> courseList = getListMentor(mentorEntityDao
+                    .findById(idMentor).getMentorName());
+            for (Course course : courseList) {
+                course.setMentorField(null);
+                courseEntityDao.update(course);
+            }
             mentorEntityDao.delete(idMentor);
             System.out.println("Mentor deleted.");
         }
@@ -223,6 +232,17 @@ public class AdminServiceImpl implements AdminService {
             System.out.println("Course doesn't exist!");
         }
         courseEntityDao.closeDao();
+    }
+
+    private List<Course> getListMentor(String mentor) {
+        EntityManager entityManager = HibernateUtil.getEntityManager();
+        Query query = entityManager
+                .createQuery("SELECT E.courses FROM Mentor E " +
+                        "WHERE E.mentorName = :mentor");
+        query.setParameter("mentor", mentor);
+        List<Course> courseList = query.getResultList();
+        entityManager.close();
+        return courseList;
     }
 
 }
