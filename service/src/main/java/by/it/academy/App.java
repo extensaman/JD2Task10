@@ -1,14 +1,6 @@
 package by.it.academy;
 
-import by.it.academy.repository.dao.DaoFactory;
-import by.it.academy.repository.dao.EntityDao;
-import by.it.academy.repository.entity.Assessment;
-import by.it.academy.repository.entity.Course;
-import by.it.academy.repository.entity.Mentor;
-import by.it.academy.services.AdminServiceImpl;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import by.it.academy.services.impl.AdminServiceImpl;
 
 /**
  * Create a project.

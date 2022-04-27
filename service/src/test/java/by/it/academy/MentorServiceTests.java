@@ -3,14 +3,11 @@ package by.it.academy;
 import by.it.academy.repository.dao.DaoFactory;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.*;
-import by.it.academy.services.MentorService;
-import org.junit.After;
+import by.it.academy.services.impl.MentorServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import javax.persistence.OrderBy;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +20,7 @@ public class MentorServiceTests {
     private static Task task;
     private static Course course;
     private static Assessment assessment;
-    private static MentorService ms;
+    private static MentorServiceImpl ms;
 
     @BeforeClass
     public static void setUp() {
@@ -37,7 +34,7 @@ public class MentorServiceTests {
 
         courseDao.save(course);
 
-        ms = new MentorService();
+        ms = new MentorServiceImpl();
 
         courseDao.closeDao();
     }

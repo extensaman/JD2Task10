@@ -1,4 +1,4 @@
-package by.it.academy.repository.dao;
+package by.it.academy.repository.dao.exception;
 
 public class EntityDaoException extends RuntimeException{
     public EntityDaoException() {
