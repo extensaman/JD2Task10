@@ -1,4 +1,4 @@
-package by.it.academy.services;
+package by.it.academy.services.impl;
 
 import by.it.academy.repository.dao.DaoFactory;
 import by.it.academy.repository.dao.EntityDao;
@@ -6,6 +6,7 @@ import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
 import by.it.academy.repository.util.HibernateUtil;
+import by.it.academy.services.AdminService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -35,7 +36,8 @@ public class AdminServiceImpl implements AdminService {
      *
      */
     @Override
-    public void createCourse(String nameCourse) {
+    public void createCourse(String nameCourse)
+            throws SecurityException {
         courseEntityDao =
                 DaoFactory.getInstance().getCourseDao();
         Course course = Course.builder()
@@ -49,7 +51,8 @@ public class AdminServiceImpl implements AdminService {
      * @param idCourse
      */
     @Override
-    public void deleteCourseById(int idCourse) {
+    public void deleteCourseById(int idCourse)
+            throws SecurityException {
         courseEntityDao =
                 DaoFactory.getInstance().getCourseDao();
         List<Course> listCourse = courseEntityDao.findAll();
@@ -72,7 +75,8 @@ public class AdminServiceImpl implements AdminService {
      *
      */
     @Override
-    public void deleteCourseByName() {
+    public void deleteCourseByName()
+            throws SecurityException {
         courseEntityDao =
                 DaoFactory.getInstance().getCourseDao();
         List<Course> listCourse = courseEntityDao.findAll();
@@ -96,7 +100,8 @@ public class AdminServiceImpl implements AdminService {
      *
      */
     @Override
-    public void createMentor(String nameMentor) {
+    public void createMentor(String nameMentor)
+            throws SecurityException {
         mentorEntityDao =
                 DaoFactory.getInstance().getMentorDao();
         Mentor mentor = Mentor.builder()
@@ -110,7 +115,8 @@ public class AdminServiceImpl implements AdminService {
      * @param idMentor
      */
     @Override
-    public void deleteMentorById(int idMentor) {
+    public void deleteMentorById(int idMentor)
+            throws SecurityException {
         mentorEntityDao =
                 DaoFactory.getInstance().getMentorDao();
         if (mentorEntityDao.findById(idMentor) != null) {
@@ -126,7 +132,8 @@ public class AdminServiceImpl implements AdminService {
      *
      */
     @Override
-    public void deleteMentorByName() {
+    public void deleteMentorByName()
+            throws SecurityException {
         mentorEntityDao =
                 DaoFactory.getInstance().getMentorDao();
         List<Mentor> listMentor = mentorEntityDao.findAll();
@@ -153,7 +160,8 @@ public class AdminServiceImpl implements AdminService {
      *
      */
     @Override
-    public void insertMentorToCourse(int idCourse, int idMentor) {
+    public void insertMentorToCourse(int idCourse, int idMentor)
+            throws SecurityException {
         courseEntityDao =
                 DaoFactory.getInstance().getCourseDao();
         mentorEntityDao =
@@ -175,7 +183,8 @@ public class AdminServiceImpl implements AdminService {
      * @param idAdmin
      */
     @Override
-    public void takeCourseForControl(int idAdmin) {
+    public void takeCourseForControl(int idAdmin)
+            throws SecurityException {
         courseEntityDao =
                 DaoFactory.getInstance().getCourseDao();
         adminEntityDao =
@@ -197,7 +206,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void updateMentorToCourse(int idCourse, int idMentor) {
+    public void updateMentorToCourse(int idCourse, int idMentor)
+            throws SecurityException {
         courseEntityDao =
                 DaoFactory.getInstance().getCourseDao();
         mentorEntityDao =
@@ -216,7 +226,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void updateAdminToCourse(int idCourse, int idAdmin) {
+    public void updateAdminToCourse(int idCourse, int idAdmin)
+            throws SecurityException {
         courseEntityDao =
                 DaoFactory.getInstance().getCourseDao();
         adminEntityDao =
@@ -234,7 +245,8 @@ public class AdminServiceImpl implements AdminService {
         courseEntityDao.closeDao();
     }
 
-    private List<Course> getListMentor(String mentor) {
+    private List<Course> getListMentor(String mentor)
+            throws SecurityException {
         EntityManager entityManager = HibernateUtil.getEntityManager();
         Query query = entityManager
                 .createQuery("SELECT E.courses FROM Mentor E " +
