@@ -8,5 +8,6 @@ import javax.persistence.EntityManager;
 public class CourseDaoImpl extends EntityDaoImpl<Course> implements CourseDao {
     public CourseDaoImpl(EntityManager em) {
         super(em, Course.class);
+
     }
 }

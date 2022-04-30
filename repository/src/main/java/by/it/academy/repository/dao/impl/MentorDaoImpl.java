@@ -9,4 +9,5 @@ public class MentorDaoImpl extends EntityDaoImpl<Mentor> implements MentorDao {
     public MentorDaoImpl(EntityManager em) {
         super(em, Mentor.class);
     }
+
 }

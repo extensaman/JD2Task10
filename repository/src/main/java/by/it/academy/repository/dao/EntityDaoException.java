@@ -1,4 +1,4 @@
-package by.it.academy.repository.dao.exception;
+package by.it.academy.repository.dao;
 
 public class EntityDaoException extends RuntimeException{
     public EntityDaoException() {
@@ -14,6 +14,5 @@ public class EntityDaoException extends RuntimeException{
 
     public EntityDaoException(Throwable cause) {
         super(cause);
-
     }
 }

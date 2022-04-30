@@ -18,7 +18,6 @@ public class DaoFactory {
         private final static DaoFactory INSTANCE =
                 new DaoFactory();
     }
-
     private DaoFactory() {
         factory = Persistence
                 .createEntityManagerFactory(

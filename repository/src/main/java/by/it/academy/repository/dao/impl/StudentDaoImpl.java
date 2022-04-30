@@ -19,6 +19,7 @@ public class StudentDaoImpl extends EntityDaoImpl<Student> implements StudentDao
         query.setParameter("low", markLowBound);
         query.setParameter("high", markHighBound);
         return query.getResultList();
+
     }
 
     @Override

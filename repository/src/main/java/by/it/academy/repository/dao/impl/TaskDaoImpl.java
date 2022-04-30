@@ -10,4 +10,5 @@ public class TaskDaoImpl extends EntityDaoImpl<Task> implements TaskDao {
     public TaskDaoImpl(EntityManager em) {
         super(em, Task.class);
     }
+
 }

@@ -33,6 +33,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
                          final Class<T> a) {
         this.entityManager = em;
         this.aClass = a;
+
     }
 
     /**

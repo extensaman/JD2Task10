@@ -8,5 +8,6 @@ import javax.persistence.EntityManager;
 public class AdminDaoImpl extends EntityDaoImpl<Admin> implements AdminDao {
     public AdminDaoImpl(EntityManager em) {
         super(em, Admin.class);
+
     }
 }
