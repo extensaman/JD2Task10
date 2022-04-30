@@ -1,5 +1,7 @@
 package by.it.academy;
 
+
+
 import by.it.academy.repository.dao.DaoFactory;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Assessment;
@@ -9,6 +11,7 @@ import by.it.academy.services.AdminServiceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 /**
  * Create a project.
@@ -78,6 +81,7 @@ public class App {
 
         AdminServiceImpl a = new AdminServiceImpl();
         a.createCourse("AS");
+
 
     }
 }

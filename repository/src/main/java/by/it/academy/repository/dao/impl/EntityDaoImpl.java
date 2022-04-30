@@ -1,10 +1,9 @@
 package by.it.academy.repository.dao.impl;
 
 import by.it.academy.repository.dao.EntityDao;
-import by.it.academy.repository.dao.EntityDaoException;
+import by.it.academy.repository.dao.exception.EntityDaoException;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,7 +19,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
     /**
      *
      */
-    private final EntityManager entityManager;
+    protected final EntityManager entityManager;
     /**
      *
      */
@@ -34,6 +33,7 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
                          final Class<T> a) {
         this.entityManager = em;
         this.aClass = a;
+
     }
 
     /**

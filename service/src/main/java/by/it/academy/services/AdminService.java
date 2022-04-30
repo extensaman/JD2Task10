@@ -10,60 +10,60 @@ public interface AdminService {
      *
      * @param nameCourse
      */
-    public void createCourse(String nameCourse);
+    void createCourse(String nameCourse) throws SecurityException;
 
     /**
      *
      * @param idMentor
      */
-    public void deleteMentorById(int idMentor);
+    void deleteMentorById(int idMentor) throws SecurityException;
 
     /**
      *
      */
-    public void deleteMentorByName();
+    void deleteMentorByName() throws SecurityException;
 
     /**
      *
      * @param nameMentor
      */
-    public void createMentor(String nameMentor);
+    void createMentor(String nameMentor) throws SecurityException;
 
     /**
      *
      * @param idCourse
      */
-    public void deleteCourseById(int idCourse);
+    void deleteCourseById(int idCourse) throws SecurityException;
 
     /**
      *
      */
-    public void deleteCourseByName();
-
-    /**
-     *
-     * @param idCourse
-     * @param idMentor
-     */
-    public void insertMentorToCourse(int idCourse,int idMentor);
-
-    /**
-     *
-     * @param idAdmin
-     */
-    public void takeCourseForControl(int idAdmin);
+    void deleteCourseByName() throws SecurityException;
 
     /**
      *
      * @param idCourse
      * @param idMentor
      */
-    public void updateMentorToCourse(int idCourse, int idMentor);
+    void insertMentorToCourse(int idCourse,int idMentor) throws SecurityException;
+
+    /**
+     *
+     * @param idAdmin
+     */
+    void takeCourseForControl(int idAdmin) throws SecurityException;
+
+    /**
+     *
+     * @param idCourse
+     * @param idMentor
+     */
+    void updateMentorToCourse(int idCourse, int idMentor) throws SecurityException;
 
     /**
      *
      * @param idCourse
      * @param idAdmin
      */
-    public void updateAdminToCourse(int idCourse, int idAdmin);
+    void updateAdminToCourse(int idCourse, int idAdmin) throws SecurityException;
 }
