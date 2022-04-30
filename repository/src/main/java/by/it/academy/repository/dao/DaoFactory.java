@@ -1,11 +1,12 @@
 package by.it.academy.repository.dao;
 
-import by.it.academy.repository.dao.impl.AdminDaoImpl;
-import by.it.academy.repository.dao.impl.AssessmentDaoImpl;
-import by.it.academy.repository.dao.impl.CourseDaoImpl;
-import by.it.academy.repository.dao.impl.MentorDaoImpl;
-import by.it.academy.repository.dao.impl.StudentDaoImpl;
-import by.it.academy.repository.dao.impl.TaskDaoImpl;
+import by.it.academy.repository.dao.impl.EntityDaoImpl;
+import by.it.academy.repository.entity.Admin;
+import by.it.academy.repository.entity.Assessment;
+import by.it.academy.repository.entity.Course;
+import by.it.academy.repository.entity.Mentor;
+import by.it.academy.repository.entity.Student;
+import by.it.academy.repository.entity.Task;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -35,42 +36,48 @@ public class DaoFactory {
     /**
      * @return -
      */
-    public AdminDao getAdminDao() {
-        return new AdminDaoImpl(factory.createEntityManager());
+    public EntityDao<Admin> getAdminDao() {
+        return new EntityDaoImpl<>(factory.createEntityManager(),
+                Admin.class);
     }
 
     /**
      * @return -
      */
-    public AssessmentDao getAssessmentDao() {
-        return new AssessmentDaoImpl(factory.createEntityManager());
+    public EntityDao<Assessment> getAssessmentDao() {
+        return new EntityDaoImpl<>(factory.createEntityManager(),
+                Assessment.class);
     }
 
     /**
      * @return -
      */
-    public MentorDao getMentorDao() {
-        return new MentorDaoImpl(factory.createEntityManager());
+    public EntityDao<Mentor> getMentorDao() {
+        return new EntityDaoImpl<>(factory.createEntityManager(),
+                Mentor.class);
     }
 
     /**
      * @return -
      */
-    public CourseDao getCourseDao() {
-        return new CourseDaoImpl(factory.createEntityManager());
+    public EntityDao<Course> getCourseDao() {
+        return new EntityDaoImpl<>(factory.createEntityManager(),
+                Course.class);
     }
 
     /**
      * @return -
      */
-    public StudentDao getStudentDao() {
-        return new StudentDaoImpl(factory.createEntityManager());
+    public EntityDao<Student> getStudentDao() {
+        return new EntityDaoImpl<>(factory.createEntityManager(),
+                Student.class);
     }
 
     /**
      * @return -
      */
-    public TaskDao getTaskDao() {
-        return new TaskDaoImpl(factory.createEntityManager());
+    public EntityDao<Task> getTaskDao() {
+        return new EntityDaoImpl<>(factory.createEntityManager(),
+                Task.class);
     }
 }

@@ -4,7 +4,7 @@ import by.it.academy.repository.dao.DaoFactory;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Student;
-import by.it.academy.services.impl.StudentServiceImpl;
+import by.it.academy.services.StudentService;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -16,11 +16,11 @@ import static org.junit.Assert.assertEquals;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentServiceTests {
-    private static StudentServiceImpl studentService;
+    private static StudentService studentService;
 
     @Before
     public void setUp() {
-        studentService = new StudentServiceImpl();
+        studentService = new StudentService();
     }
 
     @Test
