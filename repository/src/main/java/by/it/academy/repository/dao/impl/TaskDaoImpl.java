@@ -15,23 +15,21 @@ public class TaskDaoImpl extends EntityDaoImpl<Task> implements TaskDao {
     }
 
     @Override
-    public List<Task> getListOfCourseTasks(String courseName) {
+    public List<Task> getListOfCourseTasks(Integer courseId) {
         Query query = entityManager
                 .createQuery("SELECT E.tasks FROM Course E " +
-                        "where E.courseProgram = :courseName ");
-        query.setParameter("courseName", courseName);
-        List<Task> tasks = query.getResultList();
-        return tasks;
+                        "where E.id = :courseId ");
+        query.setParameter("courseId", courseId);
+        return query.getResultList();
     }
 
     @Override
-    public List<Task> getListOfStudentTasks(String studentName) {
+    public List<Task> getListOfStudentTasks(Integer studentId) {
         Query query = entityManager
                 .createQuery("SELECT E.taskInAssessment FROM Assessment E " +
-                        "where E.studentInAssessment.studentName = :studentName ");
-        query.setParameter("studentName", studentName);
-        List<Task> tasks = query.getResultList();
-        return tasks;
+                        "where E.studentInAssessment.id = :studentId ");
+        query.setParameter("studentId", studentId);
+        return query.getResultList();
     }
 
 }
