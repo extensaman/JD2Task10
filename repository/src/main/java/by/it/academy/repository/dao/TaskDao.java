@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface TaskDao extends EntityDao<Task> {
 
-    List<Task> getListOfCourseTasks(String courseName);
+    List<Task> getListOfCourseTasks(Integer courseId);
 
-    List<Task> getListOfStudentTasks(String studentName);
+    List<Task> getListOfStudentTasks(Integer studentId);
 
 
 }
