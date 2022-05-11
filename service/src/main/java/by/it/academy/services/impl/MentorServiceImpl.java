@@ -1,6 +1,6 @@
 package by.it.academy.services.impl;
 
-import by.it.academy.repository.dao.DaoFactory;
+import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Assessment;
 import by.it.academy.repository.entity.Course;
@@ -14,8 +14,8 @@ public class MentorServiceImpl implements MentorService {
 
     public void createTask(int courseId, Task task)
             throws SecurityException {
-        courseDao = DaoFactory.getInstance().getCourseDao();
-        taskDao = DaoFactory.getInstance().getTaskDao();
+        courseDao = DaoProvider.getInstance().getCourseDao();
+        taskDao = DaoProvider.getInstance().getTaskDao();
 
         Course course = courseDao.findById(courseId);
         if (course == null) {
@@ -31,7 +31,7 @@ public class MentorServiceImpl implements MentorService {
     }
     public void deleteTask(int taskId)
             throws SecurityException {
-        taskDao = DaoFactory.getInstance().getTaskDao();
+        taskDao = DaoProvider.getInstance().getTaskDao();
 
         if (taskDao.findById(taskId) == null) {
             System.out.println("Не найдено задание с данным ID: " + taskId);
@@ -42,8 +42,8 @@ public class MentorServiceImpl implements MentorService {
     }
     public void createAssessment(int taskId, Assessment assessment)
             throws SecurityException {
-        taskDao = DaoFactory.getInstance().getTaskDao();
-        assessmentDao = DaoFactory.getInstance().getAssessmentDao();
+        taskDao = DaoProvider.getInstance().getTaskDao();
+        assessmentDao = DaoProvider.getInstance().getAssessmentDao();
 
         Task task = taskDao.findById(taskId);
         if (task == null) {
@@ -58,7 +58,7 @@ public class MentorServiceImpl implements MentorService {
     }
     public void updateAssessment(Assessment assessment)
             throws SecurityException {
-        assessmentDao = DaoFactory.getInstance().getAssessmentDao();
+        assessmentDao = DaoProvider.getInstance().getAssessmentDao();
 
         if (assessmentDao.findById(assessment.getId()) == null) {
             System.out.println("Не найден отзыв с данным ID: " + assessment.getId());

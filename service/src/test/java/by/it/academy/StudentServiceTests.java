@@ -1,6 +1,6 @@
 package by.it.academy;
 
-import by.it.academy.repository.dao.DaoFactory;
+import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Student;
@@ -26,18 +26,18 @@ public class StudentServiceTests {
     @Test
     public void testJoinCourse() {
 
-        EntityDao<Student> studentClean = DaoFactory.getInstance().getStudentDao();
+        EntityDao<Student> studentClean = DaoProvider.getInstance().getStudentDao();
         studentClean.findAll()
                 .forEach(student -> studentClean.delete(student.getId()));
         studentClean.closeDao();
 
-        EntityDao<Course> courseClean = DaoFactory.getInstance().getCourseDao();
+        EntityDao<Course> courseClean = DaoProvider.getInstance().getCourseDao();
         courseClean.findAll()
                 .forEach(course -> courseClean.delete(course.getId()));
                         courseClean.closeDao();
 
-        EntityDao<Course> courseDao = DaoFactory.getInstance().getCourseDao();
-        EntityDao<Student> studentDao = DaoFactory.getInstance().getStudentDao();
+        EntityDao<Course> courseDao = DaoProvider.getInstance().getCourseDao();
+        EntityDao<Student> studentDao = DaoProvider.getInstance().getStudentDao();
 
         Course course = new Course();
         course.setCourseProgram("test");
@@ -58,7 +58,7 @@ public class StudentServiceTests {
         studentDao.closeDao();
         courseDao.closeDao();
 
-        courseDao = DaoFactory.getInstance().getCourseDao();
+        courseDao = DaoProvider.getInstance().getCourseDao();
 
         Course updatedCourse = courseDao.findById(courseId);
 
@@ -70,19 +70,19 @@ public class StudentServiceTests {
     @Test
     public void testLeaveCourse() {
 
-        EntityDao<Course> courseClean = DaoFactory.getInstance().getCourseDao();
+        EntityDao<Course> courseClean = DaoProvider.getInstance().getCourseDao();
         courseClean.findAll()
                 .forEach(course -> courseClean.delete(course.getId()));
         courseClean.closeDao();
 
-        EntityDao<Student> studentClean = DaoFactory.getInstance().getStudentDao();
+        EntityDao<Student> studentClean = DaoProvider.getInstance().getStudentDao();
         studentClean.findAll()
                 .forEach(student -> studentClean.delete(student.getId()));
         studentClean.closeDao();
 
 
-        EntityDao<Course> courseDao = DaoFactory.getInstance().getCourseDao();
-        EntityDao<Student> studentDao = DaoFactory.getInstance().getStudentDao();
+        EntityDao<Course> courseDao = DaoProvider.getInstance().getCourseDao();
+        EntityDao<Student> studentDao = DaoProvider.getInstance().getStudentDao();
 
         Course course = new Course();
         course.setCourseProgram("test2");
@@ -111,7 +111,7 @@ public class StudentServiceTests {
 
         studentService.leaveCourse(studentId, courseId);
 
-        courseDao = DaoFactory.getInstance().getCourseDao();
+        courseDao = DaoProvider.getInstance().getCourseDao();
         Course updatedCourse = courseDao.findById(courseId);
         Integer studentId2 = 2;
 

@@ -25,6 +25,8 @@
         <hibernate.version>5.6.8.Final</hibernate.version>
         <mysql.version>8.0.28</mysql.version>
         <h2.version>2.1.212</h2.version>
+        <servlet-version>4.0.1</servlet-version>
+        <jstl-version>1.2</jstl-version>
     </properties>
 
     <dependencyManagement>
@@ -58,6 +60,21 @@
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl-version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>

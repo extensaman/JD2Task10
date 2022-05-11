@@ -1,6 +1,6 @@
 package by.it.academy;
 
-import by.it.academy.repository.dao.DaoFactory;
+import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
@@ -28,11 +28,11 @@ public class AdminServiceImplTest extends Assert {
     @BeforeClass
     public static void settingTest() {
         courseEntityDao =
-                DaoFactory.getInstance().getCourseDao();
+                DaoProvider.getInstance().getCourseDao();
         mentorEntityDao =
-                DaoFactory.getInstance().getMentorDao();
+                DaoProvider.getInstance().getMentorDao();
         adminEntityDao =
-                DaoFactory.getInstance().getAdminDao();
+                DaoProvider.getInstance().getAdminDao();
         AdminServiceImpl as = new AdminServiceImpl();
     }
 
