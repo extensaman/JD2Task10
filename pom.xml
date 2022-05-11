@@ -13,6 +13,7 @@
         <module>repository</module>
         <module>service</module>
         <module>reportAggregator</module>
+        <module>controller</module>
     </modules>
 
     <properties>
