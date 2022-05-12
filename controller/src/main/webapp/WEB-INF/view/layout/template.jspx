@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<html xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:mytag="urn:jsptagdir:/WEB-INF/tags"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
->
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+      xmlns:mytag="urn:jsptagdir:/WEB-INF/tags"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <jsp:directive.page pageEncoding="UTF-8" contentType="text/html; UTF-8"/>
-    <script>var contextUrl = '${pageContext.request.contextPath}';</script>
 
     <head>
         <![CDATA[
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.rtl.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap-grid.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap-reboot.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap-grid.rtl.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap-reboot.rtl.min.css" />
         <script defer src="${pageContext.request.contextPath}/assets/js/bootstrap.bundle.min.js"></script>
         ]]>
 
@@ -29,16 +33,5 @@
                     </div>
                 </div>
         <jsp:directive.include file="../common/footer.jspx"/>
-        <script>
-            /*// Get the modal*/
-            var modal = document.getElementById('id01');
-
-            /*// When the user clicks anywhere outside of the modal, close it*/
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
     </body>
 </html>
