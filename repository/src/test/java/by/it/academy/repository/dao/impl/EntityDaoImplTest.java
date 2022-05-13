@@ -1,17 +1,12 @@
 package by.it.academy.repository.dao.impl;
 
-import by.it.academy.repository.dao.DaoFactory;
+import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Admin;
-import liquibase.pro.packaged.A;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class EntityDaoImplTest {
     EntityDao<Admin> adminEntityDao;
@@ -20,7 +15,7 @@ public class EntityDaoImplTest {
 
     @Before
     public void setUp() {
-        adminEntityDao = DaoFactory.getInstance().getAdminDao();
+        adminEntityDao = DaoProvider.getInstance().getAdminDao();
         admin = Admin.builder().adminName("Вася").build();
         adminList.add(admin);
     }
