@@ -11,17 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class DefaultCommand implements Command {
+public class StudentCommand implements Command {
     public static final String MAIN_PAGE = "/WEB-INF/view/layout/template.jspx";
     public static final String STUDENTS = "students";
     private final StudentService studentService = ServiceProvider.getInstance().getStudentService();
-
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        System.out.println("From StudentCommand");
         List<Student> allStudent = studentService.findAllStudent();
         System.out.println(allStudent);
         req.getSession().setAttribute(STUDENTS, allStudent);
-
         req.getRequestDispatcher(MAIN_PAGE).forward(req,resp);
     }
 }

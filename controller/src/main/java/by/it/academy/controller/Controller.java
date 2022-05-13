@@ -23,9 +23,14 @@ public class Controller extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("In SERVICE!!!");
-        String pageName = Optional.ofNullable(req.getParameter(PAGE_NAME))
+/*        String pageName = Optional.ofNullable(req.getParameter(PAGE_NAME))
                 .filter(String::isEmpty)
-                .orElse(HOME);
+                .orElse(HOME);*/
+        String pageName = req.getParameter("pageName");
+        if (pageName == null || pageName.isEmpty()) {
+            pageName = "home";
+        }
+        System.out.println(pageName);
         HttpSession session = req.getSession();
         CommandEnum command = CommandEnum.selectCommand(pageName);
         session.setAttribute(PAGE_PATH,command.getPagePath());

@@ -1,9 +1,11 @@
 package by.it.academy.controller.command;
 
 import by.it.academy.controller.command.impl.DefaultCommand;
+import by.it.academy.controller.command.impl.StudentCommand;
 
 public enum CommandEnum {
-    HOME("Home", "pages/main.jspx", new DefaultCommand());
+    HOME("Home", "pages/main.jspx", new DefaultCommand()),
+    STUDENT("Student", "pages/student.jsp", new StudentCommand());
 
     private String pageName;
     private String pagePath;

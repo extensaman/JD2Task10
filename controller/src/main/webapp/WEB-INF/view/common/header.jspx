@@ -6,10 +6,14 @@
   To change this template use File | Settings | File Templates.
 -->
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
-    <html>
-    <head><title>Header</title></head>
-    <body>
-    <span>Header</span>
-    </body>
-    </html>
+    <hr/>
+    <nav class="nav nav-pills nav-fill">
+        <a class="nav-link active" href="${pageContext.request.contextPath}/home?pageName=home">Home</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=student">Student</a>
+        <a class="nav-link" href="#">Mentor</a>
+        <a class="nav-link" href="#">Course</a>
+        <a class="nav-link" href="#">Task &amp; Assessment</a>
+        <a class="nav-link" href="#">Admin</a>
+    </nav>
+    <hr/>
 </jsp:root>
