@@ -10,10 +10,10 @@
     <nav class="nav nav-pills nav-fill">
         <a class="nav-link active" href="${pageContext.request.contextPath}/home?pageName=home">Home</a>
         <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=student">Student</a>
-        <a class="nav-link" href="#">Mentor</a>
-        <a class="nav-link" href="#">Course</a>
-        <a class="nav-link" href="#">Task &amp; Assessment</a>
-        <a class="nav-link" href="#">Admin</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=mentor">Mentor</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=course">Course</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=task">Task &amp; Assessment</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=admin">Admin</a>
     </nav>
     <hr/>
 </jsp:root>
