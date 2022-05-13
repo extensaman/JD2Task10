@@ -1,6 +1,6 @@
 package by.it.academy;
 
-import by.it.academy.repository.dao.DaoFactory;
+import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.*;
 import by.it.academy.services.impl.MentorServiceImpl;
@@ -24,9 +24,9 @@ public class MentorServiceTests {
 
     @BeforeClass
     public static void setUp() {
-        courseDao = DaoFactory.getInstance().getCourseDao();
-        taskDao = DaoFactory.getInstance().getTaskDao();
-        assessmentDao = DaoFactory.getInstance().getAssessmentDao();
+        courseDao = DaoProvider.getInstance().getCourseDao();
+        taskDao = DaoProvider.getInstance().getTaskDao();
+        assessmentDao = DaoProvider.getInstance().getAssessmentDao();
 
         course = Course.builder().courseProgram("Da").build();
         task = Task.builder().description("Do it").build();
@@ -53,7 +53,7 @@ public class MentorServiceTests {
 
     @Test
     public void t2_testCreateAssessment() {
-        assessmentDao = DaoFactory.getInstance().getAssessmentDao();
+        assessmentDao = DaoProvider.getInstance().getAssessmentDao();
 
         ms.createAssessment(1,assessment);
 
@@ -66,7 +66,7 @@ public class MentorServiceTests {
 
     @Test
     public void t3_testUpdateAssessment() {
-        assessmentDao = DaoFactory.getInstance().getAssessmentDao();
+        assessmentDao = DaoProvider.getInstance().getAssessmentDao();
 
         assessment.setFeedback("not so good");
         assessment.setMark(7);
@@ -83,8 +83,8 @@ public class MentorServiceTests {
 
     @Test
     public void t4_testDeleteTask() {
-        taskDao = DaoFactory.getInstance().getTaskDao();
-        assessmentDao = DaoFactory.getInstance().getAssessmentDao();
+        taskDao = DaoProvider.getInstance().getTaskDao();
+        assessmentDao = DaoProvider.getInstance().getAssessmentDao();
 
         ms.deleteTask(task.getTaskId());
 

@@ -10,15 +10,15 @@ import by.it.academy.repository.dao.impl.TaskDaoImpl;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DaoFactory {
+public class DaoProvider {
     public static final String PERSISTENCE_UNIT_NAME = "unit";
     private final EntityManagerFactory factory;
 
     private static class SingletonHolder {
-        private final static DaoFactory INSTANCE =
-                new DaoFactory();
+        private final static DaoProvider INSTANCE =
+                new DaoProvider();
     }
-    private DaoFactory() {
+    private DaoProvider() {
         factory = Persistence
                 .createEntityManagerFactory(
                         PERSISTENCE_UNIT_NAME);
@@ -27,7 +27,7 @@ public class DaoFactory {
     /**
      * @return -
      */
-    public static DaoFactory getInstance() {
+    public static DaoProvider getInstance() {
         return SingletonHolder.INSTANCE;
     }
 

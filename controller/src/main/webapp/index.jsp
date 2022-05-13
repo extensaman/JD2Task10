@@ -1,5 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+    <title>Alternate IT Academy</title>
+</head>
+<jsp:forward page="/home"/>
 <body>
-<h2>Hello World!</h2>
+</form>
 </body>
 </html>
