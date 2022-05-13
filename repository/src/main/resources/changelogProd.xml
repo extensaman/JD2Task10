@@ -88,7 +88,8 @@
             insert into assessment (task_id, feedback, mark, student_id) VALUES
             (1,'Not bad', 5,1),
             (2,'Good', 7,2),
-            (3,'Excellent', 9,3);
+            (3,'Excellent', 9,3),
+            (4,'So-so', 4,2);
         </sql>
     </changeSet>
 </databaseChangeLog>

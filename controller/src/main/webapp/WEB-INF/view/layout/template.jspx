@@ -24,7 +24,7 @@
         <title><c:out value="${requestScope.title}"/></title>
     </head>
     <body>
-        <div class="container text-center">
+        <div class="container-fluid text-center">
             <c:import url="../common/header.jspx"/>
             <c:url var="bodyUrl" value="../pages/main.jspx"/>
             <c:if test="${not empty sessionScope.pagePath}">

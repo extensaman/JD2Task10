@@ -21,11 +21,15 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="${pageContext.request.contextPath}/assets/img/main/1.jpg" class="d-block w-100" alt="1"/>
+                <img src="${pageContext.request.contextPath}/assets/img/main/01.jpg" class="d-block w-100" alt="1"/>
             </div>
             <div class="carousel-item">
-                <img src="${pageContext.request.contextPath}/assets/img/main/slide-2-1.jpg" class="d-block w-100"
+                <img src="${pageContext.request.contextPath}/assets/img/main/02.jpg" class="d-block w-100"
                      alt="2"/>
+            </div>
+            <div class="carousel-item">
+                <img src="${pageContext.request.contextPath}/assets/img/main/03.jpg" class="d-block w-100"
+                     alt="3"/>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"

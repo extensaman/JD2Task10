@@ -6,16 +6,20 @@ import by.it.academy.repository.dao.StudentDao;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Student;
 import by.it.academy.services.StudentService;
+import by.it.academy.services.dto.StudentDto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StudentServiceImpl implements StudentService {
 
     @Override
-    public List<Student> findAllStudent() {
-        List<Student> result = null;
+    public List<StudentDto> findAllStudentDto() {
+        List<StudentDto> result = null;
         StudentDao studentDao = DaoProvider.getInstance().getStudentDao();
-        result = studentDao.findAll();
+        result = studentDao.findAll().stream()
+                .map(StudentDto::new)
+                .collect(Collectors.toList());
         studentDao.closeDao();
         return result;
     }
