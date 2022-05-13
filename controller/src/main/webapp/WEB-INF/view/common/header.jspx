@@ -1,0 +1,19 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: Note
+  Date: 11.05.2022
+  Time: 23:05
+  To change this template use File | Settings | File Templates.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+    <hr/>
+    <nav class="nav nav-pills nav-fill">
+        <a class="nav-link active" href="${pageContext.request.contextPath}/home?pageName=home">Home</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=student">Student</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=mentor">Mentor</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=course">Course</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=task">Task &amp; Assessment</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home?pageName=admin">Admin</a>
+    </nav>
+    <hr/>
+</jsp:root>
