@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AdminCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(AdminCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(AdminCommand.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        logger.trace(getClass().getSimpleName());
+        LOGGER.trace(getClass().getSimpleName());
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req,resp);
     }
 }
