@@ -3,9 +3,7 @@ package by.it.academy.controller.command.impl;
 import by.it.academy.controller.command.Command;
 import by.it.academy.controller.command.Constant;
 import by.it.academy.services.ServiceProvider;
-import by.it.academy.services.StudentService;
 import by.it.academy.services.TaskService;
-import by.it.academy.services.dto.StudentDto;
 import by.it.academy.services.dto.TaskDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +21,7 @@ public class TaskCommand implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         logger.trace(getClass().getSimpleName());
-        List<TaskDto> allTask = taskService.taskDtos();
+        List<TaskDto> allTask = taskService.findAllTaskDto();
         req.getSession().setAttribute(TASKS, allTask);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req,resp);
     }

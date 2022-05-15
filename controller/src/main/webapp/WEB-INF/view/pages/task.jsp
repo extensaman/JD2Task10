@@ -27,21 +27,16 @@
                     <td class="col">${task.name}</td>
                     <td class="col">${task.curse}</td>
                     <td class="col">
-                        <a class="col" data-bs-toggle="collapse" href="#collapseExample${status.index+1}">Assessment</a>
+                        <a href='#' onclick='javascript:
+                                window.open("task?taskId=${task.id}", "_blank", "scrollbars=1,resizable=1,height=300,width=450");
+                                   ' title='Assessment'>Assessment</a>
+                        <%--<a class="nav-link" href="${pageContext.request.contextPath}/task?taskId=${task.id}">Assessment</a>--%>
                     </td>
-                    <div class="collapse" id="collapseExample${status.index+1}">
-                            ${task.assessments}
-                           <%-- ${task.assessment.toString}--%>
-               <%-- <c:forEach var="assessment" items="${task.assessment}" varStatus="status">
-                    <tr>
-                        <td class="col">${status.index+1}</td>
-                        <td class="col">${assessment.id}</td>
-                    </tr>
-                </c:forEach>--%>
-                    </div>
-                </tr>
             </c:forEach>
             </tbody>
         </table>
+        <a class="nav-link active" href='#' onclick='javascript:
+                window.open("newTask", "_blank", "scrollbars=1,resizable=1,height=300,width=450");
+                ' title='Assessment'>New Task</a>
     </c:if>
 </div>
