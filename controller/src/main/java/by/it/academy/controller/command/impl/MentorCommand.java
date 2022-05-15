@@ -11,8 +11,10 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class MentorCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(MentorCommand.class);
@@ -21,6 +23,8 @@ public class MentorCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        Optional.ofNullable((String) req.getSession().getAttribute("delete"))
+                .ifPresent(s -> LOGGER.trace(getClass().getSimpleName() + " --- forDelete = " + s));
         List<Mentor> allMentor = mentorService.findAllMentor();
         LOGGER.trace(getClass().getSimpleName() + " --- allMentor = " + allMentor);
         req.getSession().setAttribute(MENTORS, allMentor);
