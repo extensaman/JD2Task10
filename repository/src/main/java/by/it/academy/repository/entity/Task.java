@@ -22,14 +22,9 @@ public class Task {
     @Column(length = 1000)
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "course_id")
     private Course courseField;
-
-    @OneToOne(mappedBy = "taskInAssessment",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private Assessment assessment;
 
     @Override
     public boolean equals(Object o) {
