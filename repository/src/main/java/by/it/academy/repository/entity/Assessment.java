@@ -18,11 +18,8 @@ import java.util.Objects;
 public class Assessment {
 
     @Id
-    @GenericGenerator(name = "one-one",
-            strategy = "foreign",
-            parameters = @Parameter(name = "property", value = "taskInAssessment"))
-    @GeneratedValue(generator = "one-one")
-    @Column(name = "task_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column
@@ -35,8 +32,8 @@ public class Assessment {
     @JoinColumn(name = "student_id")
     private Student studentInAssessment;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "task_id")
     private Task taskInAssessment;
 
     @Override

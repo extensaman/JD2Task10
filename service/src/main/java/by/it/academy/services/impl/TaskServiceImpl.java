@@ -52,12 +52,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public static void main(String[] args) {
-
-       /*System.out.println(new TaskServiceImpl().findAllTaskDto());
-        *//* System.out.println(new TaskServiceImpl().getListOfTaskAssessment(3));*/
-
-
-
-
+        new TaskServiceImpl().createTask("kksdkfs",1);
+       /*System.out.println(new TaskServiceImpl().findAllTaskDto());*/
+        /* System.out.println(new TaskServiceImpl().getListOfTaskAssessment(3));*/
     }
 }
