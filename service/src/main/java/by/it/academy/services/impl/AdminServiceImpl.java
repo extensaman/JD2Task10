@@ -11,6 +11,7 @@ import by.it.academy.repository.util.HibernateUtil;
 import by.it.academy.services.AdminService;
 import by.it.academy.services.dto.AdminCourseDto;
 import by.it.academy.services.dto.AdminDto;
+import by.it.academy.services.dto.AdminMentorDto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -57,6 +58,17 @@ public class AdminServiceImpl implements AdminService {
                     .collect(Collectors.toList());
             adminDao.closeDao();
             return courseFromAdmin;
+    }
+
+    @Override
+    public List<AdminMentorDto> allMentorFromAdmin(Integer mentorId) {
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        List<AdminMentorDto> mentorFromAdmin = null;
+        mentorFromAdmin = adminDao.showAllMentorAdmin(mentorId).stream()
+                .map(AdminMentorDto::new)
+                .collect(Collectors.toList());
+        adminDao.closeDao();
+        return mentorFromAdmin;
     }
 
 
