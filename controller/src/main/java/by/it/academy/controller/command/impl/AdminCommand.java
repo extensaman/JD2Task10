@@ -17,12 +17,15 @@ import java.util.List;
 public class AdminCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(AdminCommand.class);
     public static final String ADMIN = "admin";
-    private  AdminService adminService = ServiceProvider.getInstance().getAdminService();
+    private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         LOGGER.trace(getClass().getSimpleName());
         List<AdminDto> allAdmin = adminService.showAllAdminDto();
+        for (AdminDto a : allAdmin) {
+            System.out.println(a.toString());
+        }
         req.getSession().setAttribute(ADMIN, allAdmin);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
     }
