@@ -24,10 +24,10 @@
             <artifactId>service</artifactId>
             <version>1.0.1</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>by.it.academy</groupId>
             <artifactId>controller</artifactId>
             <version>1.0.1</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>

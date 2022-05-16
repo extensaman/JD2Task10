@@ -77,13 +77,18 @@
             ('TaskDescription02',2),
             ('TaskDescription03',3);
 
-            create table assessment (
-            task_id int,
-            feedback varchar(1000),
-            mark int,
-            student_id int,
-            constraint assessment_pk primary key (task_id),
-            constraint assessment_student_fk foreign key (student_id) references student(id)
+            create table assessment
+            (
+                id         int auto_increment
+                    primary key,
+                task_id    int           null,
+                student_id int           null,
+                mark       int           null,
+                feedback   varchar(1000) null,
+                constraint assessment_student_fk
+                    foreign key (student_id) references student (id),
+                constraint assessment_task_fk
+                    foreign key (task_id) references task (task_id)
             );
             insert into assessment (task_id, feedback, mark, student_id) VALUES
             (1,'Not bad', 5,1),
