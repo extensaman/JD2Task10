@@ -2,6 +2,8 @@ package by.it.academy.repository.dao.impl;
 
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.dao.exception.EntityDaoException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -15,7 +17,10 @@ import java.util.List;
  * @param <T>
  */
 public class EntityDaoImpl<T> implements EntityDao<T> {
-
+    /**
+     *
+     */
+    private static final Logger LOGGER = LogManager.getLogger(EntityDaoImpl.class);
     /**
      *
      */
@@ -115,10 +120,14 @@ public class EntityDaoImpl<T> implements EntityDao<T> {
     @Override
     public void delete(final Integer id) {
         try {
+            LOGGER.trace(getClass().getSimpleName() + " --- id for delete = " + id);
             T entity = entityManager.find(aClass, id);
+            LOGGER.trace(getClass().getSimpleName() + " --- entity for delete = " + entity);
+            System.out.println(getClass().getSimpleName() + " --- entity for delete = " + entity);
             entityManager.getTransaction().begin();
             entityManager.remove(entity);
             entityManager.getTransaction().commit();
+            LOGGER.trace(getClass().getSimpleName() + " --- entity is deleted");
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
             throw new EntityDaoException(e);

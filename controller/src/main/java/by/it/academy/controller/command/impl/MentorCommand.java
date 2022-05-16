@@ -23,8 +23,11 @@ public class MentorCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        Optional.ofNullable((String) req.getSession().getAttribute("delete"))
-                .ifPresent(s -> LOGGER.trace(getClass().getSimpleName() + " --- forDelete = " + s));
+        Optional.ofNullable((String) req.getParameter("delete"))
+                .ifPresent(s -> {
+                    LOGGER.trace(getClass().getSimpleName() + " --- forDelete = " + s);
+                    mentorService.deleteById(Integer.parseInt(s));
+                });
         List<Mentor> allMentor = mentorService.findAllMentor();
         LOGGER.trace(getClass().getSimpleName() + " --- allMentor = " + allMentor);
         req.getSession().setAttribute(MENTORS, allMentor);

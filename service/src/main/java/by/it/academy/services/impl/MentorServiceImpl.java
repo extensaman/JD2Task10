@@ -81,4 +81,11 @@ public class MentorServiceImpl implements MentorService {
         mentorDao.closeDao();
         return  mentors;
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+        mentorDao.delete(id);
+        mentorDao.closeDao();
+    }
 }

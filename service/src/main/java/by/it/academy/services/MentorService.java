@@ -16,4 +16,6 @@ public interface MentorService {
     void updateAssessment(Assessment assessment) throws SecurityException;
 
     List<Mentor> findAllMentor();
+
+    void deleteById(Integer id);
 }
