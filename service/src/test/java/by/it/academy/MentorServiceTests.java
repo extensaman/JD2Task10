@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MentorServiceTests {
-    private static EntityDao<Course> courseDao;
+    /*private static EntityDao<Course> courseDao;
     private static EntityDao<Task> taskDao;
     private static EntityDao<Assessment> assessmentDao;
 
@@ -95,5 +95,5 @@ public class MentorServiceTests {
 
         taskDao.closeDao();
         assessmentDao.closeDao();
-    }
+    }*/
 }
