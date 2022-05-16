@@ -20,7 +20,19 @@ public class AdminCourseServlet extends HttpServlet {
     public void init() throws ServletException {
 
     }
+/*
+ private static final Logger LOGGER = LogManager.getLogger(AdminCommand.class);
+    public static final String ADMIN_COURSE = "adminCourse";
+    private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
+
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        LOGGER.trace(getClass().getSimpleName());
+        Integer adminId = Integer.valueOf(req.getParameter("adminId"));
+        List<AdminCourseDto> allCourseFromAdmin = adminService.allCourseFromAdmin(adminId);
+        req.getSession().setAttribute(ADMIN, allCourseFromAdmin);
+        req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
+ */
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
