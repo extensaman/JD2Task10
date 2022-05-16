@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>MentorServiceImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">controller</a> &gt; <a href="../index.html" class="el_bundle">service</a> &gt; <a href="index.source.html" class="el_package">by.it.academy.services.impl</a> &gt; <span class="el_source">MentorServiceImpl.java</span></div><h1>MentorServiceImpl.java</h1><pre class="source lang-java linenums">package by.it.academy.services.impl;
+
+import by.it.academy.repository.dao.DaoProvider;
+import by.it.academy.repository.dao.EntityDao;
+import by.it.academy.repository.entity.Assessment;
+import by.it.academy.repository.entity.Course;
+import by.it.academy.repository.entity.Task;
+import by.it.academy.services.MentorService;
+
+<span class="nc" id="L10">public class MentorServiceImpl implements MentorService {</span>
+    private static EntityDao&lt;Task&gt; taskDao;
+    private static EntityDao&lt;Course&gt; courseDao;
+    private static EntityDao&lt;Assessment&gt; assessmentDao;
+
+    public void createTask(int courseId, Task task)
+            throws SecurityException {
+<span class="nc" id="L17">        courseDao = DaoProvider.getInstance().getCourseDao();</span>
+<span class="nc" id="L18">        taskDao = DaoProvider.getInstance().getTaskDao();</span>
+
+<span class="nc" id="L20">        Course course = courseDao.findById(courseId);</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        if (course == null) {</span>
+<span class="nc" id="L22">            System.out.println(&quot;Не найден курс с данным ID: &quot; + courseId);</span>
+<span class="nc" id="L23">            return;</span>
+        }
+<span class="nc" id="L25">        taskDao.save(task);</span>
+<span class="nc" id="L26">        task.setCourseField(course);</span>
+<span class="nc" id="L27">        taskDao.update(task);</span>
+
+<span class="nc" id="L29">        courseDao.closeDao();</span>
+<span class="nc" id="L30">        taskDao.closeDao();</span>
+<span class="nc" id="L31">    }</span>
+    public void deleteTask(int taskId)
+            throws SecurityException {
+<span class="nc" id="L34">        taskDao = DaoProvider.getInstance().getTaskDao();</span>
+
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (taskDao.findById(taskId) == null) {</span>
+<span class="nc" id="L37">            System.out.println(&quot;Не найдено задание с данным ID: &quot; + taskId);</span>
+<span class="nc" id="L38">            return;</span>
+        }
+<span class="nc" id="L40">        taskDao.delete(taskId);</span>
+<span class="nc" id="L41">        taskDao.closeDao();</span>
+<span class="nc" id="L42">    }</span>
+    public void createAssessment(int taskId, Assessment assessment)
+            throws SecurityException {
+<span class="nc" id="L45">        taskDao = DaoProvider.getInstance().getTaskDao();</span>
+<span class="nc" id="L46">        assessmentDao = DaoProvider.getInstance().getAssessmentDao();</span>
+
+<span class="nc" id="L48">        Task task = taskDao.findById(taskId);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (task == null) {</span>
+<span class="nc" id="L50">            System.out.println(&quot;Не найдено задание с данным ID: &quot; + taskId);</span>
+<span class="nc" id="L51">            return;</span>
+        }
+<span class="nc" id="L53">        assessment.setTaskInAssessment(task);</span>
+<span class="nc" id="L54">        assessmentDao.save(assessment);</span>
+
+<span class="nc" id="L56">        taskDao.closeDao();</span>
+<span class="nc" id="L57">        assessmentDao.closeDao();</span>
+<span class="nc" id="L58">    }</span>
+    public void updateAssessment(Assessment assessment)
+            throws SecurityException {
+<span class="nc" id="L61">        assessmentDao = DaoProvider.getInstance().getAssessmentDao();</span>
+
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (assessmentDao.findById(assessment.getId()) == null) {</span>
+<span class="nc" id="L64">            System.out.println(&quot;Не найден отзыв с данным ID: &quot; + assessment.getId());</span>
+<span class="nc" id="L65">            return;</span>
+        }
+<span class="nc" id="L67">        assessmentDao.update(assessment);</span>
+
+<span class="nc" id="L69">        assessmentDao.closeDao();</span>
+<span class="nc" id="L70">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
