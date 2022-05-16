@@ -23,6 +23,13 @@ public class MentorCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        LOGGER.trace(req.getParameter("action"));
+        LOGGER.trace(req.getParameter("description"));
+        String action = req.getParameter("action");
+        Optional.ofNullable((String) req.getParameter("action"))
+                .ifPresent(s -> {
+
+                });
         Optional.ofNullable((String) req.getParameter("delete"))
                 .ifPresent(s -> {
                     LOGGER.trace(getClass().getSimpleName() + " --- forDelete = " + s);
