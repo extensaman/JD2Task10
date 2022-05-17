@@ -16,6 +16,7 @@
                 <th class="col">ID</th>
                 <th class="col">Student name</th>
                 <th class="col">Assessment count</th>
+                <th class="col">Assessment</th>
             </tr>
             </thead>
             <tbody>
@@ -25,6 +26,20 @@
                     <td class="col">${student.id}</td>
                     <td class="col">${student.studentName}</td>
                     <td class="col">${student.assessmentCount}</td>
+                    <td class="col">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown link
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
