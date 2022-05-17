@@ -33,9 +33,9 @@
                     <td class="col-1">
                     <td class="col">
                         <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown link
+                                <i class="bi bi-list">&nbsp&nbspChoose</i>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">

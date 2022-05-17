@@ -18,22 +18,28 @@
             </div>
         </div>
 
-        <c:forEach var="course" items="${courses}" varStatus="status">
-            <div class="row">
-                <div class="col-4"></div>
-                    <div class="col-5 form-check form-switch">
-                        <input class="col-1 form-check-input"
-                               type="checkbox"
-                               role="switch"
-                               name="courseId"
-                               value="${course.id}"
-                               id="flexSwitchCheckCourse">
-                        <label class="col-4 form-check-label"
-                               for="flexSwitchCheckCourse">${course.courseProgram}</label>
+        <c:choose>
+            <c:when test="${not empty sessionScope.courses}">
+                <c:forEach var="course" items="${courses}" varStatus="status">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-5 form-check form-switch">
+                            <input class="col-1 form-check-input"
+                                   type="checkbox"
+                                   role="switch"
+                                   name="courseId"
+                                   value="${course.id}"
+                                   id="flexSwitchCheckCourse">
+                            <label class="col-4 form-check-label"
+                                   for="flexSwitchCheckCourse">${course.courseProgram}</label>
+                        </div>
                     </div>
-            </div>
-        </c:forEach>
-
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <span class="border-primary text-danger">No courses without mentor</span>
+            </c:otherwise>
+        </c:choose>
         <c:forEach var="admin" items="${admins}" varStatus="status">
             <div class="row">
                 <div class="col-4"></div>
