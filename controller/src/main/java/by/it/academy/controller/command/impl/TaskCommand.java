@@ -23,7 +23,7 @@ public class TaskCommand implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         logger.trace(getClass().getSimpleName());
-        List<TaskDto> allTask = taskService.taskDtos();
+        List<TaskDto> allTask = taskService.findAllTaskDto();
         req.getSession().setAttribute(TASKS, allTask);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req,resp);
     }

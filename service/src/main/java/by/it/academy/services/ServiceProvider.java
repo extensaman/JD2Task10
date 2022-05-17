@@ -36,7 +36,6 @@ public class ServiceProvider {
     public StudentService getStudentService() {
         return studentService;
     }
-
     public TaskService taskService() {
         return taskService;
     }

@@ -49,5 +49,7 @@ public class MentorCommand implements Command {
         LOGGER.trace(getClass().getSimpleName() + " --- allMentor = " + allMentor);
         req.getSession().setAttribute(MENTORS, allMentor);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
+
+
     }
 }

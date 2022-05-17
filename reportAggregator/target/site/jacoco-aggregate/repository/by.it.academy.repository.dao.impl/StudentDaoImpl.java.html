@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>StudentDaoImpl.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">reportAggregator</a> &gt; <a href="../index.html" class="el_bundle">repository</a> &gt; <a href="index.source.html" class="el_package">by.it.academy.repository.dao.impl</a> &gt; <span class="el_source">StudentDaoImpl.java</span></div><h1>StudentDaoImpl.java</h1><pre class="source lang-java linenums">package by.it.academy.repository.dao.impl;
+
+import by.it.academy.repository.dao.StudentDao;
+import by.it.academy.repository.entity.Student;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
+
+public class StudentDaoImpl extends EntityDaoImpl&lt;Student&gt; implements StudentDao {
+    public StudentDaoImpl(EntityManager em) {
+<span class="nc" id="L12">        super(em, Student.class);</span>
+<span class="nc" id="L13">    }</span>
+
+    @Override
+    public List getStudentAcademicPerformanceList(final Integer markLowBound, final Integer markHighBound) {
+<span class="nc" id="L17">        Query query = entityManager.createQuery(</span>
+                &quot;select s from Student as s, IN (s.assessments) as a where a.mark between :low and :high&quot;);
+<span class="nc" id="L19">        query.setParameter(&quot;low&quot;, markLowBound);</span>
+<span class="nc" id="L20">        query.setParameter(&quot;high&quot;, markHighBound);</span>
+<span class="nc" id="L21">        return query.getResultList();</span>
+
+    }
+
+    @Override
+    public List getCourseListOfStudent(final Student student) {
+<span class="nc" id="L27">        Query query = entityManager</span>
+<span class="nc" id="L28">                .createQuery(&quot;select c from Student s, &quot; +</span>
+                        &quot;IN(s.assessments) a, &quot; +
+                        &quot;a.taskInAssessment t, &quot; +
+                        &quot;t.courseField c &quot; +
+                        &quot;where s.id = :studentId&quot;);
+<span class="nc" id="L33">        query.setParameter(&quot;studentId&quot;, student.getId());</span>
+<span class="nc" id="L34">        return query.getResultList();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
