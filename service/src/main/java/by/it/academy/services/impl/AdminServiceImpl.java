@@ -1,5 +1,6 @@
 package by.it.academy.services.impl;
 
+import by.it.academy.repository.dao.AdminDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Admin;
@@ -7,11 +8,14 @@ import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
 import by.it.academy.repository.util.HibernateUtil;
 import by.it.academy.services.AdminService;
+import by.it.academy.services.dto.AdminCourseDto;
+import by.it.academy.services.dto.AdminDto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AdminServiceImpl implements AdminService {
 
@@ -31,6 +35,29 @@ public class AdminServiceImpl implements AdminService {
      *
      */
     private Scanner scanner = new Scanner(System.in);
+
+    @Override
+    public List<AdminDto> showAllAdminDto() {
+        List<AdminDto> result = null;
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        result = adminDao.findAll().stream()
+                .map(AdminDto::new)
+                .collect(Collectors.toList());
+        adminDao.closeDao();
+        return result;
+    }
+
+    @Override
+    public List<AdminCourseDto> allCourseFromAdmin(Integer adminId) {
+            AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+            List<AdminCourseDto> courseFromAdmin = null;
+            courseFromAdmin = adminDao.showAllCourseAdmin(adminId).stream()
+                    .map(AdminCourseDto::new)
+                    .collect(Collectors.toList());
+            adminDao.closeDao();
+            return courseFromAdmin;
+    }
+
 
     /**
      *

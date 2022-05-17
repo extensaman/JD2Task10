@@ -1,11 +1,6 @@
 package by.it.academy.controller.command;
 
-import by.it.academy.controller.command.impl.AdminCommand;
-import by.it.academy.controller.command.impl.CourseCommand;
-import by.it.academy.controller.command.impl.HomeCommand;
-import by.it.academy.controller.command.impl.MentorCommand;
-import by.it.academy.controller.command.impl.StudentCommand;
-import by.it.academy.controller.command.impl.TaskCommand;
+import by.it.academy.controller.command.impl.*;
 
 public enum CommandEnum {
     HOME("Home", "pages/main.jspx", new HomeCommand()),
@@ -14,6 +9,7 @@ public enum CommandEnum {
     COURSE("Course", "pages/course.jsp", new CourseCommand()),
     TASK("Task", "pages/task.jsp", new TaskCommand()),
     ADMIN("Admin", "pages/admin.jsp", new AdminCommand());
+   // ADMIN_COURSE("AdminCourse", "pages/admin_course.jsp", new AdminCourseCommand());
 
     private String pageName;
     private String pagePath;
