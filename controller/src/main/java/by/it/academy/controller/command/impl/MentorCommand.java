@@ -25,6 +25,16 @@ public class MentorCommand implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         LOGGER.trace(req.getParameter("action"));
         LOGGER.trace(req.getParameter("description"));
+        if(req.getParameterValues("courseId") != null){
+            for (String s : req.getParameterValues("courseId")) {
+                LOGGER.trace(s);
+            }
+        }
+        if(req.getParameterValues("mentorId") != null){
+            for (String s : req.getParameterValues("mentorId")) {
+                LOGGER.trace(s);
+            }
+        }
         String action = req.getParameter("action");
         Optional.ofNullable((String) req.getParameter("action"))
                 .ifPresent(s -> {

@@ -9,14 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class='d-flex justify-content-start'>
-        <%--        <form action="${pageContext.request.contextPath}/home?pageName=mentor" name="deleting"
-                      method="post">
-                    <input type="hidden" name="action" value="add"/>
-                    <button type="button" class="btn btn-outline-primary">
-                        <i class="bi bi-plus-square">&nbsp&nbspAdd mentor</i>
-                    </button>
-                </form>--%>
-
         <form action="${pageContext.request.contextPath}/home?pageName=mentorinput" name="getForm"
               method="post">
             <input type="hidden" name="action" value="getForm"/>

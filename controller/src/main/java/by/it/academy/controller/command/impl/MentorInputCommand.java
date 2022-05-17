@@ -2,7 +2,9 @@ package by.it.academy.controller.command.impl;
 
 import by.it.academy.controller.command.Command;
 import by.it.academy.controller.command.Constant;
+import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
+import by.it.academy.services.AdminService;
 import by.it.academy.services.CourseService;
 import by.it.academy.services.ServiceProvider;
 import org.apache.logging.log4j.LogManager;
@@ -17,13 +19,18 @@ import java.util.List;
 public class MentorInputCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(MentorInputCommand.class);
     public static final String COURSES = "courses";
+    public static final String ADMINS = "admins";
     private final CourseService courseService = ServiceProvider.getInstance().getCourseService();
+    private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        List<Course> allCourse = courseService.findAllCourse();
-        LOGGER.trace(getClass().getSimpleName() + " --- allCourse = " + allCourse);
-        req.getSession().setAttribute(COURSES, allCourse);
+        List<Course> allCourseWithoutMentor = courseService.findAllCourseWithoutMentor();
+        List<Admin> allAdmin = adminService.findAllAdmin();
+        LOGGER.trace(getClass().getSimpleName() + " --- allCourseWithoutMentor = " + allCourseWithoutMentor);
+        LOGGER.trace(getClass().getSimpleName() + " --- allAdmin = " + allAdmin);
+        req.getSession().setAttribute(COURSES, allCourseWithoutMentor);
+        req.getSession().setAttribute(ADMINS, allAdmin);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
     }
 }

@@ -6,6 +6,7 @@ import by.it.academy.repository.entity.Course;
 import by.it.academy.services.CourseService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CourseServiceImpl implements CourseService {
     @Override
@@ -15,5 +16,12 @@ public class CourseServiceImpl implements CourseService {
         courses = courseDao.findAll();
         courseDao.closeDao();
         return courses;
+    }
+
+    @Override
+    public List<Course> findAllCourseWithoutMentor() {
+        return findAllCourse().stream()
+                .filter(course -> course.getMentorField() == null)
+                .collect(Collectors.toList());
     }
 }

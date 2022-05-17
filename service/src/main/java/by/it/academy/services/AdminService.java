@@ -4,6 +4,8 @@ import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
 
+import java.util.List;
+
 public interface AdminService {
 
     /**
@@ -66,4 +68,6 @@ public interface AdminService {
      * @param idAdmin
      */
     void updateAdminToCourse(int idCourse, int idAdmin) throws SecurityException;
+
+    List<Admin> findAllAdmin();
 }
