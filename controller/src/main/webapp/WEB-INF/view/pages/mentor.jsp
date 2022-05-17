@@ -17,11 +17,11 @@
                     </button>
                 </form>--%>
 
-        <form action="${pageContext.request.contextPath}/home?pageName=mentor" name="getForm"
+        <form action="${pageContext.request.contextPath}/home?pageName=mentorinput" name="getForm"
               method="post">
             <input type="hidden" name="action" value="getForm"/>
             <input type="hidden" name="description" value="new"/>
-            <button type="button" class="btn btn-outline-primary">
+            <button class="btn btn-outline-primary">
                 <i class="bi bi-plus-square">&nbsp&nbspAdd mentor</i>
             </button>
         </form>
