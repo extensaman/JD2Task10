@@ -1,3 +1,4 @@
+by\it\academy\controller\NewAdmin.class
 by\it\academy\controller\command\Constant.class
 by\it\academy\controller\command\Command.class
 by\it\academy\controller\Task.class
@@ -8,7 +9,6 @@ by\it\academy\controller\command\impl\TaskCommand.class
 by\it\academy\controller\AdminCourseServlet.class
 by\it\academy\controller\NewTask.class
 by\it\academy\controller\command\impl\StudentCommand.class
-by\it\academy\controller\command\impl\AdminCourseCommand.class
 by\it\academy\controller\command\impl\HomeCommand.class
 by\it\academy\controller\Controller.class
 by\it\academy\controller\command\CommandEnum.class

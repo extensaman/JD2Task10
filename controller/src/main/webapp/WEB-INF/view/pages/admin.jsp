@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${not empty sessionScope.admin}">
+
+    <a href="newAdmin">Add admin</a>
     <table class="table">
         <thead>
         <tr>
@@ -24,8 +26,10 @@
                 <td class="col">${status.index+1}</td>
                 <td class="col">${admin.id}</td>
                 <td class="col">${admin.adminName}</td>
-                <td class="col">${admin.adminAddedToCourse}</td>
-                <td class="col">${admin.adminAddedToMentors}</td>
+                <td class="col">
+                    <a href="/adminCourse?adminId=${admin.id}">Show courses</a>
+
+                </td>
             </tr>
         </c:forEach>
         </tbody>

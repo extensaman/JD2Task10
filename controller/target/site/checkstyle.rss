@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#by.it.academy.controller.command.impl.AdminCourseCommand.java">by/it/academy/controller/command/impl/AdminCourseCommand.java</a>
+                  <a href="${project.url}/checkstyle.html#by.it.academy.controller.command.CommandEnum.java">by/it/academy/controller/command/CommandEnum.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#by.it.academy.controller.command.CommandEnum.java">by/it/academy/controller/command/CommandEnum.java</a>
+                  <a href="${project.url}/checkstyle.html#by.it.academy.controller.NewAdmin.java">by/it/academy/controller/NewAdmin.java</a>
                 </td>
                 <td>
                   0

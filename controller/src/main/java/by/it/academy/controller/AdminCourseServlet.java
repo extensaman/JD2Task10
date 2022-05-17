@@ -1,6 +1,14 @@
 package by.it.academy.controller;
 
+import by.it.academy.controller.command.impl.AdminCommand;
 import by.it.academy.services.AdminService;
+import by.it.academy.services.ServiceProvider;
+import by.it.academy.services.dto.AdminCourseDto;
+import by.it.academy.services.dto.AdminDto;
+import by.it.academy.services.dto.AssessmentTdo;
+import by.it.academy.services.impl.AdminServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,10 +16,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name = "AdminCourseServlet",
         urlPatterns = {"/AdminCourseServlet"})
 public class AdminCourseServlet extends HttpServlet {
+
+    private static final Logger LOGGER = LogManager.getLogger(AdminCommand.class);
+    private static final String ADMIN_COURSE = "adminCourse";
+    private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
     public AdminCourseServlet() {
         super();
@@ -20,41 +34,31 @@ public class AdminCourseServlet extends HttpServlet {
     public void init() throws ServletException {
 
     }
-/*
- private static final Logger LOGGER = LogManager.getLogger(AdminCommand.class);
-    public static final String ADMIN_COURSE = "adminCourse";
-    private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
-
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        LOGGER.trace(getClass().getSimpleName());
-        Integer adminId = Integer.valueOf(req.getParameter("adminId"));
-        List<AdminCourseDto> allCourseFromAdmin = adminService.allCourseFromAdmin(adminId);
-        req.getSession().setAttribute(ADMIN, allCourseFromAdmin);
-        req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
- */
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        String s = "This is " + this.getClass().getName()
-                + " using the Get method";
-        response.getWriter().print(s);
+        Integer adminId = Integer.valueOf(request.getParameter("adminId"));
+        List<AdminCourseDto> allCourseFromAdmin = adminService.allCourseFromAdmin(adminId);
+        for (AdminCourseDto a : allCourseFromAdmin) {
+            System.out.println(a.toString());
+        }
+        request.getSession().setAttribute(ADMIN_COURSE, allCourseFromAdmin);
+        LOGGER.trace(getClass().getSimpleName());
+        request.getRequestDispatcher("WEB-INF/view/pages/adminCourse.jsp").forward(request, response);
 
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        String s = "This is" + this.getClass().getName()
-                + "using the Post method";
-        response.getWriter().print(s);
-    }
+    request.getParameter("");
 
-    public void destroy() {
-        super.destroy();
     }
 }
+
+/*
+ */
