@@ -1,7 +1,7 @@
 C:\IT\course\controller\src\main\java\by\it\academy\controller\command\Constant.java
 C:\IT\course\controller\src\main\java\by\it\academy\controller\command\Command.java
 C:\IT\course\controller\src\main\java\by\it\academy\controller\command\impl\HomeCommand.java
-C:\IT\course\controller\src\main\java\by\it\academy\controller\command\impl\AdminCourseCommand.java
+C:\IT\course\controller\src\main\java\by\it\academy\controller\NewAdmin.java
 C:\IT\course\controller\src\main\java\by\it\academy\controller\Controller.java
 C:\IT\course\controller\src\main\java\by\it\academy\controller\command\impl\CourseCommand.java
 C:\IT\course\controller\src\main\java\by\it\academy\controller\command\impl\MentorCommand.java

@@ -71,10 +71,17 @@ public class AdminServiceImpl implements AdminService {
         return mentorFromAdmin;
     }
 
+    @Override
+    public void createAdmin(String nameCourse)
+            throws SecurityException {
+        adminEntityDao = DaoProvider.getInstance().getAdminDao();
+        Admin newAdmin = Admin.builder()
+                .adminName(nameCourse)
+                .build();
+        adminEntityDao.save(newAdmin);
+        adminEntityDao.closeDao();
+    }
 
-    /**
-     *
-     */
     @Override
     public void createCourse(String nameCourse)
             throws SecurityException {
