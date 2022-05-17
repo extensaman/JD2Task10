@@ -15,13 +15,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class StudentCommand implements Command {
-    private static final Logger logger = LogManager.getLogger(StudentCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(StudentCommand.class);
     public static final String STUDENTS = "students";
     private final StudentService studentService = ServiceProvider.getInstance().getStudentService();
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        logger.trace(getClass().getSimpleName());
+        LOGGER.trace(getClass().getSimpleName());
         List<StudentDto> allStudent = studentService.findAllStudentDto();
         req.getSession().setAttribute(STUDENTS, allStudent);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);

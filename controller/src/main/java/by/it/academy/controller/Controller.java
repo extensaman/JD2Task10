@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @WebServlet(urlPatterns = "/home")
 public class Controller extends HttpServlet {
-    private static final Logger logger = LogManager.getLogger(Controller.class);
+    private static final Logger LOGGER = LogManager.getLogger(Controller.class);
     public static final String PAGE_NAME = "pageName";
     public static final String HOME = "home";
     public static final String PAGE_PATH_ATTR = "pagePath";
@@ -27,7 +27,7 @@ public class Controller extends HttpServlet {
         String pageName = Optional.ofNullable(req.getParameter(PAGE_NAME))
                 .filter(s -> !s.isEmpty())
                 .orElse(HOME);
-        logger.trace(getClass().getSimpleName() + " *** pageName = " + pageName);
+        LOGGER.trace(getClass().getSimpleName() + " *** pageName = " + pageName);
         HttpSession session = req.getSession();
         CommandEnum command = CommandEnum.selectCommand(pageName);
         session.setAttribute(PAGE_PATH_ATTR,command.getPagePath());
