@@ -5,8 +5,6 @@ import by.it.academy.services.dto.AdminCourseDto;
 import by.it.academy.services.dto.AdminDto;
 import by.it.academy.services.dto.AdminMentorDto;
 
-import java.util.List;
-
 public interface AdminService {
 
     List<AdminDto> showAllAdminDto();
