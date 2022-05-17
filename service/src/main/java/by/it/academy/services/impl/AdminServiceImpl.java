@@ -1,6 +1,7 @@
 package by.it.academy.services.impl;
 
 import by.it.academy.repository.dao.AdminDao;
+import by.it.academy.repository.dao.CourseDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Admin;
@@ -284,4 +285,12 @@ public class AdminServiceImpl implements AdminService {
         return courseList;
     }
 
+    @Override
+    public List<Admin> findAllAdmin() {
+        List<Admin> admins = null;
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        admins = adminDao.findAll();
+        adminDao.closeDao();
+        return admins;
+    }
 }

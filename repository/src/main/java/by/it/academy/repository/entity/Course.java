@@ -20,10 +20,12 @@ public class Course {
     @Column
     private Integer id;
 
+    // TODO: 16.05.2022 Need add field - course abbreviation
+
     @Column(name = "course_program", length = 1000)
     private String courseProgram;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "mentor_id")
     private Mentor mentorField;
 
@@ -35,7 +37,7 @@ public class Course {
             inverseJoinColumns = {@JoinColumn(name = "course_id")})
     private List<Student> students;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "admin_id")
     private Admin adminField;
 

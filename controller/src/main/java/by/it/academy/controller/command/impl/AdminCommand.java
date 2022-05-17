@@ -19,9 +19,11 @@ public class AdminCommand implements Command {
     public static final String ADMIN = "admin";
     private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
+
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         LOGGER.trace(getClass().getSimpleName());
+
         List<AdminDto> allAdmin = adminService.showAllAdminDto();
         for (AdminDto a : allAdmin) {
             System.out.println(a.toString());

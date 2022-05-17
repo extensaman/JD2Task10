@@ -2,10 +2,14 @@ package by.it.academy.services.impl;
 
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
+import by.it.academy.repository.dao.MentorDao;
 import by.it.academy.repository.entity.Assessment;
 import by.it.academy.repository.entity.Course;
+import by.it.academy.repository.entity.Mentor;
 import by.it.academy.repository.entity.Task;
 import by.it.academy.services.MentorService;
+
+import java.util.List;
 
 public class MentorServiceImpl implements MentorService {
     private static EntityDao<Task> taskDao;
@@ -67,5 +71,21 @@ public class MentorServiceImpl implements MentorService {
         assessmentDao.update(assessment);
 
         assessmentDao.closeDao();
+    }
+
+    @Override
+    public List<Mentor> findAllMentor() {
+        List<Mentor> mentors = null;
+        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+        mentors = mentorDao.findAll();
+        mentorDao.closeDao();
+        return  mentors;
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+        mentorDao.delete(id);
+        mentorDao.closeDao();
     }
 }

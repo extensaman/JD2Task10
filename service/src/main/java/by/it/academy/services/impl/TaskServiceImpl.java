@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 public class TaskServiceImpl implements TaskService {
 
-
     @Override
     public List<TaskDto> findAllTaskDto() {
         TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
@@ -25,6 +24,21 @@ public class TaskServiceImpl implements TaskService {
                 .map(TaskDto::new)
                 .collect(Collectors.toList());
         taskDao.closeDao();
+
+        result.forEach(taskDto -> taskDto.setAssessments(extracted(taskDto.getId())));
+
+        return result;
+    }
+
+    private List<AssessmentTdo> extracted(Integer taskId) {
+        return assessmentDao.getListOfTaskAssessment(taskId)
+                .stream().map(AssessmentTdo::new).collect(Collectors.toList());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new TaskServiceImpl().taskDtos());
+        System.out.println(new TaskServiceImpl().extracted(3));
+
         return result;
     }
 
