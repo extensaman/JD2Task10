@@ -9,7 +9,7 @@ public enum CommandEnum {
     COURSE("Course", "pages/course.jsp", new CourseCommand()),
     TASK("Task", "pages/task.jsp", new TaskCommand()),
     ADMIN("Admin", "pages/admin.jsp", new AdminCommand());
-   // ADMIN_COURSE("AdminCourse", "pages/admin_course.jsp", new AdminCourseCommand());
+
 
     private String pageName;
     private String pagePath;

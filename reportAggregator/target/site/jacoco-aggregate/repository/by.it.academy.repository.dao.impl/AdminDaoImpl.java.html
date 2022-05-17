@@ -17,26 +17,18 @@ public class AdminDaoImpl extends EntityDaoImpl&lt;Admin&gt; implements AdminDao
 
     @Override
     public List&lt;Course&gt; showAllCourseAdmin(Integer adminId) {
-<span class="nc" id="L20">        Query query = entityManager.createQuery(</span>
-                &quot;SELECT co &quot; +
-                        &quot;FROM Course  AS co &quot; +
-                        &quot;join Admin as ad &quot; +
-                        &quot;where &quot; +
-                        &quot;ad.id = :adminId&quot;);
-<span class="nc" id="L26">        query.setParameter(&quot;adminId&quot;, adminId);</span>
-<span class="nc" id="L27">        return query.getResultList();</span>
+<span class="nc" id="L20">        Query query = entityManager.createQuery(&quot;SELECT a.courses FROM Admin a &quot; +</span>
+                &quot;where a.id = :adminId &quot;);
+<span class="nc" id="L22">        query.setParameter(&quot;adminId&quot;, adminId);</span>
+<span class="nc" id="L23">        return query.getResultList();</span>
     }
 
     @Override
     public List&lt;Mentor&gt; showAllMentorAdmin(Integer mentorId) {
-<span class="nc" id="L32">        Query query = entityManager.createQuery(</span>
-                &quot;SELECT me &quot; +
-                        &quot;FROM Mentor  AS me &quot; +
-                        &quot;join Admin as ad &quot; +
-                        &quot;where &quot; +
-                        &quot;ad.id = :mentorId&quot;);
-<span class="nc" id="L38">        query.setParameter(&quot;mentorId&quot;, mentorId);</span>
-<span class="nc" id="L39">        return query.getResultList();</span>
+<span class="nc" id="L28">        Query query = entityManager.createQuery(&quot;SELECT a.mentors FROM Admin a &quot; +</span>
+                &quot;where a.id = :mentorId &quot;);
+<span class="nc" id="L30">        query.setParameter(&quot;mentorId&quot;, mentorId);</span>
+<span class="nc" id="L31">        return query.getResultList();</span>
     }
 
 }

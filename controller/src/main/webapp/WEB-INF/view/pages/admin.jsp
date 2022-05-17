@@ -27,8 +27,10 @@
                 <td class="col">${admin.id}</td>
                 <td class="col">${admin.adminName}</td>
                 <td class="col">
-                    <a href="/adminCourse?adminId=${admin.id}">Show courses</a>
-
+                    <a href="adminCourse?adminId=${admin.id}">Show courses</a>
+                </td>
+                <td class="col">
+                    <a href="adminMentor?mentorId=${admin.id}">Show mentors</a>
                 </td>
             </tr>
         </c:forEach>
