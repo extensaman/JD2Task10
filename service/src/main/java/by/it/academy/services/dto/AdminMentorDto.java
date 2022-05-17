@@ -9,7 +9,6 @@ import lombok.*;
 @Getter
 @ToString
 @EqualsAndHashCode
-
 public class AdminMentorDto {
     private Integer id;
     private String nameMentor;

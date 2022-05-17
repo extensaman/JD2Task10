@@ -17,24 +17,16 @@ public class AdminDaoImpl extends EntityDaoImpl<Admin> implements AdminDao {
 
     @Override
     public List<Course> showAllCourseAdmin(Integer adminId) {
-        Query query = entityManager.createQuery(
-                "SELECT co " +
-                        "FROM Course  AS co " +
-                        "join Admin as ad " +
-                        "where " +
-                        "ad.id = :adminId");
+        Query query = entityManager.createQuery("SELECT a.courses FROM Admin a " +
+                "where a.id = :adminId ");
         query.setParameter("adminId", adminId);
         return query.getResultList();
     }
 
     @Override
     public List<Mentor> showAllMentorAdmin(Integer mentorId) {
-        Query query = entityManager.createQuery(
-                "SELECT me " +
-                        "FROM Mentor  AS me " +
-                        "join Admin as ad " +
-                        "where " +
-                        "ad.id = :mentorId");
+        Query query = entityManager.createQuery("SELECT a.mentors FROM Admin a " +
+                "where a.id = :mentorId ");
         query.setParameter("mentorId", mentorId);
         return query.getResultList();
     }

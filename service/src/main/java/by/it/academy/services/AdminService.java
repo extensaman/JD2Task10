@@ -19,9 +19,9 @@ public interface AdminService {
 
     void createAdmin(String nameCourse) throws SecurityException;
 
+
+
     void createCourse(String nameCourse) throws SecurityException;
-
-
 
     void deleteMentorById(int idMentor) throws SecurityException;
 

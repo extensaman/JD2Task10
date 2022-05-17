@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "AdminCourseServlet",
-        urlPatterns = {"/AdminCourseServlet"})
+        urlPatterns = {"/adminCourse"})
 public class AdminCourseServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(AdminCommand.class);
@@ -32,7 +32,6 @@ public class AdminCourseServlet extends HttpServlet {
     }
 
     public void init() throws ServletException {
-
     }
 
     @Override
@@ -50,7 +49,6 @@ public class AdminCourseServlet extends HttpServlet {
 
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
@@ -59,6 +57,3 @@ public class AdminCourseServlet extends HttpServlet {
 
     }
 }
-
-/*
- */
