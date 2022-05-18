@@ -32,11 +32,16 @@
                                    ' title='Assessment'>Assessment</a>
                         <%--<a class="nav-link" href="${pageContext.request.contextPath}/task?taskId=${task.id}">Assessment</a>--%>
                     </td>
+                    <td class="col">
+                            <a class="nav-link"
+                               href="${pageContext.request.contextPath}/deleteTask?command=delete&taskId=${task.id}">
+                                Delete</a>
+                    </td>
             </c:forEach>
             </tbody>
         </table>
         <a class="nav-link active" href='#' onclick='javascript:
-                window.open("newTask", "_blank", "scrollbars=1,resizable=1,height=300,width=450");
+                window.open("newTask"/*?command=newTask"*/, "_blank", "scrollbars=1,resizable=1,height=300,width=450");
                 ' title='Assessment'>New Task</a>
     </c:if>
 </div>
