@@ -13,7 +13,12 @@
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6 text-secondary form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input type="text"
+                       class="form-control"
+                       id="floatingInput"
+                       placeholder="Enter name"
+                       name="name"
+                >
                 <label for="floatingInput">&nbspMentor name</label>
             </div>
         </div>
@@ -47,7 +52,7 @@
                 <div class="col-5 form-check">
                     <input class="form-check-input"
                            type="radio"
-                           name="mentorId"
+                           name="adminId"
                            value="${admin.id}"
                            id="flexRadioDefault1">
                     <label class="col-4 form-check-label"
@@ -70,7 +75,7 @@
                     --%>
             </div>
         </c:forEach>
-        <button class="btn btn-outline-primary"><i class="bi bi-save"></i>&nbsp;Save</button>
+        <button class="btn btn-outline-primary" name="action" value="save"><i class="bi bi-save"></i>&nbsp;Save</button>
     </div>
 </form>
 

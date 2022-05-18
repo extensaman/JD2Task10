@@ -5,8 +5,8 @@ import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.services.CourseService;
 import by.it.academy.services.dto.CourseDto;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CourseServiceImpl implements CourseService {
@@ -37,7 +37,12 @@ public class CourseServiceImpl implements CourseService {
                 .collect(Collectors.toList());
     }
 
-    public static void main(String[] args) {
-        new CourseServiceImpl().findAllCourseDto().forEach(System.out::println);
+    @Override
+    public Optional<Course> findCourseById(Integer id) {
+        Course course;
+        CourseDao courseDao = DaoProvider.getInstance().getCourseDao();
+        course = courseDao.findById(id);
+        courseDao.closeDao();
+        return Optional.ofNullable(course);
     }
 }

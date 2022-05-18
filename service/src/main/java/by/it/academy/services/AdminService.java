@@ -3,6 +3,9 @@ package by.it.academy.services;
 import by.it.academy.repository.entity.Admin;
 import by.it.academy.services.dto.AdminCourseDto;
 import by.it.academy.services.dto.AdminDto;
+
+import java.util.List;
+import java.util.Optional;
 import by.it.academy.services.dto.AdminMentorDto;
 
 public interface AdminService {
@@ -38,4 +41,6 @@ public interface AdminService {
     void updateAdminToCourse(int idCourse, int idAdmin) throws SecurityException;
 
     List<Admin> findAllAdmin();
+
+    Optional<Admin> findAdminById(Integer id);
 }

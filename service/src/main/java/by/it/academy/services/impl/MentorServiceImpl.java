@@ -7,14 +7,26 @@ import by.it.academy.repository.entity.Assessment;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
 import by.it.academy.repository.entity.Task;
+import by.it.academy.services.AdminService;
+import by.it.academy.services.CourseService;
 import by.it.academy.services.MentorService;
+import by.it.academy.services.ServiceProvider;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MentorServiceImpl implements MentorService {
+    private static final Logger LOGGER = LogManager.getLogger(MentorServiceImpl.class);
+    public static final int SINGLE_ADMIN_INDEX = 0;
     private static EntityDao<Task> taskDao;
     private static EntityDao<Course> courseDao;
     private static EntityDao<Assessment> assessmentDao;
+    private final CourseService courseService = ServiceProvider.getInstance().getCourseService();
+    private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
     public void createTask(int courseId, Task task)
             throws SecurityException {
@@ -33,6 +45,7 @@ public class MentorServiceImpl implements MentorService {
         courseDao.closeDao();
         taskDao.closeDao();
     }
+
     public void deleteTask(int taskId)
             throws SecurityException {
         taskDao = DaoProvider.getInstance().getTaskDao();
@@ -44,6 +57,7 @@ public class MentorServiceImpl implements MentorService {
         taskDao.delete(taskId);
         taskDao.closeDao();
     }
+
     public void createAssessment(int taskId, Assessment assessment)
             throws SecurityException {
         taskDao = DaoProvider.getInstance().getTaskDao();
@@ -60,6 +74,7 @@ public class MentorServiceImpl implements MentorService {
         taskDao.closeDao();
         assessmentDao.closeDao();
     }
+
     public void updateAssessment(Assessment assessment)
             throws SecurityException {
         assessmentDao = DaoProvider.getInstance().getAssessmentDao();
@@ -79,7 +94,7 @@ public class MentorServiceImpl implements MentorService {
         MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
         mentors = mentorDao.findAll();
         mentorDao.closeDao();
-        return  mentors;
+        return mentors;
     }
 
     @Override
@@ -87,5 +102,52 @@ public class MentorServiceImpl implements MentorService {
         MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
         mentorDao.delete(id);
         mentorDao.closeDao();
+    }
+
+    @Override
+    public void save(String name, String[] courses_array, String[] admins_array) {
+        // TODO Need add validation functionality
+        Mentor newMentor = Mentor.builder().build();
+        Optional.ofNullable(name)
+                .ifPresent(newMentor::setMentorName);
+        Optional.ofNullable(admins_array)
+                .ifPresent(a ->
+                        newMentor.setAdminMentorField(
+                                adminService.findAdminById(Integer.parseInt(a[SINGLE_ADMIN_INDEX]))
+                                        .orElse(null)
+                        )
+                );
+        Optional.ofNullable(courses_array)
+                .ifPresent(courses -> {
+                    newMentor.setCourses(
+                            Stream.of(courses)
+                                    .map(Integer::parseInt)
+                                    .map(courseService::findCourseById)
+                                    .filter(Optional::isPresent)
+                                    .map(Optional::get)
+                                    .peek(LOGGER::trace)
+                                    .peek(course -> course.setMentorField(newMentor))
+                                    .collect(Collectors.toList())
+                    );
+
+                });
+
+        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+        mentorDao.save(newMentor);
+        mentorDao.closeDao();
+
+/*        Optional.ofNullable(courses_array)
+                .ifPresent(courses -> {
+                    newMentor.setCourses(
+                            Stream.of(courses)
+                                    .map(Integer::parseInt)
+                                    .map(courseService::findCourseById)
+                                    .filter(Optional::isPresent)
+                                    .map(Optional::get)
+                                    .peek(LOGGER::trace)
+                                    .collect(Collectors.toList())
+                    );
+
+                });*/
     }
 }

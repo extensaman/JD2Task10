@@ -18,4 +18,6 @@ public interface MentorService {
     List<Mentor> findAllMentor();
 
     void deleteById(Integer id);
+
+    void save(String name, String[] courses, String[] admin);
 }
