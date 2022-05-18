@@ -11,4 +11,5 @@ public interface TaskService {
     List<TaskDto> findAllTaskDto();
     List<AssessmentTdo> getListOfTaskAssessment(Integer taskId);
     void createTask(String taskName,Integer courseId);
+    void removeTask(Integer taskId);
 }

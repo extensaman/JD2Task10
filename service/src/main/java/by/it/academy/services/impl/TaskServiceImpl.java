@@ -67,10 +67,17 @@ public class TaskServiceImpl implements TaskService {
         taskDao.save(task);
         taskDao.closeDao();
     }
-//
-//    public static void main(String[] args) {
-//        new TaskServiceImpl().createTask("kksdkfs",1);
-//       /*System.out.println(new TaskServiceImpl().findAllTaskDto());*/
-//        /* System.out.println(new TaskServiceImpl().getListOfTaskAssessment(3));*/
-//    }
+
+    public void removeTask(Integer taskId){
+        TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
+        taskDao.delete(taskId);
+        taskDao.closeDao();
+    }
+
+    public static void main(String[] args) {
+        new TaskServiceImpl().removeTask(6);
+        /*new TaskServiceImpl().createTask("kksdkfs",1);*/
+       /*System.out.println(new TaskServiceImpl().findAllTaskDto());*/
+        /* System.out.println(new TaskServiceImpl().getListOfTaskAssessment(3));*/
+    }
 }
