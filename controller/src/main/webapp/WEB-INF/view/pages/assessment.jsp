@@ -18,18 +18,18 @@
             <thead>
             <tr>
                 <th class="col">№</th>
-                <th class="col">ID</th>
                 <th class="col">Student name</th>
                 <th class="col">Mark</th>
+                <th class="col">Feedback</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="assessment" items="${assessments}" varStatus="status">
                 <tr>
                     <td class="col">${status.index+1}</td>
-                    <td class="col">${assessment.id}</td>
                     <td class="col">${assessment.studentName}</td>
                     <td class="col">${assessment.mark}</td>
+                    <td class="col">${assessment.feedback}</td>
                 </tr>
             </c:forEach>
             </tbody>

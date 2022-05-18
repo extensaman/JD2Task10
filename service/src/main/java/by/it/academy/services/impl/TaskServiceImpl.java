@@ -1,10 +1,9 @@
 package by.it.academy.services.impl;
 
-import by.it.academy.repository.dao.AssessmentDao;
-import by.it.academy.repository.dao.CourseDao;
-import by.it.academy.repository.dao.DaoProvider;
-import by.it.academy.repository.dao.TaskDao;
+import by.it.academy.repository.dao.*;
+import by.it.academy.repository.entity.Assessment;
 import by.it.academy.repository.entity.Course;
+import by.it.academy.repository.entity.Student;
 import by.it.academy.repository.entity.Task;
 import by.it.academy.services.TaskService;
 import by.it.academy.services.dto.AssessmentTdo;
@@ -26,6 +25,7 @@ public class TaskServiceImpl implements TaskService {
         taskDao.closeDao();
         return result;
     }
+
     @Override
     public List<AssessmentTdo> getListOfTaskAssessment(Integer taskId) {
         AssessmentDao assessmentDao = DaoProvider.getInstance().getAssessmentDao();
@@ -35,6 +35,7 @@ public class TaskServiceImpl implements TaskService {
         assessmentDao.closeDao();
         return assessments;
     }
+
     @Override
     public void createTask(String taskName, Integer courseId) {
         TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
@@ -44,7 +45,6 @@ public class TaskServiceImpl implements TaskService {
         Task task = Task.builder()
                 .description(taskName)
                 .courseField(course).build();
-        System.out.println(task);
         taskDao.save(task);
         taskDao.closeDao();
     }
@@ -54,19 +54,48 @@ public class TaskServiceImpl implements TaskService {
         taskDao.delete(taskId);
         taskDao.closeDao();
     }
+
     @Override
     public TaskDto findById(Integer taskId) {
         TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
         TaskDto taskDto = null;
         taskDto = new TaskDto(taskDao.findById(taskId));
+        taskDao.closeDao();
         return taskDto;
     }
 
     @Override
-    public void updateTask(Integer taskId) {
+    public void updateTask(Integer taskId, String newName, Integer courseId) {
         TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
+        CourseDao courseDao = DaoProvider.getInstance().getCourseDao();
+        Course course = courseDao.findById(courseId);
         Task task = taskDao.findById(taskId);
-        task.setDescription("gf");
+        task.setDescription(newName);
+        task.setCourseField(course);
         taskDao.update(task);
+        taskDao.closeDao();
+        courseDao.closeDao();
+    }
+
+    @Override
+    public void createAssessment(Integer taskId, Integer studentId, Integer mark, String feedback) {
+        AssessmentDao assessmentDao = DaoProvider.getInstance().getAssessmentDao();
+        TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
+        StudentDao studentDao = DaoProvider.getInstance().getStudentDao();
+        Task task = taskDao.findById(taskId);
+        Student student = studentDao.findById(studentId);
+        Assessment assessment = Assessment.builder()
+                .taskInAssessment(task)
+                .studentInAssessment(student)
+                .mark(mark)
+                .feedback(feedback).build();
+        assessmentDao.save(assessment);
+        studentDao.closeDao();
+        taskDao.closeDao();
+        assessmentDao.closeDao();
+    }
+
+    public static void main(String[] args) {
+        new TaskServiceImpl().createAssessment(3,2,6,"jdkjfg");
     }
 }

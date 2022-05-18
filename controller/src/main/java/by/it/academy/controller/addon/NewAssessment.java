@@ -2,8 +2,10 @@ package by.it.academy.controller.addon;
 
 import by.it.academy.services.CourseService;
 import by.it.academy.services.ServiceProvider;
+import by.it.academy.services.StudentService;
 import by.it.academy.services.TaskService;
 import by.it.academy.services.dto.CourseDto;
+import by.it.academy.services.dto.StudentDto;
 import by.it.academy.services.dto.TaskDto;
 
 import javax.servlet.*;
@@ -13,32 +15,30 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "updateTask", value = "/updateTask")
-public class UpdateTask extends HttpServlet {
+@WebServlet(name = "newAssessment", value = "/newAssessment")
+public class NewAssessment extends HttpServlet {
+    private final StudentService studentService = ServiceProvider.getInstance().getStudentService();
     private final TaskService taskService = ServiceProvider.getInstance().taskService();
-    private final CourseService courseService = ServiceProvider.getInstance().getCourseService();
-    public static final String TASK = "task";
-    public static final String COURSES = "courses";
-    private  Integer taskId;
+    public static final String STUDENT = "students";
+    private Integer taskId;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         taskId = Integer.valueOf(request.getParameter("taskId"));
-        TaskDto task = taskService.findById(taskId);
-        List<CourseDto> courseDtos = courseService.findAllCourseDto();
-        request.getSession().setAttribute(TASK,task);
-        request.getSession().setAttribute(COURSES,courseDtos);
-        request.getRequestDispatcher("WEB-INF/view/pages/updateTaskJSP.jsp").include(request, response);
+        List<StudentDto> studentDtos = studentService.findAllStudentDto();
+        request.getSession().setAttribute(STUDENT,studentDtos);
+        request.getRequestDispatcher("WEB-INF/view/pages/newAssessment.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String newName = request.getParameter("Name");
-        Integer courseId = Integer.valueOf(request.getParameter("Course"));
-        taskService.updateTask(taskId,newName,courseId);
-
+        Integer studentId = Integer.valueOf(request.getParameter("studentId"));
+        Integer mark = Integer.valueOf(request.getParameter("mark"));
+        String feedback = request.getParameter("feedback");
+        taskService.createAssessment(taskId,studentId,mark,feedback);
         PrintWriter printWriter = response.getWriter();
         printWriter.println("<html><head><title>First</title></head>");
-        printWriter.println("<body><h1>Task Update!</h1>");
+        printWriter.println("<body><h1>Task created!</h1>");
         printWriter.println("</body></html>");
     }
 }
