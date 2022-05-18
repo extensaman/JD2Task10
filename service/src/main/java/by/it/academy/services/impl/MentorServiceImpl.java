@@ -126,42 +126,12 @@ public class MentorServiceImpl implements MentorService {
                 .ifPresent(courses ->
                             Stream.of(courses)
                                     .map(Integer::parseInt)
-                                    .map(courseDao::findCourseById)
-                                    .filter(Optional::isPresent)
-                                    .map(Optional::get)
-                                    .peek(LOGGER::trace)
-                                    .peek(course -> course.setMentorField(newMentor))
-                                    .forEach(course -> courseDao.update(course))
+                                    .forEach(id ->
+                                            courseDao.updateMentorInCourse(id, newMentor))
                 );
 
-/*        Optional.ofNullable(courses_array)
-                .ifPresent(courses -> {
-                    newMentor.setCourses(
-                            Stream.of(courses)
-                                    .map(Integer::parseInt)
-                                    .map(courseDao::findCourseById)
-                                    .filter(Optional::isPresent)
-                                    .map(Optional::get)
-                                    .peek(LOGGER::trace)
-                                    .peek(course -> course.setMentorField(newMentor))
-                                    //.peek(course -> courseDao.update(course))
-                                    .collect(Collectors.toList())
-                    );
-                });*/
-        mentorDao.update(newMentor);
         adminDao.closeDao();
         courseDao.closeDao();
         mentorDao.closeDao();
-
-/*        Optional.ofNullable(courses_array)
-                .ifPresent(courses ->
-                            Stream.of(courses)
-                                    .map(Integer::parseInt)
-                                    .map(courseDao::findCourseById)
-                                    .filter(Optional::isPresent)
-                                    .map(Optional::get)
-                                    .peek(LOGGER::trace)
-                                    .forEach(course -> course.setMentorField(newMentor))
-                );*/
     }
 }
