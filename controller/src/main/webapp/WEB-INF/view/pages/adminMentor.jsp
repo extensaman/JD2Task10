@@ -7,17 +7,17 @@
         <tr>
             <th class="col">№</th>
             <th class="col">ID</th>
-            <th class="col">Course name</th>
+            <th class="col">Mentor name</th>
             <th class="col">Edit</th>
             <th class="col">Delete</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="adminCourse" items="${adminCourse}" varStatus="status">
+        <c:forEach var="adminMentor" items="${adminMentor}" varStatus="status">
             <tr>
                 <td class="col">${status.index+1}</td>
-                <td class="col">${adminCourse.id}</td>
-                <td class="col">${adminCourse.nameCourse}</td>
+                <td class="col">${adminMentor.id}</td>
+                <td class="col">${adminMentor.nameMentor}</td>
             </tr>
         </c:forEach>
         </tbody>

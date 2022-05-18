@@ -11,6 +11,7 @@ import by.it.academy.repository.util.HibernateUtil;
 import by.it.academy.services.AdminService;
 import by.it.academy.services.dto.AdminCourseDto;
 import by.it.academy.services.dto.AdminDto;
+import by.it.academy.services.dto.AdminMentorDto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -50,19 +51,43 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<AdminCourseDto> allCourseFromAdmin(Integer adminId) {
-            AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
-            List<AdminCourseDto> courseFromAdmin = null;
-            courseFromAdmin = adminDao.showAllCourseAdmin(adminId).stream()
-                    .map(AdminCourseDto::new)
-                    .collect(Collectors.toList());
-            adminDao.closeDao();
-            return courseFromAdmin;
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        List<AdminCourseDto> courseFromAdmin = null;
+        courseFromAdmin = adminDao.showAllCourseAdmin(adminId).stream()
+                .map(AdminCourseDto::new)
+                .collect(Collectors.toList());
+        adminDao.closeDao();
+        return courseFromAdmin;
     }
 
+    @Override
+    public List<AdminMentorDto> allMentorFromAdmin(Integer mentorId) {
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        List<AdminMentorDto> mentorFromAdmin = null;
+        mentorFromAdmin = adminDao.showAllMentorAdmin(mentorId).stream()
+                .map(AdminMentorDto::new)
+                .collect(Collectors.toList());
+        adminDao.closeDao();
+        return mentorFromAdmin;
+    }
 
-    /**
-     *
-     */
+    @Override
+    public void createAdmin(String nameCourse)
+            throws SecurityException {
+        adminEntityDao = DaoProvider.getInstance().getAdminDao();
+        Admin newAdmin = Admin.builder()
+                .adminName(nameCourse)
+                .build();
+        adminEntityDao.save(newAdmin);
+        adminEntityDao.closeDao();
+    }
+
+    public void deleteAdmin(Integer adminId) {
+        adminEntityDao = DaoProvider.getInstance().getAdminDao();
+        adminEntityDao.delete(adminId);
+        adminEntityDao.closeDao();
+    }
+
     @Override
     public void createCourse(String nameCourse)
             throws SecurityException {
@@ -284,6 +309,7 @@ public class AdminServiceImpl implements AdminService {
         entityManager.close();
         return courseList;
     }
+
 
     @Override
     public List<Admin> findAllAdmin() {

@@ -1,6 +1,5 @@
 package by.it.academy.services.dto;
 
-import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import lombok.*;
 

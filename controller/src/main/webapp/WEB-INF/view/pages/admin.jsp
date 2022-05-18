@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${not empty sessionScope.admin}">
+
+    <a href="newAdmin">Add admin</a>
     <table class="table">
         <thead>
         <tr>
@@ -16,6 +18,8 @@
             <th class="col">Admin name</th>
             <th class="col">Fixed course</th>
             <th class="col">Fixed mentor</th>
+            <th class="col">Edit</th>
+            <th class="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -24,8 +28,21 @@
                 <td class="col">${status.index+1}</td>
                 <td class="col">${admin.id}</td>
                 <td class="col">${admin.adminName}</td>
-                <td class="col">${admin.adminAddedToCourse}</td>
-                <td class="col">${admin.adminAddedToMentors}</td>
+                <td class="col">
+                    <a href="adminCourse?adminId=${admin.id}">Show courses</a>
+                </td>
+                <td class="col">
+                    <a href="adminMentor?mentorId=${admin.id}">Show mentors</a>
+                </td>
+                <td class="col">
+                    <a href="adminEdit?mentorId=${admin.id}">Edit</a>
+                </td>
+                <td class="col">
+                    <form action="adminDelete" method="POST">
+                    <button type="submit" id="adminDelete" name="adminDelete" value="${admin.id}"> Delete</button>
+                    <a href="adminDelete?mentorId=${admin.id}">Delete</a>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
