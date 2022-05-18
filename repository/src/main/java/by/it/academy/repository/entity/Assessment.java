@@ -30,7 +30,7 @@ public class Assessment {
     @Column(length = 1000)
     private String feedback;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "student_id")
     private Student studentInAssessment;
 
