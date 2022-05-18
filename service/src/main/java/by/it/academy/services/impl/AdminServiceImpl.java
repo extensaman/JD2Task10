@@ -321,4 +321,12 @@ public class AdminServiceImpl implements AdminService {
         return admins;
     }
 
+    @Override
+    public Optional<Admin> findAdminById(Integer id) {
+        Admin admin;
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        admin = adminDao.findById(id);
+        adminDao.closeDao();
+        return Optional.ofNullable(admin);
+    }
 }
