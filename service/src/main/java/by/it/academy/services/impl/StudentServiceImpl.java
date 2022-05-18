@@ -1,11 +1,13 @@
 package by.it.academy.services.impl;
 
+import by.it.academy.repository.dao.AssessmentDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.dao.StudentDao;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Student;
 import by.it.academy.services.StudentService;
+import by.it.academy.services.dto.AssessmentTdo;
 import by.it.academy.services.dto.StudentDto;
 
 import java.util.List;
@@ -51,5 +53,14 @@ public class StudentServiceImpl implements StudentService {
 
         studentDao.closeDao();
         courseDao.closeDao();
+    }
+    @Override
+    public List<AssessmentTdo> getListOfStudentAssessment(Integer studentId) {
+        AssessmentDao assessmentDao = DaoProvider.getInstance().getAssessmentDao();
+        List<AssessmentTdo> assessments = null;
+        assessments = assessmentDao.getListOfStudentAssessment(studentId)
+                .stream().map(AssessmentTdo::new).collect(Collectors.toList());
+        assessmentDao.closeDao();
+        return assessments;
     }
 }

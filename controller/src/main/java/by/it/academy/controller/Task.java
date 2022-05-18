@@ -22,10 +22,6 @@ public class Task extends HttpServlet {
     public static final String ASSESSMENT = "assessments";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter printWriter = response.getWriter();
-        printWriter.println("<html><head><title>First</title></head>");
-        printWriter.println("<body><h1>Hello</h1>");
-        printWriter.println("</body></html>");
         Integer taskId = Integer.valueOf(request.getParameter("taskId"));
         List<AssessmentTdo> allAssessment = taskService.getListOfTaskAssessment(taskId);
         request.getSession().setAttribute(ASSESSMENT,allAssessment);

@@ -7,14 +7,23 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="row">
+    <div class='d-flex justify-content-start'>
+        <form action='#' onclick='javascript:
+              window.open("newTask", "_blank", "scrollbars=1,resizable=1,height=300,width=450");'
+              name="getForm" method="post">
+            <button class="btn btn-outline-primary">
+                <i class="bi bi-plus-square">&nbsp&nbspAdd Task</i>
+            </button>
+        </form>
+    </div>
+</div>
 <div class="row mx-2">
-    <h1>Task</h1>
     <c:if test="${not empty sessionScope.tasks}">
         <table class="table">
             <thead>
             <tr>
                 <th class="col">№</th>
-                <th class="col">ID</th>
                 <th class="col">Task name</th>
                 <th class="col">Curse</th>
             </tr>
@@ -23,25 +32,34 @@
             <c:forEach var="task" items="${tasks}" varStatus="status">
                 <tr>
                     <td class="col">${status.index+1}</td>
-                    <td class="col">${task.id}</td>
                     <td class="col">${task.name}</td>
                     <td class="col">${task.curse}</td>
-                    <td class="col">
+                    <td class="col-1">
                         <a href='#' onclick='javascript:
-                                window.open("task?taskId=${task.id}", "_blank", "scrollbars=1,resizable=1,height=300,width=450");
-                                   ' title='Assessment'>Assessment</a>
-                        <%--<a class="nav-link" href="${pageContext.request.contextPath}/task?taskId=${task.id}">Assessment</a>--%>
+                                window.open("task?taskId=${task.id}", "_blank"
+                                , "scrollbars=1,resizable=1,height=300,width=450");
+                                ' title='Assessment'>Assessment</a>
+                    <td class="col-1">
+                        <form action="${pageContext.request.contextPath}/deleteTask" name="deleting"
+                              method="get">
+                            <input type="hidden" name="taskId" value="${task.id}"/>
+                            <button class="btn btn-outline-secondary"><i class="bi bi-trash"></i></button>
+                        </form>
                     </td>
-                    <td class="col">
-                            <a class="nav-link"
-                               href="${pageContext.request.contextPath}/deleteTask?command=delete&taskId=${task.id}">
-                                Delete</a>
                     </td>
+                    <td class="col-1">
+                        <form action='#' onclick='javascript:
+                                window.open("updateTask?taskId=${task.id}"
+                                , "_blank", "scrollbars=1,resizable=1,height=300,width=450");'
+                              name="getForm" method="post">
+                            <button class="btn btn-outline-secondary">
+                                <i class="bi bi-pencil">&nbsp&nbsp</i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
             </c:forEach>
             </tbody>
         </table>
-        <a class="nav-link active" href='#' onclick='javascript:
-                window.open("newTask"/*?command=newTask"*/, "_blank", "scrollbars=1,resizable=1,height=300,width=450");
-                ' title='Assessment'>New Task</a>
     </c:if>
 </div>

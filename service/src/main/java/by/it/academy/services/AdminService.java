@@ -1,12 +1,9 @@
 package by.it.academy.services;
 
 import by.it.academy.repository.entity.Admin;
-import by.it.academy.repository.entity.Course;
 import by.it.academy.services.dto.AdminCourseDto;
 import by.it.academy.services.dto.AdminDto;
 import by.it.academy.services.dto.AdminMentorDto;
-
-import java.util.List;
 
 import java.util.List;
 

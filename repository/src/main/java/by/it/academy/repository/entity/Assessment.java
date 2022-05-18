@@ -3,6 +3,8 @@ package by.it.academy.repository.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
@@ -32,8 +34,9 @@ public class Assessment {
     @JoinColumn(name = "student_id")
     private Student studentInAssessment;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "task_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Task taskInAssessment;
 
     @Override

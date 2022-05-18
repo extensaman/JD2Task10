@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class AdminServiceImplTest extends Assert {
 
-    /*private static EntityDao<Mentor> mentorEntityDao;
+    private static EntityDao<Mentor> mentorEntityDao;
     private static EntityDao<Course> courseEntityDao;
     private static EntityDao<Admin> adminEntityDao;
     private Scanner scanner = new Scanner(System.in);
@@ -59,6 +59,5 @@ public class AdminServiceImplTest extends Assert {
         assertEquals(mentorDB, mentor);
         courseEntityDao.closeDao();
     }
-*/
 
 }

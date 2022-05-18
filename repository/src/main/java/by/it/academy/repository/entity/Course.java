@@ -29,7 +29,7 @@ public class Course {
     @JoinColumn(name = "mentor_id")
     private Mentor mentorField;
 
-    @OneToMany(mappedBy = "courseField", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "courseField", fetch = FetchType.LAZY,orphanRemoval = false)
     private List<Task> tasks;
 
     @ManyToMany(cascade = CascadeType.ALL)
