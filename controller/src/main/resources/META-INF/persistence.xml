@@ -5,6 +5,11 @@
     <persistence-unit name="task12">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>by.it.academy.repository.entity.Student</class>
+        <class>by.it.academy.repository.entity.Mentor</class>
+        <class>by.it.academy.repository.entity.Course</class>
+        <class>by.it.academy.repository.entity.Task</class>
+        <class>by.it.academy.repository.entity.Assessment</class>
+        <class>by.it.academy.repository.entity.Admin</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
@@ -19,6 +24,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.connection.pool_size" value="10"/>
             <property name="hibernate.connection.isolation" value="2"/>
+            <property name="hibernate.event.merge.entity_copy_observer" value="allow"/>
         </properties>
     </persistence-unit>
 </persistence>

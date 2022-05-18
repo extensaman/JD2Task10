@@ -108,6 +108,7 @@ public class MentorServiceImpl implements MentorService {
         // TODO Need add validation functionality
         adminDao = DaoProvider.getInstance().getAdminDao();
         courseDao = DaoProvider.getInstance().getCourseDao();
+        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
 
         Mentor newMentor = Mentor.builder().build();
         Optional.ofNullable(name)
@@ -119,7 +120,21 @@ public class MentorServiceImpl implements MentorService {
                                         .orElse(null)
                         )
                 );
+        mentorDao.save(newMentor);
+
         Optional.ofNullable(courses_array)
+                .ifPresent(courses ->
+                            Stream.of(courses)
+                                    .map(Integer::parseInt)
+                                    .map(courseDao::findCourseById)
+                                    .filter(Optional::isPresent)
+                                    .map(Optional::get)
+                                    .peek(LOGGER::trace)
+                                    .peek(course -> course.setMentorField(newMentor))
+                                    .forEach(course -> courseDao.update(course))
+                );
+
+/*        Optional.ofNullable(courses_array)
                 .ifPresent(courses -> {
                     newMentor.setCourses(
                             Stream.of(courses)
@@ -129,13 +144,13 @@ public class MentorServiceImpl implements MentorService {
                                     .map(Optional::get)
                                     .peek(LOGGER::trace)
                                     .peek(course -> course.setMentorField(newMentor))
-                                    .peek(course -> courseDao.update(course))
+                                    //.peek(course -> courseDao.update(course))
                                     .collect(Collectors.toList())
                     );
-                });
-
-        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
-        mentorDao.save(newMentor);
+                });*/
+        mentorDao.update(newMentor);
+        adminDao.closeDao();
+        courseDao.closeDao();
         mentorDao.closeDao();
 
 /*        Optional.ofNullable(courses_array)
