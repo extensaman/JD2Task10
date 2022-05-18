@@ -66,7 +66,7 @@
                         <form action="${pageContext.request.contextPath}/home?pageName=mentor" name="deleting"
                               method="post">
                             <input type="hidden" name="action" value="delete"/>
-                            <input type="hidden" name="delete" value="${mentor.id}"/>
+                            <input type="hidden" name="description" value="${mentor.id}"/>
                             <button class="btn btn-outline-secondary"><i class="bi bi-trash"></i></button>
                         </form>
                     </td>
@@ -86,6 +86,9 @@
             </tbody>
         </table>
     </c:if>
+
+
+
     <!-- Модальное окно -->
     <div class="modal fade" id="courseDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

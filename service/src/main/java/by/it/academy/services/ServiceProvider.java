@@ -14,12 +14,10 @@ public class ServiceProvider {
     private final StudentService studentService = new StudentServiceImpl();
     private final TaskService taskService = new TaskServiceImpl();
 
-    private static class SingletonHolder {
-        private final static ServiceProvider INSTANCE = new ServiceProvider();
-    }
+    private final static ServiceProvider INSTANCE = new ServiceProvider();
 
     public static ServiceProvider getInstance() {
-        return SingletonHolder.INSTANCE;
+        return INSTANCE;
     }
 
     public AdminService getAdminService() {
@@ -29,6 +27,7 @@ public class ServiceProvider {
     public MentorService getMentorService() {
         return mentorService;
     }
+
     public CourseService getCourseService() {
         return courseService;
     }
@@ -36,6 +35,7 @@ public class ServiceProvider {
     public StudentService getStudentService() {
         return studentService;
     }
+
     public TaskService taskService() {
         return taskService;
     }

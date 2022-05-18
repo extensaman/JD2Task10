@@ -1,7 +1,6 @@
 package by.it.academy.services.impl;
 
 import by.it.academy.repository.dao.AdminDao;
-import by.it.academy.repository.dao.CourseDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Admin;
@@ -37,6 +36,7 @@ public class AdminServiceImpl implements AdminService {
      *
      */
     private Scanner scanner = new Scanner(System.in);
+
 
     @Override
     public List<AdminDto> showAllAdminDto() {
@@ -319,4 +319,5 @@ public class AdminServiceImpl implements AdminService {
         adminDao.closeDao();
         return admins;
     }
+
 }

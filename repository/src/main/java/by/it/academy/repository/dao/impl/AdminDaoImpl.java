@@ -1,6 +1,7 @@
 package by.it.academy.repository.dao.impl;
 
 import by.it.academy.repository.dao.AdminDao;
+import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
@@ -8,6 +9,7 @@ import by.it.academy.repository.entity.Mentor;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 public class AdminDaoImpl extends EntityDaoImpl<Admin> implements AdminDao {
     public AdminDaoImpl(EntityManager em) {
@@ -29,6 +31,11 @@ public class AdminDaoImpl extends EntityDaoImpl<Admin> implements AdminDao {
                 "where a.id = :mentorId ");
         query.setParameter("mentorId", mentorId);
         return query.getResultList();
+    }
+
+    @Override
+    public Optional<Admin> findAdminById(Integer id) {
+        return Optional.ofNullable(findById(id));
     }
 
 }

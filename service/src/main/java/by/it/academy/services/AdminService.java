@@ -6,6 +6,8 @@ import by.it.academy.services.dto.AdminDto;
 import by.it.academy.services.dto.AdminMentorDto;
 
 import java.util.List;
+import java.util.Optional;
+import by.it.academy.services.dto.AdminMentorDto;
 
 public interface AdminService {
 
@@ -40,4 +42,5 @@ public interface AdminService {
     void updateAdminToCourse(int idCourse, int idAdmin) throws SecurityException;
 
     List<Admin> findAllAdmin();
+
 }
