@@ -1,5 +1,6 @@
 package by.it.academy.services;
 
+import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.services.dto.AdminCourseDto;
 import by.it.academy.services.dto.AdminDto;
@@ -19,7 +20,7 @@ public interface AdminService {
 
     void createAdmin(String nameCourse) throws SecurityException;
 
-
+    void deleteAdmin(Integer adminId);
 
     void createCourse(String nameCourse) throws SecurityException;
 

@@ -18,6 +18,8 @@
             <th class="col">Admin name</th>
             <th class="col">Fixed course</th>
             <th class="col">Fixed mentor</th>
+            <th class="col">Edit</th>
+            <th class="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +33,15 @@
                 </td>
                 <td class="col">
                     <a href="adminMentor?mentorId=${admin.id}">Show mentors</a>
+                </td>
+                <td class="col">
+                    <a href="adminEdit?mentorId=${admin.id}">Edit</a>
+                </td>
+                <td class="col">
+                    <form action="adminDelete" method="POST">
+                    <button type="submit" id="adminDelete" name="adminDelete" value="${admin.id}"> Delete</button>
+                    <a href="adminDelete?mentorId=${admin.id}">Delete</a>
+                    </form>
                 </td>
             </tr>
         </c:forEach>
