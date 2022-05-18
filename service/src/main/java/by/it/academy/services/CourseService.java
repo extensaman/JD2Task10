@@ -11,4 +11,5 @@ public interface CourseService {
     List<Course> findAllCourse();
     List<CourseDto> findAllCourseDto();
     List<Course> findAllCourseWithoutMentor();
+    Optional<Course> findCourseById(Integer id);
 }

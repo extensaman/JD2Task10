@@ -5,6 +5,7 @@ import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AdminDao extends EntityDao<Admin> {
 
@@ -12,4 +13,5 @@ public interface AdminDao extends EntityDao<Admin> {
 
     List<Mentor> showAllMentorAdmin(Integer mentorId);
 
+    Optional<Admin> findAdminById(Integer id);
 }

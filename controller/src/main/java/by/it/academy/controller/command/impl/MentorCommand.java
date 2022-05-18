@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -53,18 +54,6 @@ public class MentorCommand implements Command {
                             break;
                     }
                 });
-
-
-        if (req.getParameterValues("courseId") != null) {
-            for (String s : req.getParameterValues("courseId")) {
-                LOGGER.trace(s);
-            }
-        }
-        if (req.getParameterValues("mentorId") != null) {
-            for (String s : req.getParameterValues("mentorId")) {
-                LOGGER.trace(s);
-            }
-        }
 
         List<Mentor> allMentor = mentorService.findAllMentor();
         LOGGER.trace(getClass().getSimpleName() + " --- allMentor = " + allMentor);
