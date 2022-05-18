@@ -1,4 +1,4 @@
-package by.it.academy.controller;
+package by.it.academy.controller.addon;
 
 import by.it.academy.services.ServiceProvider;
 import by.it.academy.services.TaskService;

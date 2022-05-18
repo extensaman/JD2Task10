@@ -43,5 +43,4 @@ public interface AdminService {
 
     List<Admin> findAllAdmin();
 
-    Optional<Admin> findAdminById(Integer id);
 }

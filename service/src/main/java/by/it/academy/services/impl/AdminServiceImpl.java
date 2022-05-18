@@ -1,7 +1,6 @@
 package by.it.academy.services.impl;
 
 import by.it.academy.repository.dao.AdminDao;
-import by.it.academy.repository.dao.CourseDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.entity.Admin;
@@ -16,7 +15,6 @@ import by.it.academy.services.dto.AdminMentorDto;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -38,6 +36,7 @@ public class AdminServiceImpl implements AdminService {
      *
      */
     private Scanner scanner = new Scanner(System.in);
+
 
     @Override
     public List<AdminDto> showAllAdminDto() {
