@@ -20,6 +20,8 @@ public class TaskDto {
     private String name;
     private String curse;
 
+    private List<AssessmentTdo> assessments = new ArrayList<>();
+
     public TaskDto(Task task) {
         System.out.println(task);
         this.id = task.getTaskId();

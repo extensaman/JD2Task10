@@ -1,4 +1,4 @@
-package by.it.academy.controller;
+package by.it.academy.controller.filtr;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

@@ -17,43 +17,24 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDto> findAllTaskDto() {
-//        TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
-//        List<TaskDto> result = null;
-//        result = taskDao.findAll()
-//                .stream()
-//                .map(TaskDto::new)
-//                .collect(Collectors.toList());
-//        taskDao.closeDao();
-//
-//        result.forEach(taskDto -> taskDto.setAssessments(extracted(taskDto.getId())));
-//
-//        return result;
-        return null;
+        TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
+        List<TaskDto> result = null;
+        result = taskDao.findAll()
+                .stream()
+                .map(TaskDto::new)
+                .collect(Collectors.toList());
+        taskDao.closeDao();
+        return result;
     }
-
-    private List<AssessmentTdo> extracted(Integer taskId) {
-//        return assessmentDao.getListOfTaskAssessment(taskId)
-//                .stream().map(AssessmentTdo::new).collect(Collectors.toList());
-        return null;
-    }
-
-//    public static void main(String[] args) {
-//        System.out.println(new TaskServiceImpl().taskDtos());
-//        System.out.println(new TaskServiceImpl().extracted(3));
-//
-//        return result;
-//    }
-
     @Override
     public List<AssessmentTdo> getListOfTaskAssessment(Integer taskId) {
         AssessmentDao assessmentDao = DaoProvider.getInstance().getAssessmentDao();
-        List<AssessmentTdo> result = null;
-        result = assessmentDao.getListOfTaskAssessment(taskId)
+        List<AssessmentTdo> assessments = null;
+        assessments = assessmentDao.getListOfTaskAssessment(taskId)
                 .stream().map(AssessmentTdo::new).collect(Collectors.toList());
         assessmentDao.closeDao();
-        return result;
+        return assessments;
     }
-
     @Override
     public void createTask(String taskName, Integer courseId) {
         TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
@@ -68,16 +49,24 @@ public class TaskServiceImpl implements TaskService {
         taskDao.closeDao();
     }
 
-    public void removeTask(Integer taskId){
+    public void removeTask(Integer taskId) {
         TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
         taskDao.delete(taskId);
         taskDao.closeDao();
     }
+    @Override
+    public TaskDto findById(Integer taskId) {
+        TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
+        TaskDto taskDto = null;
+        taskDto = new TaskDto(taskDao.findById(taskId));
+        return taskDto;
+    }
 
-    public static void main(String[] args) {
-        new TaskServiceImpl().removeTask(6);
-        /*new TaskServiceImpl().createTask("kksdkfs",1);*/
-       /*System.out.println(new TaskServiceImpl().findAllTaskDto());*/
-        /* System.out.println(new TaskServiceImpl().getListOfTaskAssessment(3));*/
+    @Override
+    public void updateTask(Integer taskId) {
+        TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
+        Task task = taskDao.findById(taskId);
+        task.setDescription("gf");
+        taskDao.update(task);
     }
 }

@@ -13,10 +13,12 @@ public class AssessmentTdo {
     private String name;
     private String studentName;
     private Integer mark;
+    private String feedback;
     public AssessmentTdo(Assessment assessment) {
         this.id = assessment.getId();
         this.name = assessment.getFeedback();
         this.studentName = assessment.getStudentInAssessment().getStudentName();
         this.mark = assessment.getMark();
+        this.feedback = assessment.getFeedback();
     }
 }

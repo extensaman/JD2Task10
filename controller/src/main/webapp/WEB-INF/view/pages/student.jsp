@@ -26,6 +26,11 @@
                     <td class="col">${student.id}</td>
                     <td class="col">${student.studentName}</td>
                     <td class="col">${student.assessmentCount}</td>
+                    <td class="col-1">
+                        <a href='#' onclick='javascript:
+                                window.open("assessment?studentId=${student.id}", "_blank", "scrollbars=1,resizable=1,height=300,width=450");
+                                ' title='Assessment'>Assessment</a>
+                    <td class="col-1">
                     <td class="col">
                         <div class="dropdown">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
