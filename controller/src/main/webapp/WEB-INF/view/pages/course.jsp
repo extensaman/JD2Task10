@@ -7,6 +7,31 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="row mx-2">
+<c:if test="${not empty sessionScope.course}">
+    <div class="row mx-2">
     <h1>Course</h1>
+    <a href="newCourse">Add course</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col">№</th>
+            <th class="col">ID</th>
+            <th class="col">Course name</th>
+            <th class="col">Edit</th>
+            <th class="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="course" items="${course}" varStatus="status">
+            <tr>
+                <td class="col">${status.index+1}</td>
+                <td class="col">${course.id}</td>
+                <td class="col">${course.courseProgram}</td>
+                <td class="col">EDIT</td>
+                <td class="col">DELETE</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</c:if>
 </div>

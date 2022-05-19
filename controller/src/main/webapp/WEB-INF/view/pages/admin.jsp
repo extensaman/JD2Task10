@@ -37,10 +37,11 @@
                 <td class="col">
                     <a href="adminEdit?mentorId=${admin.id}">Edit</a>
                 </td>
-                <td class="col">
-                    <form action="adminDelete" method="POST">
-                    <button type="submit" id="adminDelete" name="adminDelete" value="${admin.id}"> Delete</button>
-                    <a href="adminDelete?mentorId=${admin.id}">Delete</a>
+                <td class="col-1">
+                    <form action="${pageContext.request.contextPath}/adminDelete" name="delete"
+                          method="GET">
+                        <input type="hidden" name="adminId" value="${admin.id}"/>
+                        <button class="btn btn-outline-secondary"><i class="bi bi-trash"></i></button>
                     </form>
                 </td>
             </tr>

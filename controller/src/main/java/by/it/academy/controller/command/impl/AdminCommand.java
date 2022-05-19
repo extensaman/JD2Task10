@@ -31,11 +31,7 @@ public class AdminCommand implements Command {
         req.getSession().setAttribute(ADMIN, allAdmin);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
 
-        if (req.getParameter("adminDelete") != null) {
-            int idAdminForDelete = Integer.parseInt(req.getParameter("idAdmin"));
-            adminService.deleteAdmin(idAdminForDelete);
-            req.getRequestDispatcher("/home?pageName=admin").forward(req, resp);
-        }
+
 
     }
 }

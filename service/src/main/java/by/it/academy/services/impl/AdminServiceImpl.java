@@ -3,6 +3,7 @@ package by.it.academy.services.impl;
 import by.it.academy.repository.dao.AdminDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
+import by.it.academy.repository.dao.TaskDao;
 import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
@@ -19,24 +20,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AdminServiceImpl implements AdminService {
-
-    /**
-     *
-     */
-    private static EntityDao<Mentor> mentorEntityDao = null;
-    /**
-     *
-     */
-    private static EntityDao<Course> courseEntityDao = null;
-    /**
-     *
-     */
-    private static EntityDao<Admin> adminEntityDao = null;
-    /**
-     *
-     */
-    private Scanner scanner = new Scanner(System.in);
-
 
     @Override
     public List<AdminDto> showAllAdminDto() {
@@ -74,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void createAdmin(String nameCourse)
             throws SecurityException {
-        adminEntityDao = DaoProvider.getInstance().getAdminDao();
+        EntityDao<Admin> adminEntityDao = DaoProvider.getInstance().getAdminDao();
         Admin newAdmin = Admin.builder()
                 .adminName(nameCourse)
                 .build();
@@ -83,15 +66,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public void deleteAdmin(Integer adminId) {
-        adminEntityDao = DaoProvider.getInstance().getAdminDao();
-        adminEntityDao.delete(adminId);
-        adminEntityDao.closeDao();
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        adminDao.delete(adminId);
+        adminDao.closeDao();
     }
 
     @Override
     public void createCourse(String nameCourse)
             throws SecurityException {
-        courseEntityDao =
+        EntityDao<Course> courseEntityDao =
                 DaoProvider.getInstance().getCourseDao();
         Course course = Course.builder()
                 .courseProgram(nameCourse)
@@ -106,7 +89,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteCourseById(int idCourse)
             throws SecurityException {
-        courseEntityDao =
+        EntityDao<Course> courseEntityDao =
                 DaoProvider.getInstance().getCourseDao();
         List<Course> listCourse = courseEntityDao.findAll();
         for (int i = 0; i < listCourse.size(); i++) {
@@ -130,7 +113,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteCourseByName()
             throws SecurityException {
-        courseEntityDao =
+        EntityDao<Course> courseEntityDao =
                 DaoProvider.getInstance().getCourseDao();
         List<Course> listCourse = courseEntityDao.findAll();
         for (int i = 0; i < listCourse.size(); i++) {
@@ -138,7 +121,7 @@ public class AdminServiceImpl implements AdminService {
         }
         System.out.println(
                 "Choose id of a course which do you prefer dismiss:");
-
+        Scanner scanner = new Scanner(System.in);
         int idCourse = scanner.nextInt();
 
         if (courseEntityDao.findById(idCourse) != null) {
@@ -155,7 +138,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void createMentor(String nameMentor)
             throws SecurityException {
-        mentorEntityDao =
+        EntityDao<Mentor> mentorEntityDao =
                 DaoProvider.getInstance().getMentorDao();
         Mentor mentor = Mentor.builder()
                 .mentorName(nameMentor)
@@ -170,7 +153,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteMentorById(int idMentor)
             throws SecurityException {
-        mentorEntityDao =
+        EntityDao<Mentor> mentorEntityDao =
                 DaoProvider.getInstance().getMentorDao();
         if (mentorEntityDao.findById(idMentor) != null) {
             mentorEntityDao.delete(idMentor);
@@ -187,7 +170,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteMentorByName()
             throws SecurityException {
-        mentorEntityDao =
+        EntityDao<Mentor> mentorEntityDao =
                 DaoProvider.getInstance().getMentorDao();
         List<Mentor> listMentor = mentorEntityDao.findAll();
         for (int i = 0; i < listMentor.size(); i++) {
@@ -195,12 +178,15 @@ public class AdminServiceImpl implements AdminService {
         }
         System.out.println(
                 "Choose id of a mentor which do you prefer dismiss:");
+        Scanner scanner = new Scanner(System.in);
         int idMentor = scanner.nextInt();
         if (mentorEntityDao.findById(idMentor) != null) {
             List<Course> courseList = getListMentor(mentorEntityDao
                     .findById(idMentor).getMentorName());
             for (Course course : courseList) {
                 course.setMentorField(null);
+                EntityDao<Course> courseEntityDao =
+                        DaoProvider.getInstance().getCourseDao();
                 courseEntityDao.update(course);
             }
             mentorEntityDao.delete(idMentor);
@@ -215,9 +201,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void insertMentorToCourse(int idCourse, int idMentor)
             throws SecurityException {
-        courseEntityDao =
+        EntityDao<Course> courseEntityDao =
                 DaoProvider.getInstance().getCourseDao();
-        mentorEntityDao =
+        EntityDao<Mentor> mentorEntityDao =
                 DaoProvider.getInstance().getMentorDao();
         if (courseEntityDao.findById(idCourse) != null
                 && mentorEntityDao.findById(idMentor) != null) {
@@ -238,11 +224,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void takeCourseForControl(int idAdmin)
             throws SecurityException {
-        courseEntityDao =
+        EntityDao<Course> courseEntityDao =
                 DaoProvider.getInstance().getCourseDao();
-        adminEntityDao =
+        EntityDao<Admin> adminEntityDao =
                 DaoProvider.getInstance().getAdminDao();
         System.out.println("Введите id курса:");
+        Scanner scanner = new Scanner(System.in);
         int idCourse = scanner.nextInt();
         if (courseEntityDao.findById(idCourse) != null
                 && adminEntityDao.findById(idAdmin) != null) {
@@ -261,9 +248,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void updateMentorToCourse(int idCourse, int idMentor)
             throws SecurityException {
-        courseEntityDao =
+        EntityDao<Course> courseEntityDao =
                 DaoProvider.getInstance().getCourseDao();
-        mentorEntityDao =
+        EntityDao<Mentor> mentorEntityDao =
                 DaoProvider.getInstance().getMentorDao();
         if (courseEntityDao.findById(idCourse) != null
                 && mentorEntityDao.findById(idMentor) != null) {
@@ -281,9 +268,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void updateAdminToCourse(int idCourse, int idAdmin)
             throws SecurityException {
-        courseEntityDao =
+        EntityDao<Course> courseEntityDao =
                 DaoProvider.getInstance().getCourseDao();
-        adminEntityDao =
+        EntityDao<Admin> adminEntityDao =
                 DaoProvider.getInstance().getAdminDao();
         if (courseEntityDao.findById(idCourse) != null
                 && adminEntityDao.findById(idAdmin) != null) {
