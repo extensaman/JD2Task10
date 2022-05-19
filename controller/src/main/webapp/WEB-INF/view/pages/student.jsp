@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row mx-2">
+    <h1>Student</h1>
     <c:if test="${not empty sessionScope.students}">
         <table class="table">
             <thead>
@@ -16,7 +17,7 @@
                 <th class="col">ID</th>
                 <th class="col">Student name</th>
                 <th class="col">Assessment count</th>
-                <th class="col">Assessment</th>
+                <th class="col">Courses</th>
             </tr>
             </thead>
             <tbody>
@@ -44,6 +45,12 @@
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </div>
+                    </td>
+
+                    <td class="col">
+                        <a href='#' onclick='javascript:
+                                window.open("studentCourses?studentId=${student.id}", "_blank", "scrollbars=1,resizable=1,height=300,width=450");
+                                ' title='Courses'>Courses</a>
                     </td>
                 </tr>
             </c:forEach>
