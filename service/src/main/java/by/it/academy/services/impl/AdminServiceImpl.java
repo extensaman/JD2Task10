@@ -3,6 +3,7 @@ package by.it.academy.services.impl;
 import by.it.academy.repository.dao.AdminDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
+import by.it.academy.repository.dao.TaskDao;
 import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.repository.entity.Mentor;
@@ -65,9 +66,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     public void deleteAdmin(Integer adminId) {
-        EntityDao<Admin> adminEntityDao = DaoProvider.getInstance().getAdminDao();
-        adminEntityDao.delete(adminId);
-        adminEntityDao.closeDao();
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        adminDao.delete(adminId);
+        adminDao.closeDao();
     }
 
     @Override
