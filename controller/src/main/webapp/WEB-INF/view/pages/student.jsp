@@ -33,6 +33,21 @@
                                 ' title='Assessment'>Assessment</a>
                     <td class="col-1">
                     <td class="col">
+                        <div class="dropdown">
+                            <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-list">&nbsp&nbspChoose</i>
+                            </a>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </div>
+                    </td>
+
+                    <td class="col">
                         <a href='#' onclick='javascript:
                                 window.open("studentCourses?studentId=${student.id}", "_blank", "scrollbars=1,resizable=1,height=300,width=450");
                                 ' title='Courses'>Courses</a>
