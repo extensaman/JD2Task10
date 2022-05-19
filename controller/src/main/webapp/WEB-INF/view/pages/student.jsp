@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="row">
+<div class="row mx-2">
     <h1>Student</h1>
     <div class='d-flex justify-content-start'>
         <form action='#' onclick='javascript:
