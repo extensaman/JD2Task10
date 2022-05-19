@@ -11,4 +11,6 @@ public interface CourseService {
     List<Course> findAllCourse();
     List<CourseDto> findAllCourseDto();
     List<Course> findAllCourseWithoutMentor();
+    void createCourse(String nameCourse);
+
 }

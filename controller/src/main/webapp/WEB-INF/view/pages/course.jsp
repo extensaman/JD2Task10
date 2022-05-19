@@ -10,6 +10,7 @@
 <c:if test="${not empty sessionScope.course}">
     <div class="row mx-2">
     <h1>Course</h1>
+    <a href="newCourse">Add course</a>
     <table class="table">
         <thead>
         <tr>
@@ -26,6 +27,8 @@
                 <td class="col">${status.index+1}</td>
                 <td class="col">${course.id}</td>
                 <td class="col">${course.courseProgram}</td>
+                <td class="col">EDIT</td>
+                <td class="col">DELETE</td>
             </tr>
         </c:forEach>
         </tbody>
