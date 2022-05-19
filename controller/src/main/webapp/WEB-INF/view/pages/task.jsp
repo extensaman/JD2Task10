@@ -47,13 +47,23 @@
                         </form>
                     </td>
                     </td>
-                    <td class="col-1">
+                    <td class="col">
                         <form action='#' onclick='javascript:
                                 window.open("updateTask?taskId=${task.id}"
                                 , "_blank", "scrollbars=1,resizable=1,height=300,width=450");'
                               name="getForm" method="post">
                             <button class="btn btn-outline-secondary">
-                                <i class="bi bi-pencil">&nbsp&nbsp</i>
+                                <i class="bi bi-pencil">&nbsp&nbspUpdate Task</i>
+                            </button>
+                        </form>
+                    </td>
+                    <td class="col">
+                        <form action='#' onclick='javascript:
+                                window.open("newAssessment?taskId=${task.id}"
+                                , "_blank", "scrollbars=1,resizable=1,height=300,width=450");'
+                              name="getForm" method="post">
+                            <button class="btn btn-outline-secondary">
+                                <i class="bi bi-pencil">&nbsp&nbspAdd Assessment</i>
                             </button>
                         </form>
                     </td>

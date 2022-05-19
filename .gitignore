@@ -1,7 +1,9 @@
 # Project exclude paths
 /repository/target/
+/controller/target/
 /service/target/
 /controller/target/
 /target/
+/reportAggregator/
 *.iml
 .idea
