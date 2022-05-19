@@ -7,8 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="row mx-2">
+<div class="row">
     <h1>Student</h1>
+    <div class='d-flex justify-content-start'>
+        <form action='#' onclick='javascript:
+              window.open("newStudent", "_blank", "scrollbars=1,resizable=1,height=300,width=450");'
+              name="getForm" method="post">
+            <button class="btn btn-outline-primary">
+                <i class="bi bi-plus-square">&nbsp&nbspAdd Student</i>
+            </button>
+        </form>
+    </div>
+</div>
+<div class="row mx-2">
     <c:if test="${not empty sessionScope.students}">
         <table class="table">
             <thead>
@@ -51,6 +62,14 @@
                         <a href='#' onclick='javascript:
                                 window.open("studentCourses?studentId=${student.id}", "_blank", "scrollbars=1,resizable=1,height=300,width=450");
                                 ' title='Courses'>Courses</a>
+                    </td>
+
+                    <td class="col-1">
+                        <form action="${pageContext.request.contextPath}/deleteStudent" name="deleting"
+                              method="get">
+                            <input type="hidden" name="studentId" value="${student.id}"/>
+                            <button class="btn btn-outline-secondary"><i class="bi bi-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
