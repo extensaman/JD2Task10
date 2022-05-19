@@ -37,7 +37,7 @@ public class Course {
             inverseJoinColumns = {@JoinColumn(name = "course_id")})
     private List<Student> students;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "admin_id")
     private Admin adminField;
 
