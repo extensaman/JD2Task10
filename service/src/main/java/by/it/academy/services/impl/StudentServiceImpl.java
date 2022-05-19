@@ -16,6 +16,30 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     @Override
+    public void createStudent(String studentName)
+            throws SecurityException {
+        EntityDao<Student> studentDao = DaoProvider.getInstance().getStudentDao();
+
+        Student student = Student.builder()
+                .studentName(studentName)
+                .build();
+
+        studentDao.save(student);
+        studentDao.closeDao();
+    }
+
+    @Override
+    public void deleteStudent(Integer studentId)
+            throws SecurityException {
+        EntityDao<Student> studentDao = DaoProvider.getInstance().getStudentDao();
+
+        Student student = studentDao.findById(studentId);
+        studentDao.delete(student.getId());
+
+        studentDao.closeDao();
+    }
+
+    @Override
     public List<StudentDto> findAllStudentDto() {
         List<StudentDto> result = null;
         StudentDao studentDao = DaoProvider.getInstance().getStudentDao();
@@ -26,6 +50,7 @@ public class StudentServiceImpl implements StudentService {
         return result;
     }
 
+    @Override
     public void joinCourse(Integer studentId, Integer courseId)
             throws SecurityException {
         EntityDao<Student> studentDao = DaoProvider.getInstance().getStudentDao();
@@ -40,6 +65,7 @@ public class StudentServiceImpl implements StudentService {
         courseDao.closeDao();
     }
 
+    @Override
     public void leaveCourse(Integer studentId, Integer courseId)
             throws SecurityException {
         EntityDao<Student> studentDao = DaoProvider.getInstance().getStudentDao();
@@ -54,6 +80,7 @@ public class StudentServiceImpl implements StudentService {
         studentDao.closeDao();
         courseDao.closeDao();
     }
+
     @Override
     public List<AssessmentTdo> getListOfStudentAssessment(Integer studentId) {
         AssessmentDao assessmentDao = DaoProvider.getInstance().getAssessmentDao();

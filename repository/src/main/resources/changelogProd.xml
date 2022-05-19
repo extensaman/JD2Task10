@@ -57,8 +57,8 @@
             student_id int,
             course_id int,
             constraint student_course_pk primary key (student_id,course_id),
-            constraint student_fk foreign key (student_id) references course(id),
-            constraint course_fk foreign key (course_id) references student(id)
+            constraint student_fk foreign key (student_id) references course(id) on delete cascade,
+            constraint course_fk foreign key (course_id) references student(id) on delete cascade
             );
             insert into student_course (student_id, course_id) VALUES
             (1,1),
