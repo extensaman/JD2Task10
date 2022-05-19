@@ -1,7 +1,8 @@
 package by.it.academy.repository.dao.exception;
 
 public class EntityDaoException extends RuntimeException {
-    public EntityDaoException() {}
+    public EntityDaoException() {
+    }
 
     public EntityDaoException(String message) {
         super(message);
