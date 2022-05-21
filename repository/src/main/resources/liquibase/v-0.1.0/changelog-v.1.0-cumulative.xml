@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <include file="src/main/resources/liquibase/v-0.1.0/2022_05_21--01-initial-schema-admin.xml"/>
+    <include file="src/main/resources/liquibase/v-0.1.0/2022_05_21--02-initial-schema-mentor.xml"/>
+    <include file="src/main/resources/liquibase/v-0.1.0/2022_05_21--03-initial-schema-course.xml"/>
+    <include file="src/main/resources/liquibase/v-0.1.0/2022_05_21--04-initial-schema-student.xml"/>
+    <include file="src/main/resources/liquibase/v-0.1.0/2022_05_21--05-initial-schema-student_courset.xml"/>
+    <include file="src/main/resources/liquibase/v-0.1.0/2022_05_21--06-initial-schema-task.xml"/>
+    <include file="src/main/resources/liquibase/v-0.1.0/2022_05_21--07-initial-schema-assessment.xml"/>
+    <include file="src/main/resources/liquibase/v-0.1.0/2022_05_21--08-test-data.xml"/>
+</databaseChangeLog>

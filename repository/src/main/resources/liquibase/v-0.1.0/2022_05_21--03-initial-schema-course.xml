@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1" author="Nenartovich">
+        <sql>
+            create table course (
+                                    id int auto_increment,
+                                    course_program varchar(1000),
+                                    admin_id int,
+                                    mentor_id int,
+                                    constraint course_pk primary key (id),
+                                    constraint course_admin_fk foreign key (admin_id) references admin(id),
+                                    constraint course_mentor_fk foreign key (mentor_id) references mentor(id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
