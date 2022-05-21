@@ -1,4 +1,4 @@
-package by.it.academy.controller.addon;
+package by.it.academy.controller;
 
 import by.it.academy.controller.command.impl.AdminCommand;
 import by.it.academy.services.AdminService;
@@ -53,7 +53,7 @@ public class AdminCourseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
-
+    request.getParameter("");
 
     }
 }

@@ -6,4 +6,3 @@
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
     <include file="src/main/resources/liquibase/v-0.1.0/changelog-v.1.0-cumulative.xml"/>
 </databaseChangeLog>
-

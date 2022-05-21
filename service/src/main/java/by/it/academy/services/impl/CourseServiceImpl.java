@@ -2,6 +2,8 @@ package by.it.academy.services.impl;
 
 import by.it.academy.repository.dao.CourseDao;
 import by.it.academy.repository.dao.DaoProvider;
+import by.it.academy.repository.dao.EntityDao;
+import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.services.CourseService;
 import by.it.academy.services.dto.CourseDto;
@@ -35,6 +37,16 @@ public class CourseServiceImpl implements CourseService {
         return findAllCourse().stream()
                 .filter(course -> course.getMentorField() == null)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void createCourse(String nameCourse) {
+        EntityDao<Course> courseEntityDao = DaoProvider.getInstance().getCourseDao();
+        Course newCourse = Course.builder()
+                .courseProgram(nameCourse)
+                .build();
+        courseEntityDao.save(newCourse);
+        courseEntityDao.closeDao();
     }
 
     @Override

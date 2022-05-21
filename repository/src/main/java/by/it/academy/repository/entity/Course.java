@@ -32,12 +32,12 @@ public class Course {
     @OneToMany(mappedBy = "courseField", fetch = FetchType.LAZY,orphanRemoval = false)
     private List<Task> tasks;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "student_course", joinColumns = {@JoinColumn(name = "student_id")},
             inverseJoinColumns = {@JoinColumn(name = "course_id")})
     private List<Student> students;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "admin_id")
     private Admin adminField;
 
