@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form action="${pageContext.request.contextPath}/home?pageName=mentor" name="inserting"
+<form action="${pageContext.request.contextPath}/home?pageName=mentorsavetodb" name="inserting"
       method="post">
     <div class="gy-5">
         <div class="row">
@@ -60,21 +60,11 @@
                             ${admin.adminName}
                     </label>
                 </div>
-
-
-                    <%--
-                                    <div class="col-5 form-check form-switch">
-                                        <input class="col-1 form-check-input"
-                                               type="checkbox"
-                                               role="switch"
-                                               name="mentorId"
-                                               value="${admin.id}"
-                                               id="flexSwitchCheckAdmin">
-                                        <label class="col-4 form-check-label" for="flexSwitchCheckAdmin">${admin.adminName}</label>
-                                    </div>
-                    --%>
             </div>
         </c:forEach>
-        <button class="btn btn-outline-primary" name="action" value="save"><i class="bi bi-save"></i>&nbsp;Save</button>
+        <button class="btn btn-outline-primary"><i class="bi bi-save"></i>&nbsp;Save</button>
     </div>
+</form>
+<form action="${pageContext.request.contextPath}/home?pageName=mentor" method="post">
+    <button class="btn btn-outline-secondary"><i class="bi bi-x-square"></i>&nbsp;Cancel</button>
 </form>

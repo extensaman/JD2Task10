@@ -134,4 +134,13 @@ public class MentorServiceImpl implements MentorService {
         courseDao.closeDao();
         mentorDao.closeDao();
     }
+
+    @Override
+    public Optional<Mentor> findMentorById(Integer id) {
+        Mentor mentor;
+        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+        mentor = mentorDao.findById(id);
+        mentorDao.closeDao();
+        return Optional.ofNullable(mentor);
+    }
 }

@@ -1,4 +1,4 @@
-package by.it.academy.controller.command.impl;
+package by.it.academy.controller.command.impl.mentor;
 
 import by.it.academy.controller.command.Command;
 import by.it.academy.controller.command.Constant;
@@ -16,10 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class MentorInputCommand implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(MentorInputCommand.class);
-    public static final String COURSES = "courses";
-    public static final String ADMINS = "admins";
+public class MentorSaveFormCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(MentorSaveFormCommand.class);
     private final CourseService courseService = ServiceProvider.getInstance().getCourseService();
     private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
@@ -29,8 +27,8 @@ public class MentorInputCommand implements Command {
         List<Admin> allAdmin = adminService.findAllAdmin();
         LOGGER.trace(getClass().getSimpleName() + " --- allCourseWithoutMentor = " + allCourseWithoutMentor);
         LOGGER.trace(getClass().getSimpleName() + " --- allAdmin = " + allAdmin);
-        req.getSession().setAttribute(COURSES, allCourseWithoutMentor);
-        req.getSession().setAttribute(ADMINS, allAdmin);
+        req.getSession().setAttribute(Constant.COURSES, allCourseWithoutMentor);
+        req.getSession().setAttribute(Constant.ADMINS, allAdmin);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
     }
 }

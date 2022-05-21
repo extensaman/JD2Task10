@@ -5,6 +5,7 @@ import by.it.academy.repository.entity.Mentor;
 import by.it.academy.repository.entity.Task;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MentorService {
     void createTask(int courseId, Task task) throws SecurityException;
@@ -20,4 +21,6 @@ public interface MentorService {
     void deleteById(Integer id);
 
     void save(String name, String[] courses, String[] admin);
+
+    Optional<Mentor> findMentorById(Integer id);
 }

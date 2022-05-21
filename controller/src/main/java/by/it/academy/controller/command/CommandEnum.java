@@ -3,16 +3,22 @@ package by.it.academy.controller.command;
 import by.it.academy.controller.command.impl.AdminCommand;
 import by.it.academy.controller.command.impl.CourseCommand;
 import by.it.academy.controller.command.impl.HomeCommand;
-import by.it.academy.controller.command.impl.MentorCommand;
-import by.it.academy.controller.command.impl.MentorInputCommand;
+import by.it.academy.controller.command.impl.mentor.MentorFindAllCommand;
+import by.it.academy.controller.command.impl.mentor.MentorDeleteFromDbCommand;
+import by.it.academy.controller.command.impl.mentor.MentorSaveFormCommand;
 import by.it.academy.controller.command.impl.StudentCommand;
 import by.it.academy.controller.command.impl.TaskCommand;
+import by.it.academy.controller.command.impl.mentor.MentorSaveToDbCommand;
+import by.it.academy.controller.command.impl.mentor.MentorUpdateFormCommand;
 
 public enum CommandEnum {
     HOME("Home", "pages/main.jspx", new HomeCommand()),
     STUDENT("Student", "pages/student.jsp", new StudentCommand()),
-    MENTOR("Mentor", "pages/mentor.jsp", new MentorCommand()),
-    MENTOR_INPUT("MentorInput", "pages/mentorInput.jsp", new MentorInputCommand()),
+    MENTOR_FIND_ALL("Mentor", "pages/mentor.jsp", new MentorFindAllCommand()),
+    MENTOR_SAVE_FORM("MentorSaveForm", "pages/mentorSaveForm.jsp", new MentorSaveFormCommand()),
+    MENTOR_UPDATE_FORM("MentorUpdateForm", "pages/mentorUpdateForm.jsp", new MentorUpdateFormCommand()),
+    MENTOR_SAVE_TO_DB("MentorSaveToDb", "pages/mentor.jsp", new MentorSaveToDbCommand()),
+    MENTOR_DELETE_FROM_DB("MentorDeleteFromDb", "pages/mentor.jsp", new MentorDeleteFromDbCommand()),
     COURSE("Course", "pages/course.jsp", new CourseCommand()),
     TASK("Task", "pages/task.jsp", new TaskCommand()),
     ADMIN("Admin", "pages/admin.jsp", new AdminCommand());

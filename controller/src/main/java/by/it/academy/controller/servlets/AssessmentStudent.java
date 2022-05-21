@@ -18,7 +18,7 @@ import java.util.List;
 
 @WebServlet(name = "assessment", value = "/assessment")
 public class AssessmentStudent extends HttpServlet {
-    private static final Logger logger = LogManager.getLogger(Controller.class);
+    private static final Logger logger = LogManager.getLogger(AssessmentStudent.class);
     private final StudentService studentService = ServiceProvider.getInstance().getStudentService();
     public static final String ASSESSMENT = "assessments";
     @Override

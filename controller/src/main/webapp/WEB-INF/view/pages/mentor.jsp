@@ -9,10 +9,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class='d-flex justify-content-start'>
-        <form action="${pageContext.request.contextPath}/home?pageName=mentorinput" name="getForm"
+        <form action="${pageContext.request.contextPath}/home?pageName=mentorsaveform" name="getForm"
               method="post">
+
+            <%-- TODO delete next two input --%>
+<%--
             <input type="hidden" name="action" value="getForm"/>
-            <input type="hidden" name="description" value="new"/>
+            <input type="hidden" name="description" value="new"/>--%>
             <button class="btn btn-outline-primary">
                 <i class="bi bi-plus-square">&nbsp&nbspAdd mentor</i>
             </button>
@@ -63,20 +66,19 @@
                         </div>
                     </td>
                     <td class="col-1">
-                        <form action="${pageContext.request.contextPath}/home?pageName=mentor" name="deleting"
+                        <form action="${pageContext.request.contextPath}/home?pageName=mentordeletefromdb"
                               method="post">
-                            <input type="hidden" name="action" value="delete"/>
-                            <input type="hidden" name="description" value="${mentor.id}"/>
-                            <button class="btn btn-outline-secondary"><i class="bi bi-trash"></i></button>
+                            <%--<input type="hidden" name="action" value="delete"/>--%>
+                            <input type="hidden" name="mentorId" value="${mentor.id}"/>
+                            <button class="btn btn-outline-secondary">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         </form>
                     </td>
                     <td class="col-1">
-                        <form action="${pageContext.request.contextPath}/home?pageName=mentor" name="editing"
-                              method="post">
-                            <input type="hidden" name="action" value="getForm"/>
-                            <input type="hidden" name="description" value="edit"/>
-                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#editingModal">
+                        <form action="${pageContext.request.contextPath}/home?pageName=mentorupdateform" method="post">
+                            <input type="hidden" name="mentorId" value="${mentor.id}"/>
+                            <button class="btn btn-outline-secondary">
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </form>

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
+import java.util.Optional;
 
 public class MentorDaoImpl extends EntityDaoImpl<Mentor> implements MentorDao {
     /**
@@ -40,4 +41,10 @@ public class MentorDaoImpl extends EntityDaoImpl<Mentor> implements MentorDao {
             throw new EntityDaoException(e);
         }
     }
+
+    @Override
+    public Optional<Mentor> findMentorById(Integer id) {
+        return Optional.ofNullable(findById(id));
+    }
+
 }
