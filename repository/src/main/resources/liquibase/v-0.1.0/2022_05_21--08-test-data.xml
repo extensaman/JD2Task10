@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1" author="Nenartovich" context="test">
+        <sql>
+            insert into admin (admin_name)
+            values ('Admin01'),
+                   ('Admin02'),
+                   ('Admin03');
+        </sql>
+    </changeSet>
+    <changeSet id="2" author="Nenartovich" context="test">
+        <sql>
+            insert into mentor (mentor_name, admin_mentor_id)
+            VALUES ('Mentor01', 1),
+                   ('Mentor02', 2),
+                   ('Mentor03', 3);
+        </sql>
+    </changeSet>
+    <changeSet id="3" author="Nenartovich" context="test">
+        <sql>
+            insert into course (course_program, admin_id, mentor_id)
+            VALUES ('Course program 01', 1, 1),
+                   ('Course program 02', 2, 2),
+                   ('Course program 03', 3, 3);
+        </sql>
+    </changeSet>
+    <changeSet id="4" author="Nenartovich" context="test">
+        <sql>
+            insert into student (student_name)
+            values ('Student01'),
+                   ('Student02'),
+                   ('Student03');
+        </sql>
+    </changeSet>
+    <changeSet id="5" author="Nenartovich" context="test">
+        <sql>
+            insert into student_course (student_id, course_id)
+            VALUES (1, 1),
+                   (2, 2),
+                   (3, 3);
+        </sql>
+    </changeSet>
+    <changeSet id="6" author="Nenartovich" context="test">
+        <sql>
+            insert into task (description, course_id)
+            VALUES ('TaskDescription01', 1),
+                   ('TaskDescription02', 2),
+                   ('TaskDescription03', 3);
+        </sql>
+    </changeSet>
+    <changeSet id="7" author="Nenartovich" context="test">
+        <sql>
+            insert into assessment (task_id, feedback, mark, student_id)
+            VALUES (1, 'Not bad', 5, 1),
+                   (2, 'Good', 7, 2),
+                   (3, 'Excellent', 9, 3);
+        </sql>
+    </changeSet>
+</databaseChangeLog>
