@@ -143,4 +143,41 @@ public class MentorServiceImpl implements MentorService {
         mentorDao.closeDao();
         return Optional.ofNullable(mentor);
     }
+
+    @Override
+    public void update(String mentorId, String name, String[] courses_array, String[] admins_array) {
+        // TODO Need add validation functionality
+
+
+        findMentorById(Integer.parseInt(mentorId))
+                .ifPresent(mentor -> {
+                    AdminDao adminUpdateDao = DaoProvider.getInstance().getAdminDao();
+                    CourseDao courseUpdateDao = DaoProvider.getInstance().getCourseDao();
+                    MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+                    Optional.ofNullable(name)
+                            .ifPresent(mentor::setMentorName);
+                    Optional.ofNullable(admins_array)
+                            .ifPresent(a ->{
+
+                                mentor.setAdminMentorField(
+                                        adminUpdateDao.findAdminById(Integer.parseInt(a[SINGLE_ADMIN_INDEX]))
+                                                .orElse(null)
+                                );
+                                    }
+                            );
+                    mentorDao.clearMentorCourseList(mentor);
+
+                    Optional.ofNullable(courses_array)
+                            .ifPresent(courses ->
+                                    Stream.of(courses)
+                                            .map(Integer::parseInt)
+                                            .forEach(id ->
+                                                    courseUpdateDao.updateMentorInCourse(id, mentor)));
+
+                    mentorDao.update(mentor);
+                    mentorDao.closeDao();
+                    adminUpdateDao.closeDao();
+                    courseUpdateDao.closeDao();
+                });
+    }
 }

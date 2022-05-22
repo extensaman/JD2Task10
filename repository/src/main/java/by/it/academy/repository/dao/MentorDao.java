@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface MentorDao extends EntityDao<Mentor>{
     Optional<Mentor> findMentorById(Integer id);
+    void clearMentorCourseList(Mentor mentorWithCourseList);
 }

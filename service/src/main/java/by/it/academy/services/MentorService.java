@@ -22,5 +22,7 @@ public interface MentorService {
 
     void save(String name, String[] courses, String[] admin);
 
+    void update(String mentorId, String name, String[] courses, String[] admin);
+
     Optional<Mentor> findMentorById(Integer id);
 }

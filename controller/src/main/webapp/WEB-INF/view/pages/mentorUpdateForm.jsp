@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form action="${pageContext.request.contextPath}/home?pageName=mentor" name="inserting"
+<form action="${pageContext.request.contextPath}/home?pageName=mentorupdatetodb" name="inserting"
       method="post">
     <div class="gy-5">
         <div class="row">
@@ -66,7 +66,9 @@
             </div>
         </c:forEach>
         <input type="hidden" name="mentorId" value="${mentorId}"/>
-        <button class="btn btn-outline-primary"><i class="bi bi-save"></i>&nbsp;Save</button>
+        <button class="btn btn-outline-primary col-1"><i class="bi bi-save"></i>&nbsp;Save</button>
     </div>
 </form>
-
+<form action="${pageContext.request.contextPath}/home?pageName=mentor" method="post">
+    <button class="btn btn-outline-secondary col-1"><i class="bi bi-x-square"></i>&nbsp;Cancel</button>
+</form>

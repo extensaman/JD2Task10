@@ -10,6 +10,7 @@ import by.it.academy.controller.command.impl.StudentCommand;
 import by.it.academy.controller.command.impl.TaskCommand;
 import by.it.academy.controller.command.impl.mentor.MentorSaveToDbCommand;
 import by.it.academy.controller.command.impl.mentor.MentorUpdateFormCommand;
+import by.it.academy.controller.command.impl.mentor.MentorUpdateToDbCommand;
 
 public enum CommandEnum {
     HOME("Home", "pages/main.jspx", new HomeCommand()),
@@ -17,6 +18,7 @@ public enum CommandEnum {
     MENTOR_FIND_ALL("Mentor", "pages/mentor.jsp", new MentorFindAllCommand()),
     MENTOR_SAVE_FORM("MentorSaveForm", "pages/mentorSaveForm.jsp", new MentorSaveFormCommand()),
     MENTOR_UPDATE_FORM("MentorUpdateForm", "pages/mentorUpdateForm.jsp", new MentorUpdateFormCommand()),
+    MENTOR_UPDATE_TO_DB("MentorUpdateToDb", "pages/mentor.jsp", new MentorUpdateToDbCommand()),
     MENTOR_SAVE_TO_DB("MentorSaveToDb", "pages/mentor.jsp", new MentorSaveToDbCommand()),
     MENTOR_DELETE_FROM_DB("MentorDeleteFromDb", "pages/mentor.jsp", new MentorDeleteFromDbCommand()),
     COURSE("Course", "pages/course.jsp", new CourseCommand()),

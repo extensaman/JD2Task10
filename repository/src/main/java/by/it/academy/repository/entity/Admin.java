@@ -23,10 +23,10 @@ public class Admin {
     @Column(name = "admin_name", length = 50)
     private String adminName;
 
-    @OneToMany(mappedBy = "adminField", fetch = FetchType.LAZY,orphanRemoval = false)
+    @OneToMany(mappedBy = "adminField", fetch = FetchType.LAZY)
     private List<Course> courses;
 
-    @OneToMany(mappedBy = "adminMentorField", fetch = FetchType.LAZY,orphanRemoval = false)
+    @OneToMany(mappedBy = "adminMentorField", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Mentor> mentors;
 
     @Override
