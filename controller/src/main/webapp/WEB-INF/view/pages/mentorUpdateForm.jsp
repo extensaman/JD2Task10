@@ -23,7 +23,18 @@
                 <label for="floatingInput">&nbspMentor name</label>
             </div>
         </div>
-
+        <div class="row text-start mt-4 text-black-50">
+            <div class="col-3"></div>
+            <div class="col-6">
+                Choose courses for mentor
+            </div>
+        </div>
+        <div class="row mt-0">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <hr/>
+            </div>
+        </div>
         <c:choose>
             <c:when test="${not empty sessionScope.allCourseForMentor}">
                 <c:forEach var="course" items="${allCourseForMentor}" varStatus="status">
@@ -47,6 +58,20 @@
                 <span class="border-primary text-danger">No courses without mentor</span>
             </c:otherwise>
         </c:choose>
+
+        <div class="row text-start mt-4 text-black-50">
+            <div class="col-3"></div>
+            <div class="col-6">
+                Choose admin for mentor
+            </div>
+        </div>
+        <div class="row mt-0">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <hr/>
+            </div>
+        </div>
+
         <c:forEach var="admin" items="${allAdminForMentor}" varStatus="status">
             <div class="row">
                 <div class="col-4"></div>
@@ -65,10 +90,12 @@
                 </div>
             </div>
         </c:forEach>
+
         <input type="hidden" name="mentorId" value="${mentorId}"/>
-        <button class="btn btn-outline-primary col-1"><i class="bi bi-save"></i>&nbsp;Save</button>
+                <button class="btn btn-outline-primary col-1 mt-4"><i class="bi bi-arrow-90deg-down"></i>&nbsp;Update
+                </button>
     </div>
 </form>
 <form action="${pageContext.request.contextPath}/home?pageName=mentor" method="post">
-    <button class="btn btn-outline-secondary col-1"><i class="bi bi-x-square"></i>&nbsp;Cancel</button>
+    <button class="btn btn-outline-secondary col-1 mt-1"><i class="bi bi-x-square"></i>&nbsp;Cancel</button>
 </form>

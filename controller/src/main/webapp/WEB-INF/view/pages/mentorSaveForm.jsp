@@ -19,10 +19,21 @@
                        placeholder="Enter name"
                        name="name"
                 >
-                <label for="floatingInput">&nbspMentor name</label>
+                <label for="floatingInput">&nbspEnter Mentor name</label>
             </div>
         </div>
-
+        <div class="row text-start mt-4 text-black-50">
+            <div class="col-3"></div>
+            <div class="col-6">
+                Choose courses for mentor
+            </div>
+        </div>
+        <div class="row mt-0">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <hr/>
+            </div>
+        </div>
         <c:choose>
             <c:when test="${not empty sessionScope.courses}">
                 <c:forEach var="course" items="${courses}" varStatus="status">
@@ -45,6 +56,20 @@
                 <span class="border-primary text-danger">No courses without mentor</span>
             </c:otherwise>
         </c:choose>
+
+        <div class="row text-start mt-4 text-black-50">
+            <div class="col-3"></div>
+            <div class="col-6">
+                Choose admin for mentor
+            </div>
+        </div>
+        <div class="row mt-0">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <hr/>
+            </div>
+        </div>
+
         <c:forEach var="admin" items="${admins}" varStatus="status">
             <div class="row">
                 <div class="col-4"></div>
@@ -62,9 +87,10 @@
                 </div>
             </div>
         </c:forEach>
-        <button class="btn btn-outline-primary"><i class="bi bi-save"></i>&nbsp;Save</button>
+        <button class="btn btn-outline-primary col-1 mt-4"><i class="bi bi-save"></i>&nbsp;Save</button>
     </div>
 </form>
 <form action="${pageContext.request.contextPath}/home?pageName=mentor" method="post">
-    <button class="btn btn-outline-secondary"><i class="bi bi-x-square"></i>&nbsp;Cancel</button>
+    <button class="btn btn-outline-secondary col-1 mt-1Ы"><i class="bi bi-x-square"></i>&nbsp;Cancel</button>
 </form>
+
