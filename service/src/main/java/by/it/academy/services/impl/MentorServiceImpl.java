@@ -126,42 +126,58 @@ public class MentorServiceImpl implements MentorService {
                 .ifPresent(courses ->
                             Stream.of(courses)
                                     .map(Integer::parseInt)
-                                    .map(courseDao::findCourseById)
-                                    .filter(Optional::isPresent)
-                                    .map(Optional::get)
-                                    .peek(LOGGER::trace)
-                                    .peek(course -> course.setMentorField(newMentor))
-                                    .forEach(course -> courseDao.update(course))
+                                    .forEach(id ->
+                                            courseDao.updateMentorInCourse(id, newMentor))
                 );
 
-/*        Optional.ofNullable(courses_array)
-                .ifPresent(courses -> {
-                    newMentor.setCourses(
-                            Stream.of(courses)
-                                    .map(Integer::parseInt)
-                                    .map(courseDao::findCourseById)
-                                    .filter(Optional::isPresent)
-                                    .map(Optional::get)
-                                    .peek(LOGGER::trace)
-                                    .peek(course -> course.setMentorField(newMentor))
-                                    //.peek(course -> courseDao.update(course))
-                                    .collect(Collectors.toList())
-                    );
-                });*/
-        mentorDao.update(newMentor);
         adminDao.closeDao();
         courseDao.closeDao();
         mentorDao.closeDao();
+    }
 
-/*        Optional.ofNullable(courses_array)
-                .ifPresent(courses ->
-                            Stream.of(courses)
-                                    .map(Integer::parseInt)
-                                    .map(courseDao::findCourseById)
-                                    .filter(Optional::isPresent)
-                                    .map(Optional::get)
-                                    .peek(LOGGER::trace)
-                                    .forEach(course -> course.setMentorField(newMentor))
-                );*/
+    @Override
+    public Optional<Mentor> findMentorById(Integer id) {
+        Mentor mentor;
+        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+        mentor = mentorDao.findById(id);
+        mentorDao.closeDao();
+        return Optional.ofNullable(mentor);
+    }
+
+    @Override
+    public void update(String mentorId, String name, String[] courses_array, String[] admins_array) {
+        // TODO Need add validation functionality
+
+
+        findMentorById(Integer.parseInt(mentorId))
+                .ifPresent(mentor -> {
+                    AdminDao adminUpdateDao = DaoProvider.getInstance().getAdminDao();
+                    CourseDao courseUpdateDao = DaoProvider.getInstance().getCourseDao();
+                    MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+                    Optional.ofNullable(name)
+                            .ifPresent(mentor::setMentorName);
+                    Optional.ofNullable(admins_array)
+                            .ifPresent(a ->{
+
+                                mentor.setAdminMentorField(
+                                        adminUpdateDao.findAdminById(Integer.parseInt(a[SINGLE_ADMIN_INDEX]))
+                                                .orElse(null)
+                                );
+                                    }
+                            );
+                    mentorDao.clearMentorCourseList(mentor);
+
+                    Optional.ofNullable(courses_array)
+                            .ifPresent(courses ->
+                                    Stream.of(courses)
+                                            .map(Integer::parseInt)
+                                            .forEach(id ->
+                                                    courseUpdateDao.updateMentorInCourse(id, mentor)));
+
+                    mentorDao.update(mentor);
+                    mentorDao.closeDao();
+                    adminUpdateDao.closeDao();
+                    courseUpdateDao.closeDao();
+                });
     }
 }

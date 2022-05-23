@@ -9,17 +9,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class='d-flex justify-content-start'>
-        <form action="${pageContext.request.contextPath}/home?pageName=mentorinput" name="getForm"
-              method="post">
-            <input type="hidden" name="action" value="getForm"/>
-            <input type="hidden" name="description" value="new"/>
+        <form action="${pageContext.request.contextPath}/home?pageName=mentorsaveform" method="post">
             <button class="btn btn-outline-primary">
                 <i class="bi bi-plus-square">&nbsp&nbspAdd mentor</i>
             </button>
         </form>
     </div>
 </div>
-<div class="row mx-2">
+<div class="row mx-2" mt-5>
     <c:if test="${not empty sessionScope.mentors}">
         <table class="table">
             <thead>
@@ -38,7 +35,7 @@
                 <tr>
                     <td class="col">${status.index+1}</td>
                     <td class="col">${mentor.mentorName}</td>
-                    <td class="col-1">
+                    <td class="col-2">
                         <div class="dropdown">
                             <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button"
                                id="dropdownMenuLink"
@@ -63,20 +60,30 @@
                         </div>
                     </td>
                     <td class="col-1">
-                        <form action="${pageContext.request.contextPath}/home?pageName=mentor" name="deleting"
+                        <form action="${pageContext.request.contextPath}/home?pageName=mentordeletefromdb"
                               method="post">
-                            <input type="hidden" name="action" value="delete"/>
-                            <input type="hidden" name="description" value="${mentor.id}"/>
-                            <button class="btn btn-outline-secondary"><i class="bi bi-trash"></i></button>
+
+                                <%-- --%>
+                            <button type="button" class="btn btn-outline-secondary js-delete-accept"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#acceptDelete"
+                                    data-mentor-name-for-delete="${mentor.mentorName}"
+                                    data-mentor-for-delete="${mentor.id}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                                    <%--  --%>
+                                            <%--<input type="hidden" name="mentorId" value="${mentor.id}"/>
+                                            <button class="btn btn-outline-secondary">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                            --%>
                         </form>
                     </td>
                     <td class="col-1">
-                        <form action="${pageContext.request.contextPath}/home?pageName=mentor" name="editing"
-                              method="post">
-                            <input type="hidden" name="action" value="getForm"/>
-                            <input type="hidden" name="description" value="edit"/>
-                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
-                                    data-bs-target="#editingModal">
+                        <form action="${pageContext.request.contextPath}/home?pageName=mentorupdateform" method="post">
+                            <input type="hidden" name="mentorId" value="${mentor.id}"/>
+                            <button class="btn btn-outline-secondary">
                                 <i class="bi bi-pencil"></i>
                             </button>
                         </form>
@@ -88,13 +95,13 @@
     </c:if>
 
 
-
-    <!-- Модальное окно -->
+    <!-- Modal window for course detail -->
     <div class="modal fade" id="courseDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLabel">Info about courses of <span class="dmn"></span></h6>
+                    <h6 class="modal-title" id="exampleModalLabel">Info about courses of <span
+                            class="dmn text-primary"></span></h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -117,11 +124,56 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- Modal window for delete mentor -->
+    <div class="modal fade" id="acceptDelete" tabindex="-1" aria-labelledby="exampleModalLabel02" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel02">Attention</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <span class="text-secondary text-black-50">Press "Delete" button to delete mentor </span>
+                            <span class="text-primary dmn"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                            <form action="${pageContext.request.contextPath}/home?pageName=mentordeletefromdb"
+                                  method="post">
+                                <input id="hide2" type="hidden" name="mentorId" value="">
+                                <button class="btn btn-danger "><i class="bi bi-x-square"></i>&nbsp;Delete
+                                </button>
+                            </form>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close
+                            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $(".js-delete-accept").click(
+                function () {
+                    var dataMentorNameForDelete = $(this).attr('data-mentor-name-for-delete');
+                    var mentorForDelete = $(this).attr('data-mentor-for-delete');
+
+                    $(".dmn").text(dataMentorNameForDelete);
+                    $("#hide2").attr('value', mentorForDelete);
+                })
+        });
+    </script>
+
     <script>
         $(function () {
             $(".js-course-detail").click(
@@ -133,9 +185,6 @@
                     $(".dcp").text(dataCourseProgram);
                     $(".dca").text(dataCourseAdmin);
                     $(".dmn").text(dataMentorName);
-                    $("#hide1").attr('value', dataCourseProgram);
-                    $("#hide2").attr('value', dataCourseAdmin);
-                    $("#hide3").attr('value', dataMentorName);
                 })
         });
     </script>

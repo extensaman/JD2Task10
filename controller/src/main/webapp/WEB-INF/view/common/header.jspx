@@ -28,7 +28,7 @@
             </c:otherwise>
         </c:choose>
         <c:choose>
-            <c:when test="${title eq 'Mentor' or title eq 'MentorInput'}">
+            <c:when test="${title eq 'Mentor' or title eq 'MentorSaveForm' or title eq 'MentorUpdateForm'}">
                 <a class="nav-link active" href="#">Mentor</a>
             </c:when>
             <c:otherwise>

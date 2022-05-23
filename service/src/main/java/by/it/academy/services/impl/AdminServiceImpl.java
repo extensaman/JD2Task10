@@ -3,6 +3,7 @@ package by.it.academy.services.impl;
 import by.it.academy.repository.dao.AdminDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
+import by.it.academy.repository.dao.MentorDao;
 import by.it.academy.repository.dao.TaskDao;
 import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
@@ -11,15 +12,19 @@ import by.it.academy.repository.util.HibernateUtil;
 import by.it.academy.services.AdminService;
 import by.it.academy.services.dto.AdminCourseDto;
 import by.it.academy.services.dto.AdminDto;
+import by.it.academy.services.dto.AdminForMentorDto;
 import by.it.academy.services.dto.AdminMentorDto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class AdminServiceImpl implements AdminService {
+    private static final String CHECKED = "checked";
+    private static final String NOT_CHECKED = "";
 
     @Override
     public List<AdminDto> showAllAdminDto() {
@@ -307,4 +312,38 @@ public class AdminServiceImpl implements AdminService {
         return admins;
     }
 
+    @Override
+    public List<AdminForMentorDto> findAllAdminForMentor() {
+        List<AdminForMentorDto> admins = null;
+        AdminDao adminDao = DaoProvider.getInstance().getAdminDao();
+        admins = adminDao.findAll().stream()
+                .map(admin -> AdminForMentorDto.builder()
+                        .id(admin.getId())
+                        .adminName(admin.getAdminName())
+                        .checked(NOT_CHECKED)
+                        .build())
+                .collect(Collectors.toList());
+        adminDao.closeDao();
+        return admins;
+    }
+
+    @Override
+    public List<AdminForMentorDto> findAllAdminForMentorWithCheckedExisting(Integer mentorId) {
+        MentorDao mentorDao = DaoProvider.getInstance().getMentorDao();
+        Integer existingAdminId = mentorDao.findMentorById(mentorId)
+                .map(mentor ->
+                        Optional.ofNullable(mentor.getAdminMentorField())
+                                .map(Admin::getId)
+                                .orElse(null))
+                .orElse(null);
+        List<AdminForMentorDto> allAdminForMentorWithCheckedExisting = findAllAdminForMentor();
+
+        allAdminForMentorWithCheckedExisting.forEach(admin -> {
+            if(admin.getId().equals(existingAdminId)) {
+                admin.setChecked(CHECKED);
+            }
+        });
+
+        return allAdminForMentorWithCheckedExisting;
+    }
 }
