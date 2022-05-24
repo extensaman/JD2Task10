@@ -17,7 +17,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDto> findAllTaskDto() {
         TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
-        List<TaskDto> result = null;
+        List<TaskDto> result;
         result = taskDao.findAll()
                 .stream()
                 .map(TaskDto::new)
@@ -29,7 +29,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<AssessmentTdo> getListOfTaskAssessment(Integer taskId) {
         AssessmentDao assessmentDao = DaoProvider.getInstance().getAssessmentDao();
-        List<AssessmentTdo> assessments = null;
+        List<AssessmentTdo> assessments;
         assessments = assessmentDao.getListOfTaskAssessment(taskId)
                 .stream().map(AssessmentTdo::new).collect(Collectors.toList());
         assessmentDao.closeDao();
@@ -58,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDto findById(Integer taskId) {
         TaskDao taskDao = DaoProvider.getInstance().getTaskDao();
-        TaskDto taskDto = null;
+        TaskDto taskDto;
         taskDto = new TaskDto(taskDao.findById(taskId));
         taskDao.closeDao();
         return taskDto;
@@ -93,9 +93,5 @@ public class TaskServiceImpl implements TaskService {
         studentDao.closeDao();
         taskDao.closeDao();
         assessmentDao.closeDao();
-    }
-
-    public static void main(String[] args) {
-        new TaskServiceImpl().createAssessment(3,2,6,"jdkjfg");
     }
 }
