@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MentorServiceImpl implements MentorService {
@@ -42,18 +41,6 @@ public class MentorServiceImpl implements MentorService {
         taskDao.update(task);
 
         courseDao.closeDao();
-        taskDao.closeDao();
-    }
-
-    public void deleteTask(int taskId)
-            throws SecurityException {
-        taskDao = DaoProvider.getInstance().getTaskDao();
-
-        if (taskDao.findById(taskId) == null) {
-            System.out.println("Не найдено задание с данным ID: " + taskId);
-            return;
-        }
-        taskDao.delete(taskId);
         taskDao.closeDao();
     }
 
@@ -124,10 +111,10 @@ public class MentorServiceImpl implements MentorService {
 
         Optional.ofNullable(courses_array)
                 .ifPresent(courses ->
-                            Stream.of(courses)
-                                    .map(Integer::parseInt)
-                                    .forEach(id ->
-                                            courseDao.updateMentorInCourse(id, newMentor))
+                        Stream.of(courses)
+                                .map(Integer::parseInt)
+                                .forEach(id ->
+                                        courseDao.updateMentorInCourse(id, newMentor))
                 );
 
         adminDao.closeDao();
@@ -157,12 +144,12 @@ public class MentorServiceImpl implements MentorService {
                     Optional.ofNullable(name)
                             .ifPresent(mentor::setMentorName);
                     Optional.ofNullable(admins_array)
-                            .ifPresent(a ->{
+                            .ifPresent(a -> {
 
-                                mentor.setAdminMentorField(
-                                        adminUpdateDao.findAdminById(Integer.parseInt(a[SINGLE_ADMIN_INDEX]))
-                                                .orElse(null)
-                                );
+                                        mentor.setAdminMentorField(
+                                                adminUpdateDao.findAdminById(Integer.parseInt(a[SINGLE_ADMIN_INDEX]))
+                                                        .orElse(null)
+                                        );
                                     }
                             );
                     mentorDao.clearMentorCourseList(mentor);

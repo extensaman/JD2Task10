@@ -10,8 +10,6 @@ import java.util.Optional;
 public interface MentorService {
     void createTask(int courseId, Task task) throws SecurityException;
 
-    void deleteTask(int taskId) throws SecurityException;
-
     void createAssessment(int taskId, Assessment assessment) throws SecurityException;
 
     void updateAssessment(Assessment assessment) throws SecurityException;

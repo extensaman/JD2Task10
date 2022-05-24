@@ -49,7 +49,6 @@
         </tbody>
     </table>
 </c:if>
-</div>
 
 
 

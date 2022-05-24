@@ -1,6 +1,6 @@
 package by.it.academy.controller.servlets;
 
-import by.it.academy.controller.Controller;
+import by.it.academy.controller.command.Constant;
 import by.it.academy.services.CourseService;
 import by.it.academy.services.ServiceProvider;
 import by.it.academy.services.dto.CourseWithStudentDto;
@@ -19,23 +19,23 @@ import java.util.stream.Collectors;
 @WebServlet(name = "studentCourses", value = "/studentCourses")
 public class StudentCourses extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(Controller.class);
+    public static final String WEB_INF_VIEW_PAGES_STUDENT_COURSES_JSP = "WEB-INF/view/pages/studentCourses.jsp";
     private final CourseService courseService = ServiceProvider.getInstance().getCourseService();
     public static final String COURSES = "courses";
-    public static final String STUDENT_ID = "studentId";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer studentId = Integer.valueOf(request.getParameter("studentId"));
+        Integer studentId = Integer.valueOf(request.getParameter(Constant.STUDENT_ID));
 
         List<CourseWithStudentDto> courses = courseService.findAllCourse().stream()
-                .map((obj) -> new CourseWithStudentDto(obj,studentId))
+                .map((obj) -> new CourseWithStudentDto(obj, studentId))
                 .collect(Collectors.toList());
 
-        request.getSession().setAttribute(COURSES,courses);
-        request.getSession().setAttribute(STUDENT_ID,studentId);
+        request.getSession().setAttribute(COURSES, courses);
+        request.getSession().setAttribute(Constant.STUDENT_ID, studentId);
         logger.trace(getClass().getSimpleName());
 
-        request.getRequestDispatcher("WEB-INF/view/pages/studentCourses.jsp").forward(request,response);
+        request.getRequestDispatcher(WEB_INF_VIEW_PAGES_STUDENT_COURSES_JSP).forward(request, response);
     }
 
     @Override

@@ -1,9 +1,8 @@
-package by.it.academy.controller;
+package by.it.academy.controller.servlets;
 
-import by.it.academy.services.CourseService;
+import by.it.academy.controller.command.Constant;
 import by.it.academy.services.ServiceProvider;
 import by.it.academy.services.StudentService;
-import by.it.academy.services.TaskService;
 import by.it.academy.services.dto.AssessmentTdo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,15 +18,17 @@ import java.util.List;
 @WebServlet(name = "assessment", value = "/assessment")
 public class AssessmentStudent extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(AssessmentStudent.class);
+    public static final String WEB_INF_VIEW_PAGES_ASSESSMENT_JSP = "WEB-INF/view/pages/assessment.jsp";
     private final StudentService studentService = ServiceProvider.getInstance().getStudentService();
     public static final String ASSESSMENT = "assessments";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer studentId = Integer.valueOf(request.getParameter("studentId"));
+        Integer studentId = Integer.valueOf(request.getParameter(Constant.STUDENT_ID));
         List<AssessmentTdo> allAssessment = studentService.getListOfStudentAssessment(studentId);
-        request.getSession().setAttribute(ASSESSMENT,allAssessment);
+        request.getSession().setAttribute(ASSESSMENT, allAssessment);
         logger.trace(getClass().getSimpleName());
-        request.getRequestDispatcher("WEB-INF/view/pages/assessment.jsp").forward(request,response);
+        request.getRequestDispatcher(WEB_INF_VIEW_PAGES_ASSESSMENT_JSP).forward(request, response);
     }
 
     @Override

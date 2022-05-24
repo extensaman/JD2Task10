@@ -1,9 +1,9 @@
 package by.it.academy.controller.addon;
 
+import by.it.academy.controller.command.Constant;
 import by.it.academy.controller.command.impl.AdminCommand;
 import by.it.academy.services.AdminService;
 import by.it.academy.services.ServiceProvider;
-import by.it.academy.services.dto.AdminCourseDto;
 import by.it.academy.services.dto.AdminMentorDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,27 +22,22 @@ public class AdminMentorServlet extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(AdminCommand.class);
     private static final String ADMIN_MENTOR = "adminMentor";
+    public static final String WEB_INF_VIEW_PAGES_ADMIN_MENTOR_JSP = "WEB-INF/view/pages/adminMentor.jsp";
     private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
     public AdminMentorServlet() {
         super();
     }
 
-    public void init() throws ServletException {
-    }
-
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
-        Integer mentorId = Integer.valueOf(request.getParameter("mentorId"));
+        Integer mentorId = Integer.valueOf(request.getParameter(Constant.MENTOR_ID));
         List<AdminMentorDto> allMentorFromAdmin = adminService.allMentorFromAdmin(mentorId);
-        for (AdminMentorDto a : allMentorFromAdmin) {
-            System.out.println(a.toString());
-        }
         request.getSession().setAttribute(ADMIN_MENTOR, allMentorFromAdmin);
         LOGGER.trace(getClass().getSimpleName());
-        request.getRequestDispatcher("WEB-INF/view/pages/adminMentor.jsp").forward(request, response);
+        request.getRequestDispatcher(WEB_INF_VIEW_PAGES_ADMIN_MENTOR_JSP).forward(request, response);
 
     }
 
@@ -50,7 +45,6 @@ public class AdminMentorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
             throws ServletException, IOException {
-        request.getParameter("");
-
+        request.getParameter(Constant.EMPTY_STRING);
     }
 }

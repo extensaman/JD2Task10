@@ -4,7 +4,6 @@ import by.it.academy.repository.dao.CourseDao;
 import by.it.academy.repository.dao.DaoProvider;
 import by.it.academy.repository.dao.EntityDao;
 import by.it.academy.repository.dao.MentorDao;
-import by.it.academy.repository.entity.Admin;
 import by.it.academy.repository.entity.Course;
 import by.it.academy.services.CourseService;
 import by.it.academy.services.dto.CourseDto;
@@ -27,6 +26,7 @@ public class CourseServiceImpl implements CourseService {
         courseDao.closeDao();
         return courses;
     }
+
     @Override
     public List<CourseDto> findAllCourseDto() {
         CourseDao courseDao = DaoProvider.getInstance().getCourseDao();
@@ -54,15 +54,6 @@ public class CourseServiceImpl implements CourseService {
                 .build();
         courseEntityDao.save(newCourse);
         courseEntityDao.closeDao();
-    }
-
-    @Override
-    public Optional<Course> findCourseById(Integer id) {
-        Course course;
-        CourseDao courseDao = DaoProvider.getInstance().getCourseDao();
-        course = courseDao.findById(id);
-        courseDao.closeDao();
-        return Optional.ofNullable(course);
     }
 
     @Override

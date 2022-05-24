@@ -14,4 +14,5 @@ public class Constant {
     public static final String MENTOR_NAME_FOR_UPDATE = "mentorNameForUpdate";
     public static final String ALL_COURSE_FOR_MENTOR = "allCourseForMentor";
     public static final String ALL_ADMIN_FOR_MENTOR = "allAdminForMentor";
+    public static final String STUDENT_ID = "studentId";
 }

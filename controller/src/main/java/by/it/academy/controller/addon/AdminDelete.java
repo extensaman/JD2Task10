@@ -12,13 +12,15 @@ import java.io.IOException;
 
 @WebServlet(name = "AdminDelete", value = "/adminDelete")
 public class AdminDelete extends HttpServlet {
+    public static final String ID_ADMIN = "idAdmin";
+    public static final String HOME_PAGE_NAME_ADMIN = "/home?pageName=admin";
     private final AdminService adminService = ServiceProvider.getInstance().getAdminService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            Integer idAdminForDelete = Integer.valueOf(request.getParameter("idAdmin"));
+            Integer idAdminForDelete = Integer.valueOf(request.getParameter(ID_ADMIN));
             adminService.deleteAdmin(idAdminForDelete);
-            response.sendRedirect(request.getContextPath() + "/home?pageName=admin");
+            response.sendRedirect(request.getContextPath() + HOME_PAGE_NAME_ADMIN);
     }
 
     @Override

@@ -65,6 +65,9 @@ public class TaskCommand implements Command {
         req.getSession().setAttribute(TASKS, allTask);
         if (req.getParameter(ACTION) == null) {
             req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
-        }else resp.sendRedirect(req.getContextPath() + HOME_PAGE_NAME_TASK);
+        }
+        else {
+            resp.sendRedirect(req.getContextPath() + HOME_PAGE_NAME_TASK);
+        }
     }
 }

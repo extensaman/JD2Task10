@@ -26,9 +26,6 @@ public class CourseCommand implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         LOGGER.trace(getClass().getSimpleName());
         List<Course> allCourse = courseService.findAllCourse();
-        for (Course a : allCourse) {
-            System.out.println(a.toString());
-        }
         req.getSession().setAttribute(COURSE, allCourse);
         LOGGER.trace(getClass().getSimpleName());
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);

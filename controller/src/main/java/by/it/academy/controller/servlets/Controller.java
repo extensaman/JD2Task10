@@ -1,4 +1,4 @@
-package by.it.academy.controller;
+package by.it.academy.controller.servlets;
 
 import by.it.academy.controller.command.CommandEnum;
 import org.apache.logging.log4j.LogManager;

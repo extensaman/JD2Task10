@@ -24,26 +24,11 @@ public interface AdminService {
 
     void createCourse(String nameCourse) throws SecurityException;
 
-    void deleteMentorById(int idMentor) throws SecurityException;
-
-    void deleteMentorByName() throws SecurityException;
-
     void createMentor(String nameMentor) throws SecurityException;
-
-    void deleteCourseById(int idCourse) throws SecurityException;
-
-    void deleteCourseByName() throws SecurityException;
-
-    void insertMentorToCourse(int idCourse, int idMentor) throws SecurityException;
-
-    void takeCourseForControl(int idAdmin) throws SecurityException;
-
-    void updateMentorToCourse(int idCourse, int idMentor) throws SecurityException;
-
-    void updateAdminToCourse(int idCourse, int idAdmin) throws SecurityException;
 
     List<Admin> findAllAdmin();
 
     List<AdminForMentorDto> findAllAdminForMentorWithCheckedExisting(Integer mentorId);
+
     List<AdminForMentorDto> findAllAdminForMentor();
 }

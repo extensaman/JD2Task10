@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CourseService {
-    Optional<Course> findCourseById(Integer id);
     List<Course> findAllCourse();
     List<CourseDto> findAllCourseDto();
     List<Course> findAllCourseWithoutMentor();

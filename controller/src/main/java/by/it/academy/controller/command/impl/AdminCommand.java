@@ -25,9 +25,6 @@ public class AdminCommand implements Command {
         LOGGER.trace(getClass().getSimpleName());
 
         List<AdminDto> allAdmin = adminService.showAllAdminDto();
-        for (AdminDto a : allAdmin) {
-            System.out.println(a.toString());
-        }
         req.getSession().setAttribute(ADMIN, allAdmin);
         req.getRequestDispatcher(Constant.TEMPLATE_PAGE).forward(req, resp);
 
