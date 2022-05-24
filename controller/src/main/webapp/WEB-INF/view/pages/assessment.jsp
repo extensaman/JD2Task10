@@ -7,9 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.css"/>
 <div class="row mx-2">
-    <h1>Assessment</h1>
+    <h1>${taskName}</h1>
     <c:if test="${empty sessionScope.assessments}">
         <h1>no data</h1>
     </c:if>

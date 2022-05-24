@@ -1,13 +1,9 @@
 package by.it.academy.controller.command;
 
-import by.it.academy.controller.command.impl.AdminCommand;
-import by.it.academy.controller.command.impl.CourseCommand;
-import by.it.academy.controller.command.impl.HomeCommand;
+import by.it.academy.controller.command.impl.*;
 import by.it.academy.controller.command.impl.mentor.MentorFindAllCommand;
 import by.it.academy.controller.command.impl.mentor.MentorDeleteFromDbCommand;
 import by.it.academy.controller.command.impl.mentor.MentorSaveFormCommand;
-import by.it.academy.controller.command.impl.StudentCommand;
-import by.it.academy.controller.command.impl.TaskCommand;
 import by.it.academy.controller.command.impl.mentor.MentorSaveToDbCommand;
 import by.it.academy.controller.command.impl.mentor.MentorUpdateFormCommand;
 import by.it.academy.controller.command.impl.mentor.MentorUpdateToDbCommand;
@@ -23,6 +19,7 @@ public enum CommandEnum {
     MENTOR_DELETE_FROM_DB("MentorDeleteFromDb", "pages/mentor.jsp", new MentorDeleteFromDbCommand()),
     COURSE("Course", "pages/course.jsp", new CourseCommand()),
     TASK("Task", "pages/task.jsp", new TaskCommand()),
+    ASSESSMENT("assessment", "pages/assessment.jsp", new AssessmentCommand()),
     ADMIN("Admin", "pages/admin.jsp", new AdminCommand());
 
 
